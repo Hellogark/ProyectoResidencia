@@ -1,0 +1,120 @@
+<div class="row animated fadeIn" >
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+              <input #input autofocus (keyup)="buscarUsuario(input.value)" (blur)="buscarUsuario(input.value)"  [(ngModel)]="termino" type="text"  class="form-control" placeholder="Buscar usuario...">
+          </div>
+          <div class="col-12" *ngIf="encontrado" >
+            <p>
+              <b>Usuarios encontrados: {{this.usuarios.length}}</b>
+            </p>
+          </div>
+        </div>
+        </div>
+        
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="cargando">
+  <div class="col-12 justify-content-center">
+      <div class="alert-warning text-center">
+          <p>
+             <strong>Cargando</strong>
+          </p>            
+           <i class="fa fa-refresh fa-spin fa-3x">           
+           </i>
+           <br>
+           <p> <span>Espere por favor...</span></p>
+         </div>       
+       </div>
+  </div>
+
+  <div class="row h-100" *ngIf="!cargando" >
+    <div class="col-12 ">
+      <div class="card w-100 ">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-12">
+                <h3 class="carad-title">Usuarios registrados ( <small>{{this.totalRegistros}} </small>)</h3>
+            </div>
+            <div class="col-12  d-flex justify-content-center text-center">
+               <div class="table-responsive">
+
+                
+                  <table class="table table-striped table-hover">
+                    <thead class="thead-inverse ">
+                      <tr class="text-center">
+                        <th>Imagen</th>
+                        <th>Correo</th>
+                        <th>Nombre de usuario</th>
+                        <th>Empresa</th>
+                        <th>Role</th> 
+                        <th>Estado</th>
+
+                        <th class="justify-content-center text-center">Operaciones</th>                      
+                      </tr>
+                      </thead>
+                      <tbody class="">
+                        <tr *ngFor="let usuario of usuarios | paginate: config" class=" fila  w-100 h-50 ">
+                          <td><img  [src]="usuario.img | archivo:usuario._id:'usuarios'" (click)="mostrarModal(usuario._id)"  class=" w-50 img-circle pointer" alt=""></td>
+                          <td class="align-middle">{{usuario.correo}}</td>
+                          <td class="align-middle">{{usuario.nombre}}</td>
+                          <td class="align-middle">{{usuario.empresa}}</td>
+                          <td class="align-middle">
+                            <select [(ngModel)]="usuario.role" name="role" class="fomr-control custom-select">
+                             <option value="ADMIN_ROLE">Administrador</option>
+                             <option value="USER_ROLE">Usuario</option>
+                            </select>
+                            <!--<span class="badge badge-pill badge-primary" *ngIf="usuario.role === 'ADMIN_ROLE'">{{usuario.role}}</span>
+                              <span class="badge badge-pill badge-secondary" *ngIf="usuario.role === 'USER_ROLE' ">{{usuario.role}}</span>-->
+                          </td>
+                          <td class="align-middle">
+                              <select [(ngModel)]="usuario.activo" name="activo" class="fomr-control custom-select">
+                               <option value="true">Activo</option>
+                               <option value="false">Inactivo</option>
+                              </select>
+                          </td>
+                          <td class="align-middle">
+                            <button class="btn btn-primary mr-3" (click)="guardarUsuario( usuario )">
+                              <i class="fa fa-save" aria-hidden="true"></i>
+
+                            </button>
+                            <button class="btn btn-danger" (click)="borrarUsuario(usuario)">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        
+                        
+                      </tbody>
+                  </table>                                 
+                </div>  
+               
+              </div>
+              <div class="text-center mt-3 col-12">
+                <pagination-controls 
+                              
+                [maxSize]="maxSize"
+                [directionLinks]="directionLinks"
+                [autoHide]="autoHide"
+                [responsive]="responsive"
+                [previousLabel]="labels.previousLabel"
+                [nextLabel]="labels.nextLabel"
+                (pageChange)="onPageChange($event)" 
+                >
+                  
+
+                </pagination-controls>
+
+              </div>
+          </div>
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+  

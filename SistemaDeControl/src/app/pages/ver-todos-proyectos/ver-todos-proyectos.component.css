@@ -1,0 +1,9 @@
+ul{
+    columns:2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    max-width: 100%;
+}
+li{
+    max-width: 100%;
+}

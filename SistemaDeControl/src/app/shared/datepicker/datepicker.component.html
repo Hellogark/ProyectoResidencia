@@ -1,0 +1,16 @@
+
+  <div class="input-group pl-2 pr-2 mb-0">
+    <input class="form-control w-50" style="float:none" placeholder="Selecciona una fecha" ngx-mydatepicker name="miFecha"
+         [(ngModel)]="fechaInput" [options]="myOptions" #dp="ngx-mydatepicker" (dateChanged)="onDateChanged($event)"
+         [attr.disabled]="disabled?'':null" autocomplete="off"
+         />
+
+     <span class="input-group-btn">
+      <button type="button" class="btn btn-default" (click)="dp.clearDate()">
+          <i class="fa fa-remove"></i>
+      </button>
+      <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+          <i class="fa fa-calendar"></i>
+      </button>
+      </span>
+    </div>     

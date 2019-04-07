@@ -1,0 +1,46 @@
+#themecolors a {
+    cursor: pointer;
+}
+
+
+.fondoNegro{
+    background-color: rgba(84, 110, 122, 0.3);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    z-index: 10003;
+}
+
+
+.mapache{
+    width: 250px;   
+    position: absolute; 
+    float: left;
+    margin-bottom: 5em;      
+}
+
+.pointer{
+    cursor: pointer;    
+}
+.prevImgPerfil{
+    width: 150px;
+}
+.error-page{height: 100%;}
+.error-body h1 {
+	font-size: 210px;
+	font-weight: 900;
+	text-shadow: 4px 4px 0 #ffffff, 6px 6px 0 #263238;
+	line-height: 210px;
+}
+@media screen and (max-width: 767px) {
+    .error-body h1 { font-size: 15vw}
+    .mapache{display: none;}
+}
+[type="file"]{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 450px;
+}

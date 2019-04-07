@@ -1,0 +1,80 @@
+<div class="row animated fadeIn">
+  <div class="col-lg-7">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Perfil del usuario</h4>
+            <h6 class="card-subtitle">{{this.usuario.nombre}}</h6>
+            <form ngNativeValdiate #f ="ngForm"  (ngSubmit)="guardar(f.value)"class="form p-t-20">
+                <div class="form-group">
+                    <label for="exampleInputuname">Nombre de usuario</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-user"></i></div>
+                        <input type="text" class="form-control"  name="nombre"placeholder="Nombre de usuario" [ngModel]="usuario.nombre" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo electrónico</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-email"></i></div>
+                        <input type="email" class="form-control " readonly name="correo"placeholder="Correo electrónico" [ngModel]="usuario.correo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Empresa</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-world"></i></div>
+                        <input type="text" class="form-control " readonly name="empresa"placeholder="Empresa" [ngModel]="usuario.empresa">
+                    </div>
+                </div>
+                <i class="fa fas-save">
+                    <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">Guardar</button>
+                    </i>
+            </form>
+            <form ngNativeValdiate #p ="ngForm"  (ngSubmit)="cambiarPass(passAnt,pass1,pass2)"class="form p-t-20">
+                <legend>Cambiar Contraseña</legend>
+                 <div class="form-group">
+                    <label for="pwd1">Contraseña anterior</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-lock"></i></div>
+                        <input type="password" #passAnt name="passwordAnterior"class="form-control" id="pwdA" placeholder="Contraseña anterior">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pwd1">Contraseña nueva</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-lock"></i></div>
+                        <input type="password" #pass1 name="passwordNuevo1"class="form-control" id="pwd1" placeholder="Contraseña nueva">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pwd2">Confirmar contraseña nueva</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-lock"></i></div>
+                        <input type="password" #pass2 name="passwordNuevo2"class="form-control" id="pwd2" placeholder="Repetir Contraseña nueva">
+                    </div>
+                </div>
+               
+                <i class="fa fas-save">
+                <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">Cambiar contraseña</button>
+                </i>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-lg-5">
+  <div class="card">
+      <div class="card-body text-center">
+          <h4 class="card-title">Fotografía del usuario</h4>
+          <h6 class="card-subtitle">{{this.usuario.nombre}}</h6>
+          <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="user" class="prevImgPerfil ">
+          <img *ngIf="imagenTemp" [src]="imagenTemp" alt="user" class="prevImgPerfil ">
+          <input  type="file" (change)="seleccionImagen($event.target.files[0])" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >
+          <br>
+          <i class="fa fas-save">
+            <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-block btn-success waves-effect waves-light m-r-10">Actualizar foto</button>
+          </i>
+
+      </div>
+    </div>
+</div>
+</div>

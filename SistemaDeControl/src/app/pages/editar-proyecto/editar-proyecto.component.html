@@ -1,0 +1,178 @@
+<div class="container-fluid">
+  <div class="row no-gutters justify-content-center">
+    <div class="col-12 col-xl-8">
+      <div class="card bg-white">
+        <div class="card-body no-gutters">
+
+          <form ngNativeValidate #f="ngForm" *ngIf="dataLista" (ngSubmit)="editarProyecto(f.value)"
+            class="form-horizontal form-material " id="nProyectoForm" action="index.html" autocomplete="off">
+            <div class="col-12 mb-5">
+              <img src="../../../assets/images/logod.png" alt="Home" class="mb-5" />
+              <h3 class="box-title m-b-0">Editar proyecto </h3>
+            </div>
+            <div class="col-12">
+
+              <fieldset class="border border-primary mb-4">
+                <legend for="">Nombre del proyecto</legend>
+                <div class="form-group mt-3  pl-2 pr-2">
+                  <div class="col-12">
+                    <input [(ngModel)]="proyecto.nombre" name="nombre" class="form-control" type="text" required
+                      placeholder="Nombre (requerido)">
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-12">
+
+              <fieldset class="border border-primary mb-4">
+                <legend for="" >Descripción del proyecto</legend>
+                <div class="form-group ">
+                    <div class="col-12">
+                        <textarea autocomplete="descripcion" [(ngModel)]="proyecto.descripcion" name="descripcion" class="form-control txtarea"   placeholder="Descripción... (requerido)">{{descripcion}}</textarea>
+                    </div>
+                </div>
+              </fieldset>
+            </div>
+            
+<!---Mostrar Cliente y empresa-->
+
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 col-xl-5  d-inline-block">
+                  <fieldset class="border border-primary mb-4">
+                    <legend for="">Cliente/Empresa</legend>
+                    <div class="form-group  pl-2 pr-2">
+                      <div class="col-12 d-inline pr-4">
+                        <input [(ngModel)]="proyecto.nombreEmpresa" name="nombreEmpresa" class="form-control" type="text"
+                          required placeholder="Empresa (requerido)">
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <div class="col-12 col-xl-7 d-inline-block fecha ">
+                  <fieldset class="border border-primary pb-4">
+                    <legend for="">Fecha proyectada</legend>
+                    <app-datepicker  [fecha] = "this.fecha"(fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+<!---Fin Mostrar Cliente y empresa-->
+            <div class="col-12">
+              <fieldset class="border border-primary mb-4">
+                <legend for="">Participantes</legend>
+                <div class="form-group ">
+                  <div class="col-12">
+                    <span>
+
+                    </span>
+                    <tag-input theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participantes"
+                      name="participantes" class="form-control" [identifyBy]="'_id'" [displayBy]="'nombre'">
+                      <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres">
+                      </tag-input-dropdown>
+                    </tag-input>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-12">
+              <fieldset class="border border-primary mb-4">
+                <legend for="">Subir archivo</legend>
+                <div class="form-group ">
+                  <div class="col-12 ">
+                    <div class="form-group">
+                      <label class="custom-file">
+                        <input type="file" [(ngModel)]="inputArchivo" name="inputArchivo" id=""
+                          (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
+                          placeholder="Elegir archivo" class="custom-file-input" aria-describedby="fileHelpId">
+                        <span class="custom-file-control"></span>
+                      </label>
+                      <div *ngIf="inputVacio"><span>{{nombreArchivo}}</span></div>
+                      <small id="fileHelpId" class="form-text text-muted">Solo se acepta un archivo .rar o .zip</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <fieldset class="border border-primary mb-4">
+                    <legend for="">Descripción del archivo subido</legend>
+                    <div class="form-group ">
+                      <div class="col-12">
+                        <textarea [(ngModel)]="comentario" name="comentario" class="form-control comentario"
+                           placeholder="Descripción... (requerido)" maxlength="150"></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </fieldset>
+              
+            </div>
+
+            <!---Mostrar archivos--> 
+            <div class="col-12  d-flex justify-content-center text-center">
+              <div class="table-responsive">
+
+               
+                 <table class="table table-striped table-hover">
+                   <thead class="thead-inverse ">
+                     <tr class="text-center">
+                        <th class="text-center">Descripción del archivo</th>
+                        <th class="text-center">Responsable</th>
+                                           
+
+                       <th class="justify-content-center text-center">Operaciones</th>                      
+                     </tr>
+                     </thead>
+                     <tbody class="">
+                       <tr *ngFor="let archivo of archivosMostrar | paginate: config" class=" fila  w-100 h-50 ">
+                          <td class="align-middle">{{archivo.comentario}}</td>                            
+                              <td class="align-middle">{{archivo.responsable.nombre}}</td>
+                         <td class="align-middle">
+                           <button class="btn btn-primary mr-3" type="button" (click)="descargarArchivo( archivo )">
+                             <i class="fa fa-download" aria-hidden="true"></i>
+
+                           </button>
+                           <button class="btn btn-danger" type="button" (click)="eliminarArchivo(archivo)">
+                             <i class="fa fa-trash" aria-hidden="true"></i>
+                           </button>
+                         </td>
+                       </tr>
+                       
+                       
+                     </tbody>
+                 </table>                                 
+               </div>  
+              
+             </div>
+             <div class="text-center mt-3 col-12">
+              <pagination-controls 
+                            
+              [maxSize]="maxSize"
+              [directionLinks]="directionLinks"
+              [autoHide]="autoHide"
+              [responsive]="responsive"
+              [previousLabel]="labels.previousLabel"
+              [nextLabel]="labels.nextLabel"
+              (pageChange)="onPageChange($event)">
+                
+
+              </pagination-controls>
+            </div>
+            <!----Fin Mostrar Archivos--> 
+            <div class="form-group text-center m-t-20">
+              <div class="col-12">
+                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                  type="submit">Guardar cambios</button>
+                  <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"  type="button" (click)="volver()">Volver</button>
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

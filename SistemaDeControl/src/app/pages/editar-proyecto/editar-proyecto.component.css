@@ -1,0 +1,42 @@
+
+.custom-file-input:hover{
+    cursor: pointer;
+
+}
+legend {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
+input{
+    border-bottom-color: cornsilk;
+}
+textarea{
+    height: 250px;
+}
+.comentario{
+    height: 100px;
+
+}
+.imgParticipante{
+    width: 40px;
+
+}
+.my-drop-zone { border: dotted 3px lightgray; 
+    height: 200px;
+}
+.nv-file-over { border: dotted 3px red; }
+.another-file-over-class { border: dotted 3px green; }
+.fecha{
+    display:flex;
+    margin-bottom: 1rem;
+    bottom:-37;
+    margin-top: 0rem;
+    position: relative;
+
+}
+@media only screen and (max-width: 720px){
+    .fecha{margin-top: 0;
+            top:0;
+    }
+}

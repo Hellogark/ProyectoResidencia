@@ -1,0 +1,142 @@
+<div class="container-fluid">
+    <div class="row no-gutters justify-content-center">
+      <div class="col-12 col-xl-8">
+        <div class="card bg-white">
+            <div class="card-body no-gutters">
+           
+              <form ngNativeValidate #f="ngForm" *ngIf="dataLista"  class="form-horizontal form-material " id="nProyectoForm" action="index.html">
+                  <div class="col-12 mb-5">
+                          <img src="../../../assets/images/logod.png" alt="Home" class="mb-5"/>
+                  </div>
+                <div class="col-12">
+
+                  <fieldset class="border border-primary mb-4">
+                   <legend for="" >Nombre del proyecto</legend>
+                    <div class="form-group mt-3 pl-2 pr-2">
+                        <div >
+                            <input readonly [(ngModel)]="proyecto.nombre"  name="nombre"class="form-control" type="text"   placeholder="Nombre (requerido)">
+                        </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="col-12">
+
+                  <fieldset class="border border-primary mb-4">
+                    <legend for="" >Descripción del proyecto</legend>
+                    <div class="form-group ">
+                        <div class="col-12">
+                            <textarea readonly [(ngModel)]="proyecto.descripcion" name="descripcion" class="form-control txtarea"   placeholder="Descripción... (requerido)"></textarea>
+                        </div>
+                    </div>
+                  </fieldset>
+                </div>
+  <!---Mostrar Cliente y empresa-->
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 col-xl-5  d-inline-block">
+        <fieldset class="border border-primary mb-4">
+          <legend for="">Cliente/Empresa</legend>
+          <div class="form-group">
+            <div class="col-12 d-inline pr-4">
+              <input [(ngModel)]="proyecto.nombreEmpresa" name="empresa" class="form-control" type="text"
+                readonly  placeholder="Empresa (requerido)">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="col-12 col-xl-7 d-inline-block fecha ">
+        <fieldset class="border border-primary pb-4">
+          <legend for="">Fecha proyectada</legend>
+          <div class="form-group  pl-2 pr-2 mb-0">
+            <input class="form-control" type="text" readonly [value]="fecha">        
+     
+    </div>
+    </fieldset>
+      </div>
+    </div>
+  </div>
+<!---Fin Mostrar Cliente y empresa-->
+
+<div class="col-12">
+
+                  <fieldset class="border border-primary mb-4">               
+                    <legend for="" >Participantes</legend>
+                    <div class="form-group ">
+                        <div class="col-12">
+                          <span>
+                            
+                          </span>
+                            <tag-input [disable]="true" class="disabled" theme='minimal' [placeholder]="" [removable] ="false"  [(ngModel)]="participantesVer" name ="participantes"class="form-control"  [identifyBy]="'_id'" [displayBy]="'nombre'">                              
+                            </tag-input>
+                        </div>
+                    </div>
+                  </fieldset>  
+                </div>
+               
+
+                  <fieldset class="border border-primary mb-4">               
+                    <legend for="" >Archivos Guardados</legend>
+                     <!---Mostrar archivos-->
+                 <div class="col-12  d-flex justify-content-center text-center">
+                   <div class="table-responsive">
+
+
+                      <table class="table table-striped table-hover">
+                        <thead class="thead-inverse ">
+                          <tr class="text-center">
+                            <th class="text-center">Descripción del archivo</th>
+                            <th class="text-center">Responsable</th>
+                            <th class="justify-content-center text-center">Descargar</th>                      
+                          </tr>
+                          </thead>
+                          <tbody class="">
+                            <tr *ngFor="let archivo of archivosMostrar | paginate: config" class=" fila  w-100 h-50 ">
+                              <td class="align-middle">{{archivo.comentario}}</td>                            
+                              <td class="align-middle">{{archivo.responsable.nombre}}</td>
+                              <td class="align-middle text-center">
+                                
+                               <button class="btn btn-primary " type="button" (click)="descargarArchivo(archivo)">
+                                  <i class="fa fa-download" aria-hidden="true"></i>
+                                
+                                </button>    
+                                                      
+                              </td>
+                            </tr>
+                          </tbody>
+                      </table>                                 
+                    </div>  
+                  
+                  </div>
+                  <div class="text-center mt-3 col-12">
+                   <pagination-controls 
+
+                   [maxSize]="maxSize"
+                   [directionLinks]="directionLinks"
+                   [autoHide]="autoHide"
+                   [responsive]="responsive"
+                   [previousLabel]="labels.previousLabel"
+                   [nextLabel]="labels.nextLabel"
+                   (pageChange)="onPageChange($event)">
+
+                  
+                   </pagination-controls>
+                 </div>
+                 <!----Fin Mostrar Archivos-->
+              </fieldset>                                                                  
+                   
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"  type="button" (click)="volver()">Volver</button>
+                        </div>
+                    </div>
+                  </form>
+        </div>
+  
+  
+  
+      </div>
+    </div>
+  </div>
+  </div>  
+  
