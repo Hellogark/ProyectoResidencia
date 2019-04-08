@@ -21,7 +21,7 @@ const pagesRoutes: Routes = [
                 canActivate: []
                 },
             {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'}},
-            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la cuenta' } },            
+            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' } },            
             { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
             { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo: 'Buscador'},           
             canActivate:[AdminGuard,VerificaTokenGuard]},

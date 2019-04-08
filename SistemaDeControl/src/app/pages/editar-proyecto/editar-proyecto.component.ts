@@ -67,7 +67,7 @@ public labels: any = {
   archivoTemp: string;
   inputVacio: boolean = false;
   nombreArchivo: string;
-  fecha: any;
+  fecha: any ;
   token = this._usuarioService.token;
   inputArchivo: any;
   formData = new FormData(); 
@@ -112,7 +112,9 @@ public labels: any = {
       this._proyectoService.obtenerProyecto(id).subscribe(  (res:any)  => {
         this.proyecto = res.proyecto;
         this.participantes = res.proyecto.participantes;
-        this.fecha = res.proyecto.fechaProyectada;                
+        console.log(res.proyecto.fechaProyectada);
+        let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';   
+        this.fecha = fecha;  
           this.archivosMostrar= res.proyecto.archivos;
           this.descripcion = this.proyecto.descripcion;
 
@@ -170,12 +172,9 @@ public labels: any = {
    this.proyecto.participantes = proyecto.participantes;
    this.proyecto.ultimoEditor = this._usuarioService.usuario._id;
    this.proyecto.participantes = proyecto.participantes; 
-   console.log(this.proyecto +'Este proyecto');
-   console.log(proyecto+'El proeycto');
-   console.log(this.comentario);
   
-   this.proyecto.fechaProyectada = this.fecha.toString();
-   console.log(this.proyecto._id);  
+  
+   this.proyecto.fechaProyectada = this.fecha.toString();  
    
   if (this.file != null ){
     if(this.comentario == '' || this.comentario == null){

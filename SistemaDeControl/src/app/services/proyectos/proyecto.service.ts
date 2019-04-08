@@ -110,15 +110,16 @@ export class ProyectoService {
 
     let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivos?token='+this.token;
     return this.http.put(url,formData,{reportProgress:true}).pipe( map( (res:any) => {
+     console.log(res);
       Swal.fire({
-        title: res,       
+        title: res.mensaje,       
         type: 'success',        
         timer: 3500
 
 
       }); 
     }),catchError((err) =>{
-      
+      console.log(err);
       Swal.fire({
         title: err.error.errors.message,       
         type: 'error',        

@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <i class="fa fas-save">
-                    <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">Guardar</button>
+                    <button type="submit" class="btn btn-block btn-themecolor waves-effect waves-light m-r-10">Guardar</button>
                     </i>
             </form>
             <form ngNativeValdiate #p ="ngForm"  (ngSubmit)="cambiarPass(passAnt,pass1,pass2)"class="form p-t-20">
@@ -55,7 +55,7 @@
                 </div>
                
                 <i class="fa fas-save">
-                <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">Cambiar contraseña</button>
+                <button type="submit" class="btn btn-block btn-themecolor waves-effect waves-light m-r-10">Cambiar contraseña</button>
                 </i>
             </form>
         </div>
@@ -66,12 +66,12 @@
       <div class="card-body text-center">
           <h4 class="card-title">Fotografía del usuario</h4>
           <h6 class="card-subtitle">{{this.usuario.nombre}}</h6>
-          <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="user" class="prevImgPerfil ">
+          <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="" class="prevImgPerfil ">
           <img *ngIf="imagenTemp" [src]="imagenTemp" alt="user" class="prevImgPerfil ">
           <input  type="file" (change)="seleccionImagen($event.target.files[0])" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >
           <br>
           <i class="fa fas-save">
-            <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-block btn-success waves-effect waves-light m-r-10">Actualizar foto</button>
+            <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-block btn-themecolor waves-effect waves-light m-r-10">Actualizar foto</button>
           </i>
 
       </div>

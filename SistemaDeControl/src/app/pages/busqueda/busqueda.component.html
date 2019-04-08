@@ -12,7 +12,7 @@
                 <td class="align-middle w-25">{{usuario.nombre}}</td>
                
                 <td class="align-middle w-50">
-                <button class="btn btn-primary" (click)="redireccionar(usuario.nombre)">
+                <button class="btn btn-themecolor" (click)="redireccionar(usuario.nombre)">
                     <i class="fa fa-edit"></i>
                 </button>
               </td>
@@ -36,7 +36,7 @@
                 <td class="align-middle">{{proyecto.nombre}}</td>
                 <td class="align-middle">{{proyecto.nombreEmpresa}}</td>
                   <td>
-                    <button class="btn btn-primary mr-3" [routerLink]="['/editarProyecto', proyecto._id]">
+                    <button class="btn btn-themecolor mr-3" [routerLink]="['/editarProyecto', proyecto._id]">
                       <i class="fa fa-edit"></i>
                   </button>
                 </td>

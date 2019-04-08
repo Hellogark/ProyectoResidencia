@@ -32,15 +32,14 @@ private inputText: string = "";
   }
 
   ngOnInit() {
-    if(this.fecha != ''){
+    if(this.fecha == '' || this.fecha == undefined|| this.fecha == null){console.log(this.fecha);return;   }
     let dia = this.fecha.split('/')[0];
     let mes = this.fecha.split('/')[1];
     let anio = this.fecha.split('/')[2];
     console.log(mes);
-      this.fechaInput = {date: { year: anio, month: mes, day: dia}};
-   
+      this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
     }
-  }
+  
 
   clearDate(): void {
     this.ngxdp.clearDate();

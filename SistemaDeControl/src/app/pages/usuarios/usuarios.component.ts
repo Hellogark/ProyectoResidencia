@@ -111,7 +111,7 @@ onPageChange(number: number) {
       return;
     }
     Swal.fire({
-      title: 'Estás seguro que deseas eliminar a'+usuarioBorrar.nombre+'?',      
+      title: 'Estás seguro que deseas eliminar a '+usuarioBorrar.nombre+'?',      
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

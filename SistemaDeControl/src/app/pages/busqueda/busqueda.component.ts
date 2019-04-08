@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/service.index';
 
 @Component({
   selector: 'app-busqueda',
@@ -13,7 +14,9 @@ import { Usuario } from 'src/app/models/usuario.model';
 export class BusquedaComponent implements OnInit {
   usuarios:Usuario[] = [];
   proyectos: Proyecto[] = [];
-  constructor(public activatedRoute: ActivatedRoute, public http:HttpClient, public router:Router) {
+  token = this._usuarioService.token;
+  constructor(public activatedRoute: ActivatedRoute, public http:HttpClient, public router:Router, public _usuarioService:UsuarioService) {
+
       activatedRoute.params.subscribe(params =>{
         let termino = params['termino'];
        this.buscar(termino);
@@ -28,7 +31,7 @@ export class BusquedaComponent implements OnInit {
       this.router.navigate(['/dashboard']);
 
       return;}
-   let url = URL_SERVICIOS+'busqueda/todo/'+termino;
+   let url = URL_SERVICIOS+'busqueda/todo/'+termino+'?token='+this.token;
     this.http.get(url).subscribe( (res:any) =>{
       console.log(res);
       this.usuarios = res.usuarios;

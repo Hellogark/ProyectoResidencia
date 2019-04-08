@@ -20,7 +20,6 @@ import { MisProyectosComponent } from './mis-proyectos/mis-proyectos.component';
 import { CrearProyectoComponent } from './crear-proyecto/crear-proyecto.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { ProyectosComponent } from './proyectos/proyectos.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SelectUsuariosComponent } from './../components/selectUsuarios/select-usuarios.component';
 import { VerTodosProyectosComponent } from './ver-todos-proyectos/ver-todos-proyectos.component';
@@ -42,7 +41,6 @@ import { FileUploadModule } from "ng2-file-upload";
         CrearProyectoComponent,
         ProfileComponent,
         UsuariosComponent,
-        ProyectosComponent,
         SelectUsuariosComponent,
         VerTodosProyectosComponent,
         EditarProyectoComponent,

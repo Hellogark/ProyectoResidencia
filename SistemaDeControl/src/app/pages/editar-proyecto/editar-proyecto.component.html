@@ -83,7 +83,7 @@
                   <div class="col-12 ">
                     <div class="form-group">
                       <label class="custom-file">
-                        <input type="file" [(ngModel)]="inputArchivo" name="inputArchivo" id=""
+                        <input type="file" [ngModel]="inputArchivo" name="inputArchivo" id=""
                           (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
                           placeholder="Elegir archivo" class="custom-file-input" aria-describedby="fileHelpId">
                         <span class="custom-file-control"></span>
@@ -128,7 +128,7 @@
                           <td class="align-middle">{{archivo.comentario}}</td>                            
                               <td class="align-middle">{{archivo.responsable.nombre}}</td>
                          <td class="align-middle">
-                           <button class="btn btn-primary mr-3" type="button" (click)="descargarArchivo( archivo )">
+                           <button class="btn btn-themecolor mr-3" type="button" (click)="descargarArchivo( archivo )">
                              <i class="fa fa-download" aria-hidden="true"></i>
 
                            </button>
@@ -161,9 +161,9 @@
             <!----Fin Mostrar Archivos--> 
             <div class="form-group text-center m-t-20">
               <div class="col-12">
-                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                <button class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light"
                   type="submit">Guardar cambios</button>
-                  <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"  type="button" (click)="volver()">Volver</button>
+                  <button class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light"  type="button" (click)="volver()">Volver</button>
 
               </div>
             </div>
