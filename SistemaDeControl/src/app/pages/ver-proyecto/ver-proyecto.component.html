@@ -1,6 +1,19 @@
 <div class="container-fluid">
     <div class="row no-gutters justify-content-center">
         <ng-progress id="progreso" [spinner]="true" [ease]="easeInCirc" [thick]="true"></ng-progress>
+        <div class="row" *ngIf="cargando">
+          <div class="col-12 justify-content-center">
+              <div class="alert-warning text-center">
+                  <p>
+                     <strong>Cargando</strong>
+                  </p>            
+                   <i class="fa fa-refresh fa-spin fa-3x">           
+                   </i>
+                   <br>
+                   <p> <span>Espere por favor...</span></p>
+                 </div>       
+               </div>
+          </div>
 
       <div class="col-12 col-xl-8">
         <div class="card bg-white">

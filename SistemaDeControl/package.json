@@ -27,6 +27,7 @@
     "ngx-chips": "^1.9.8",
     "ngx-mydatepicker": "^2.4.9",
     "ngx-pagination": "^3.2.1",
+    "ngx-progressbar": "^2.1.1",
     "rxjs": "6.1.0",
     "sweetalert2": "^8.3.0",
     "typescript": "^2.7.2",

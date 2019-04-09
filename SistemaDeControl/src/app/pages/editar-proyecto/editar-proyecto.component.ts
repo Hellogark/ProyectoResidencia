@@ -56,6 +56,7 @@ public labels: any = {
 };
 
   id :string;
+  cargando: boolean = true;
   proyecto:Proyecto;
   dataLista:boolean = false;
   archivo:Archivos;
@@ -95,6 +96,7 @@ public labels: any = {
  
 //Obtener y rellenar lista de usuarios
    obtenerUsuarios(){
+     
     this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
     .subscribe(res =>{
         this.todosUsuarios = res.usuarios;
@@ -106,6 +108,8 @@ public labels: any = {
          
         });
         console.log(this.nombres);
+       
+
     });
    }
   
@@ -127,6 +131,7 @@ public labels: any = {
         console.log(this.proyecto);
        
         this.dataLista=true;
+        this.cargando = false;
     }, (err) =>{
      console.log(err);
     });
