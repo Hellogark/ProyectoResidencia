@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate,Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 import { UsuarioService } from '../usuario/usuario.service';
 
 @Injectable({
@@ -13,8 +13,20 @@ export class VerificaTokenGuard implements CanActivate {
     let payload = JSON.parse( atob(token.split('.')[1]));
     let expirado = this.expirado(payload.exp);
     if(expirado){
-      this._usuarioService.logout();
-      return false;
+      Swal.fire({
+        title:'La sesión ah expirado',
+        type:'info',
+
+
+      }).then( (result) => {
+
+        if(result.value){
+          this._usuarioService.logout();
+          return false;
+
+        }
+      })
+     
     }
     return this.verificaRenueva(payload.exp);
   }

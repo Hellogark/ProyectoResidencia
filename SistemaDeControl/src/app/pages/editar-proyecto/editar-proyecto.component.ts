@@ -14,6 +14,8 @@ import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import {saveAs}  from 'file-saver';
 import  Swal from 'sweetalert2';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 
 
 TagInputModule.withDefaults({
@@ -72,11 +74,12 @@ public labels: any = {
   inputArchivo: any;
   formData = new FormData(); 
   comentario: string;
+  progressRef: NgProgressRef;
   
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _proyectoService:ProyectoService, 
     public _usuarioService:UsuarioService, public rutaActiva:ActivatedRoute,
-    public _cambiarImagenService: CambiarImagenService) { 
+    public _cambiarImagenService: CambiarImagenService, private progress: NgProgress) { 
   
       this.id =this.rutaActiva.snapshot.paramMap.get('id');                
       
@@ -84,6 +87,7 @@ public labels: any = {
  
   async ngOnInit() {
     this.cargarProyecto(this.id);
+    this.progressRef = this.progress.ref('progreso');
     
 
    }
@@ -130,9 +134,11 @@ public labels: any = {
   }
   descargarArchivo(archivo: any){      
     console.log(archivo);
+    this.cargar();
    
     this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{   
       console.log(res);
+      this.terminado();
      
       
       saveAs(res,'Recursos.rar');
@@ -165,7 +171,7 @@ public labels: any = {
   obtenerFecha = (fecha) =>this.fecha = fecha;
   //Guardar Proyecto
  editarProyecto(proyecto:Proyecto){
-   
+   this.cargar();
    this.proyecto.nombre = proyecto.nombre;
    this.proyecto.descripcion = proyecto.descripcion;
    this.proyecto.nombreEmpresa = proyecto.nombreEmpresa;
@@ -193,8 +199,10 @@ public labels: any = {
     };
    
     this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
+      
            this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
         console.log(res);
+        this.terminado();
       });
     });
    this.cargarProyecto(this.id);
@@ -203,6 +211,7 @@ public labels: any = {
   }); */}else{
     this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
       console.log(res);
+      this.terminado();
     })
 
   } 
@@ -286,6 +295,14 @@ verificarArchivo(archivo){
  onPageChange(number: number) {
   console.log('change to page', number);
   this.config.currentPage = number;
+}
+
+cargar() {
+  this.progressRef.start();
+}
+
+terminado() {
+  this.progressRef.complete();
 }
 }
    

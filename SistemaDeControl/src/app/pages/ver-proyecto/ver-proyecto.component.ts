@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { TagInputModule } from 'ngx-chips';
 import { DomSanitizer } from '@angular/platform-browser';
 import {saveAs}  from 'file-saver';
+import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 
 import { PaginationInstance } from 'ngx-pagination';
 
@@ -48,9 +49,12 @@ public labels: any = {
   nombres: any [] = [];
   nuevoParticipantes = {};
   archivoUrl;
+  progressRef: NgProgressRef;
+
 
   constructor(public _proyectoService:ProyectoService, public _usuarioService:UsuarioService, 
-    public router:Router,public rutaActiva:ActivatedRoute, public _location:Location, private sanitizer: DomSanitizer) { 
+    public router:Router,public rutaActiva:ActivatedRoute, public _location:Location, private sanitizer: DomSanitizer,
+     private progress: NgProgress) { 
       this.id =this.rutaActiva.snapshot.paramMap.get('id');     
      
          
@@ -60,6 +64,8 @@ public labels: any = {
 
   ngOnInit() {
     this.cargarProyecto(this.id);
+    this.progressRef = this.progress.ref('progreso');
+
       
   }
   obtenerUsuarios(){
@@ -96,6 +102,7 @@ public labels: any = {
   }
   descargarArchivo(archivo: any){      
     console.log(archivo);
+    this.cargar();
    
     this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{   
       console.log(res);
@@ -103,6 +110,7 @@ public labels: any = {
       
       this.archivoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.location.protocol + '//' + window.location.host + "/descarga.rar"); 
       console.log(this.archivoUrl);
+      this.terminado();
       saveAs(res,'Recursos.rar');
 });
 
@@ -113,5 +121,11 @@ public labels: any = {
   }
   obtenerFecha = (fecha) =>this.fecha = fecha;
 
-
+  cargar() {
+    this.progressRef.start();
+  }
+  
+  terminado() {
+    this.progressRef.complete();
+  }
 }

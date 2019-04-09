@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
+
 // temporal
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 import { MisProyectosComponent } from './mis-proyectos/mis-proyectos.component';
@@ -31,6 +32,7 @@ import { TagInputModule } from 'ngx-chips';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component'; 
 import { FileUploadModule } from "ng2-file-upload";
+import { NgProgressModule } from '@ngx-progressbar/core';
 
 @NgModule({
     declarations: [
@@ -62,6 +64,7 @@ import { FileUploadModule } from "ng2-file-upload";
         NgxPaginationModule,
         TagInputModule, 
         FileUploadModule,
+        NgProgressModule,
         
         
         

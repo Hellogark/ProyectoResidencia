@@ -111,13 +111,13 @@ export class ProyectoService {
     let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivos?token='+this.token;
     return this.http.put(url,formData,{reportProgress:true}).pipe( map( (res:any) => {
      console.log(res);
-      Swal.fire({
+   /*    Swal.fire({
         title: res.mensaje,       
         type: 'success',        
         timer: 3500
 
 
-      }); 
+      }); */ 
     }),catchError((err) =>{
       console.log(err);
       Swal.fire({
@@ -137,7 +137,17 @@ export class ProyectoService {
     formData.append('url',urlArchivo);    */
     return this.http.get(url,{responseType: 'blob'}).pipe( map( (res:any) =>{      
       return res;
-    } )) ;
+    } ),catchError((err:any) =>{
+     
+     return Swal.fire({
+        title: 'Ah ocurrido un error al descargar el archivo, el archivo no existe o no se encuentra disponible',       
+        type: 'error',        
+        timer: 3500
+
+
+      });
+      //return throwError(err);
+    } ));  
 
   }
 
