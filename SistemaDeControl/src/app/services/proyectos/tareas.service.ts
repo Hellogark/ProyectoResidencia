@@ -24,9 +24,9 @@ export class TareasService {
   constructor(public _usuarioService:UsuarioService, public http: HttpClient,public  router: Router) { 
 
   }
-  crearTarea(tarea:Tareas){
-    let url = URL_SERVICIOS + '/tareas'+
-    return this.http.post()
+  crearTarea(tarea:Tareas, id:string){
+    let url = URL_SERVICIOS + id+'/tareas?token='+this.token;
+   // return this.http.post()
 
   }
 

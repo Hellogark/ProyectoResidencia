@@ -9,7 +9,7 @@ import { UsuarioService } from 'src/app/services/service.index';
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
-  styles: []
+  styles: ['./busqueda.component.css']
 })
 export class BusquedaComponent implements OnInit {
   usuarios:Usuario[] = [];
@@ -36,6 +36,7 @@ export class BusquedaComponent implements OnInit {
       console.log(res);
       this.usuarios = res.usuarios;
       this.proyectos = res.proyectos;
+      console.log(this.proyectos);
     });
 
   }

@@ -1,5 +1,4 @@
 import { Tareas } from './../../models/tareas.model';
-import { Component, OnInit } from '@angular/core';
 import { Archivos } from './../../models/archivos.model';
 import { DatepickerComponent } from './../../shared/datepicker/datepicker.component';
 
