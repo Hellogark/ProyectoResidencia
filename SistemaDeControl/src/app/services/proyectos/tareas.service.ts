@@ -1,0 +1,33 @@
+import { Tareas } from './../../models/tareas.model';
+import { Injectable } from '@angular/core';
+import { map, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { Archivos } from './../../models/archivos.model';
+import { URL_SERVICIOS } from './../../config/config';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { Proyecto } from 'src/app/models/proyectos.model';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from '../usuario/usuario.service';
+@Injectable({
+  providedIn: 'root'
+})
+export class TareasService {
+
+  proyecto: Proyecto;
+  usuario: Usuario; 
+ 
+  token =this._usuarioService.token;
+
+
+  constructor(public _usuarioService:UsuarioService, public http: HttpClient,public  router: Router) { 
+
+  }
+  crearTarea(tarea:Tareas){
+    let url = URL_SERVICIOS + '/tareas'+
+    return this.http.post()
+
+  }
+
+}

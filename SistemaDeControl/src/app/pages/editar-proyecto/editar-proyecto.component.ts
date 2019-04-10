@@ -1,4 +1,3 @@
-import { CambiarImagenService } from './../../services/cambiarImagen/cambiarImagen.service';
 import { Archivos } from './../../models/archivos.model';
 import { DatepickerComponent } from './../../shared/datepicker/datepicker.component';
 
@@ -10,7 +9,6 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { TagInputModule } from 'ngx-chips';
 import { PaginationInstance } from 'ngx-pagination';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import {saveAs}  from 'file-saver';
 import  Swal from 'sweetalert2';
@@ -80,7 +78,7 @@ public labels: any = {
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _proyectoService:ProyectoService, 
     public _usuarioService:UsuarioService, public rutaActiva:ActivatedRoute,
-    public _cambiarImagenService: CambiarImagenService, private progress: NgProgress) { 
+    private progress: NgProgress) { 
   
       this.id =this.rutaActiva.snapshot.paramMap.get('id');                
       
@@ -123,8 +121,8 @@ public labels: any = {
         console.log(res.proyecto.fechaProyectada);
         let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';   
         this.fecha = fecha;  
-          this.archivosMostrar= res.proyecto.archivos;
-          this.descripcion = this.proyecto.descripcion;
+        this.archivosMostrar = res.proyecto.archivos;
+        this.descripcion = this.proyecto.descripcion;
 
         console.log(this.archivosMostrar);
         this.obtenerUsuarios();
