@@ -36,7 +36,6 @@ export class ListaTareasComponent implements OnInit {
   token: string = this._usuarioService.token;
   constructor(public _usuarioService: UsuarioService,public rutaActiva:ActivatedRoute, public _location:Location) {
     this.id = this.rutaActiva.snapshot.paramMap.get('id');
-
    }
 
   ngOnInit() {

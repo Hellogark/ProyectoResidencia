@@ -11,16 +11,19 @@ import {UsuariosComponent} from './usuarios/usuarios.component';
 import {VerTodosProyectosComponent} from './ver-todos-proyectos/ver-todos-proyectos.component';
 import {EditarProyectoComponent} from './editar-proyecto/editar-proyecto.component';
 import { VerificaTokenGuard } from '../services/service.index';
-
+import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
+import { MisTareasComponent } from "./mis-tareas/mis-tareas.component";
 
 
 
 const pagesRoutes: Routes = [
    
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' }, 
-                canActivate: []
+                canActivate: [VerificaTokenGuard]
                 },
             {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'}},
+            {path: 'tareas', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'}},
+            { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '} },
             { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' } },            
             { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
             { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo: 'Buscador'},           

@@ -34,6 +34,7 @@ import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component';
 import { FileUploadModule } from "ng2-file-upload";
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
+import { MisTareasComponent } from './mis-tareas/mis-tareas.component';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
         BusquedaComponent,
         VerProyectoComponent,
         ListaTareasComponent,
+        MisTareasComponent,
         
       
     ],

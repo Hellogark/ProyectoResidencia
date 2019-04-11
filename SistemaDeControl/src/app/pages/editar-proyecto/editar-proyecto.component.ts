@@ -40,7 +40,7 @@ export class EditarProyectoComponent implements OnInit {
   public responsive: boolean = true;
   public config: PaginationInstance = {
    
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     currentPage: 1
 };
 
