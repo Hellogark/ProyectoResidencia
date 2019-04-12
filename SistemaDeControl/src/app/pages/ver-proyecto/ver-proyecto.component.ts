@@ -27,7 +27,7 @@ export class VerProyectoComponent implements OnInit {
   fecha: any;
   public config: PaginationInstance = {
    
-    itemsPerPage: 10,
+    itemsPerPage: 5,
     currentPage: 1
 };
 
@@ -60,7 +60,7 @@ public labels: any = {
          
       
       }
-    
+ 
 
   ngOnInit() {
     this.cargarProyecto(this.id);
@@ -127,5 +127,9 @@ public labels: any = {
   
   terminado() {
     this.progressRef.complete();
+  }
+  onPageChange(number: number) {
+    console.log('change to page', number);
+    this.config.currentPage = number;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter,ViewChild } from '@angular/core';
-import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyCalendarViewChanged, IMyMarkedDate, IMyDate, IMyDefaultMonth, NgxMyDatePickerDirective} from 'ngx-mydatepicker';
+import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyOptions, NgxMyDatePickerDirective} from 'ngx-mydatepicker';
 
 
 @Component({
@@ -14,6 +14,10 @@ export class DatepickerComponent implements OnInit {
   @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
   fechaInput: any;
   arreglo: string []= [];
+  private fechaInicial = new Date();
+  public dia = this.fechaInicial.getDate();
+  private mes = this.fechaInicial.getMonth();
+  private anio = this.fechaInicial.getFullYear();
   myOptions: INgxMyDpOptions = {
     // other options...
     dateFormat: 'dd/m/yyyy',
@@ -22,9 +26,11 @@ export class DatepickerComponent implements OnInit {
     markCurrentDay: true,
     openSelectorTopOfInput: false,
     focusInputOnDateSelect: true,
+    disableUntil: {year: 0, month: 0, day:0}
    
 };
-private fechaInicial: Object = {jsdate: new Date()};
+
+
 private validDate: boolean = false;
 private inputText: string = "";
  
@@ -36,8 +42,9 @@ private inputText: string = "";
     let dia = this.fecha.split('/')[0];
     let mes = this.fecha.split('/')[1];
     let anio = this.fecha.split('/')[2];
-    console.log(mes);
+    console.log(this.dia);
       this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
+      this.disableUntil();
     }
   
 
@@ -60,5 +67,19 @@ onInputFieldChanged(event: IMyInputFieldChanged): void {
   this.inputText = event.value;
   this.fechaSeleccion.emit(event.value.toString());
 
+}
+disableUntil() {
+  let d: Date = new Date();
+  d.setDate(d.getDate() - 1);
+  let copy = this.getCopyOfOptions();
+  copy.disableUntil = {year: d.getFullYear(), 
+                       month: d.getMonth() + 1, 
+                       day: d.getDate()};
+  this.myOptions = copy;
+}
+
+// Returns copy of myOptions
+getCopyOfOptions(): IMyOptions {
+  return JSON.parse(JSON.stringify(this.myOptions));
 }
 }

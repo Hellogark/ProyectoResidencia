@@ -5,6 +5,7 @@
             <h4 class="card-title">Perfil del usuario</h4>
             <h6 class="card-subtitle">{{this.usuario.nombre}}</h6>
             <form ngNativeValdiate #f ="ngForm"  (ngSubmit)="guardar(f.value)"class="form p-t-20">
+                <legend>Datos Personales</legend>
                 <div class="form-group">
                     <label for="exampleInputuname">Nombre de usuario</label>
                     <div class="input-group">
@@ -64,8 +65,7 @@
 <div class="col-lg-5">
   <div class="card">
       <div class="card-body text-center">
-          <h4 class="card-title">Fotografía del usuario</h4>
-          <h6 class="card-subtitle">{{this.usuario.nombre}}</h6>
+          <legend>Imagen de Perfil de {{this.usuario.nombre}}</legend>
           <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="" class="prevImgPerfil ">
           <img *ngIf="imagenTemp" [src]="imagenTemp" alt="user" class="prevImgPerfil ">
           <input  type="file" (change)="seleccionImagen($event.target.files[0])" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >

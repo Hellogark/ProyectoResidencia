@@ -14,7 +14,7 @@ export class VerificaTokenGuard implements CanActivate {
     let expirado = this.expirado(payload.exp);
     if(expirado){
       Swal.fire({
-        title:'La sesión ah expirado',
+        title:'La sesión ha expirado',
         type:'info',
 
 

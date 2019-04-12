@@ -239,7 +239,7 @@ export class UsuarioService {
     return this.http.delete(url).pipe(map((res:any)=>{
       Swal.fire(
         'Eliminado!',
-        'El usuario ah sido eliminado correctamente!',
+        'El usuario ha sido eliminado correctamente!',
         'success'
       );
       return true;

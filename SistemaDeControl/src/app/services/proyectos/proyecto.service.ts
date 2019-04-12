@@ -59,7 +59,7 @@ export class ProyectoService {
   }
 
   eliminarProyecto(id:string){
-    let url= URL_SERVICIOS + 'proyectos/'+id+'?token='+this._usuarioService.token;
+    let url= URL_SERVICIOS + 'proyectos/'+id+'?token='+this.token;
     return this.http.delete(url).pipe(map((res:any)=>{
       Swal.fire({
         title:'Proyecto eliminado con éxito',
@@ -71,7 +71,7 @@ export class ProyectoService {
   }
 
   buscarProyectos(termino: string){
-    let url = URL_SERVICIOS + 'busqueda/info/proyectos/'+termino;
+    let url = URL_SERVICIOS + 'busqueda/info/proyectos/'+termino+'?token='+this.token;
     return this.http.get(url).pipe(map((res:any)=>{
       return res.proyectos;
     }));
