@@ -1,18 +1,18 @@
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild,Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Archivos } from './../../models/archivos.model';
 import { DatepickerComponent } from './../../shared/datepicker/datepicker.component';
 
 import { Proyecto } from 'src/app/models/proyectos.model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { ProyectoService, UsuarioService } from 'src/app/services/service.index';
 import { Usuario } from 'src/app/models/usuario.model';
 import { TagInputModule } from 'ngx-chips';
 import { PaginationInstance } from 'ngx-pagination';
-import { DomSanitizer } from '@angular/platform-browser';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import {saveAs}  from 'file-saver';
 import  Swal from 'sweetalert2';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 
 
@@ -215,7 +215,7 @@ public labels: any = {
     this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
       console.log(res);
       this.terminado();
-    })
+    });
 
   } 
   
