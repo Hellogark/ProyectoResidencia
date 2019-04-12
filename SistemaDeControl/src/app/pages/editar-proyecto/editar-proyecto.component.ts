@@ -1,8 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
-import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { Component, OnInit, ViewChild,Input } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Archivos } from './../../models/archivos.model';
 import { DatepickerComponent } from './../../shared/datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
@@ -13,6 +12,7 @@ import { PaginationInstance } from 'ngx-pagination';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import {saveAs}  from 'file-saver';
 import  Swal from 'sweetalert2';
+import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 
 
 TagInputModule.withDefaults({
@@ -214,7 +214,7 @@ public labels: any = {
     this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
       console.log(res);
       this.terminado();
-    })
+    });
 
   } 
   

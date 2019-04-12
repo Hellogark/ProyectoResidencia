@@ -1,4 +1,5 @@
 import { Usuario } from './usuario.model';
+import { Proyecto } from './proyectos.model';
 export class Tareas {
 
             constructor(
@@ -10,6 +11,7 @@ export class Tareas {
                 public fechaCreacion?: string,
                 public fechaFinalizado?: string,
                 public participantes?: Usuario[],
+                public proyecto?: Proyecto,
                 public _id?: string
 
             ){
