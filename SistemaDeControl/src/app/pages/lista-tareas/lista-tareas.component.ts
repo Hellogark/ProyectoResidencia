@@ -1,13 +1,13 @@
 import { Tareas } from './../../models/tareas.model';
-import { Archivos } from './../../models/archivos.model';
 import { DatepickerComponent } from './../../shared/datepicker/datepicker.component';
+import {Location} from '@angular/common';
 
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { ProyectoService, UsuarioService } from 'src/app/services/service.index';
 import { Usuario } from 'src/app/models/usuario.model';
-
+import { EditarTareaComponent } from '../../shared/editar-tarea/editar-tarea.component';
 import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
 
@@ -30,16 +30,21 @@ export class ListaTareasComponent implements OnInit {
   participantes:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
   tareas: Tareas[];
+  mostrar: boolean;
 
 
   
   token: string = this._usuarioService.token;
-  constructor(public _usuarioService: UsuarioService,public rutaActiva:ActivatedRoute, public _location:Location) {
+  constructor(public _usuarioService: UsuarioService, public router:Router,
+    public rutaActiva:ActivatedRoute, public _location:Location) {
     this.id = this.rutaActiva.snapshot.paramMap.get('id');
    }
 
   ngOnInit() {
 
   }
+
+  obtenerFecha = (fecha) =>this.fecha = fecha;
+
 
 }

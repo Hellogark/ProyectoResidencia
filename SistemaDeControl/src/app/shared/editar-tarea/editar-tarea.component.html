@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header bg-white">
+    <div class="row border-bottom">
+      <div class="col-6">
+        <button type="button" class="btn btn-outline-secondary"><i class="fa fa-check" aria-hidden="true"></i> Marcar cómo completado</button>
+        <button type="button" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i> Tarea completada</button>
+      </div>
+      <div class="col-6 text-right">
+        <i class="fa-3x fa-times" aria-hidden="true"></i>
+     </div>
+    </div>    
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">      
+          <input type="text" class="form-control" name="nombreTarea" id="" aria-describedby="helpId" placeholder="Nombre de la tarea...">
+        </div>      
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-4">
+             <tag-input theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participantes"
+                      name="participantes" class="form-control" [identifyBy]="'_id'" [displayBy]="'nombre'">
+                      <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres">
+                      </tag-input-dropdown>
+                    </tag-input>
+
+
+          </div>
+          <div class="col-8">
+            <app-datepicker  [fecha] = "this.fecha"(fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>

@@ -25,7 +25,6 @@ import { PipesModule } from './pipes/pipes.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.component';
 
 
 
@@ -41,7 +40,6 @@ import { EditarTareaComponent } from './components/editar-tarea/editar-tarea.com
     LoginComponent,
     RegisterComponent,
     PagesComponent,
-    EditarTareaComponent,
   ],
   imports: [
     BrowserModule,

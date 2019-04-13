@@ -10,6 +10,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { EditarTareaComponent } from './editar-tarea/editar-tarea.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
 
@@ -30,6 +31,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
         NopagefoundComponent,
         ModalUploadComponent,
         DatepickerComponent,
+        EditarTareaComponent
+        
 
     ],
     exports: [
@@ -39,7 +42,9 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
         BreadcrumbsComponent,
         NopagefoundComponent,
         ModalUploadComponent,
-        DatepickerComponent
+        DatepickerComponent,
+        EditarTareaComponent
+        
 
     ]
 })

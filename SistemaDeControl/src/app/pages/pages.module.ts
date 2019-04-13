@@ -5,7 +5,7 @@ import { PipesModule } from './../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { PAGES_ROUTES } from './pages.routes';
 
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule} from '../shared/shared.module';
 
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 // ng2-charts
@@ -22,10 +22,10 @@ import { CrearProyectoComponent } from './crear-proyecto/crear-proyecto.componen
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SelectUsuariosComponent } from './../components/selectUsuarios/select-usuarios.component';
 import { VerTodosProyectosComponent } from './ver-todos-proyectos/ver-todos-proyectos.component';
 import { EditarProyectoComponent } from './editar-proyecto/editar-proyecto.component';
-
+import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
+import { MisTareasComponent } from './mis-tareas/mis-tareas.component';
 
 //librerias
 import { TagInputModule } from 'ngx-chips';
@@ -33,8 +33,6 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component'; 
 import { FileUploadModule } from "ng2-file-upload";
 import { NgProgressModule } from '@ngx-progressbar/core';
-import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
-import { MisTareasComponent } from './mis-tareas/mis-tareas.component';
 
 @NgModule({
     declarations: [
@@ -45,13 +43,13 @@ import { MisTareasComponent } from './mis-tareas/mis-tareas.component';
         CrearProyectoComponent,
         ProfileComponent,
         UsuariosComponent,
-        SelectUsuariosComponent,
         VerTodosProyectosComponent,
         EditarProyectoComponent,
         BusquedaComponent,
         VerProyectoComponent,
         ListaTareasComponent,
         MisTareasComponent,
+        
         
       
     ],

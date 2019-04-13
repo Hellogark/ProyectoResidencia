@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DatepickerComponent } from './../../shared/datepicker/datepicker.component';
+import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { ProyectoService, UsuarioService, TareasService } from 'src/app/services/service.index';
 import { TagInputModule } from 'ngx-chips';
-
 import  Swal from 'sweetalert2';
 
 @Component({
@@ -45,7 +44,7 @@ export class EditarTareaComponent implements OnInit {
         }
             this.nombres.push(this.nuevosParticipantes );
         });
-        console.log(this.nombres);       
+        console.log(this.nombres); 
     });
    }
   

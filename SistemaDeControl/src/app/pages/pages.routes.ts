@@ -22,7 +22,6 @@ const pagesRoutes: Routes = [
                 canActivate: [VerificaTokenGuard]
                 },
             {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'}},
-            {path: 'tareas', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'}},
             { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '} },
             { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' } },            
             { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
@@ -35,6 +34,8 @@ const pagesRoutes: Routes = [
             {path: 'ver-usuarios/:termino', component: UsuariosComponent, data:{titulo: 'Usuario Seleccionado'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
             //Proyecto
+            {path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
+                canActivate: [AdminGuard,VerificaTokenGuard]},
             {path: 'ver-proyectos', component: VerTodosProyectosComponent, data:{titulo: 'Ver todos los proyectos'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
             {path: 'editarProyecto/:id', component: EditarProyectoComponent, data:{titulo: 'Editar Proyecto'},
@@ -42,9 +43,9 @@ const pagesRoutes: Routes = [
             { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' } },
             { path: 'nuevoProyecto', component: CrearProyectoComponent, data: { titulo: 'Crear Nuevo Proyecto' }, 
             canActivate:[AdminGuard,VerificaTokenGuard] },
-
+            
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-           /*  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' } */
+            /*  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' } */
         ];
 
 

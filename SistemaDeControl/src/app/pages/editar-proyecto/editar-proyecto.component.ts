@@ -77,10 +77,9 @@ public labels: any = {
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _proyectoService:ProyectoService, 
     public _usuarioService:UsuarioService, public rutaActiva:ActivatedRoute,
-    private progress: NgProgress) { 
-  
-      this.id =this.rutaActiva.snapshot.paramMap.get('id');                
-      
+    private progress: NgProgress) {
+
+      this.id =this.rutaActiva.snapshot.paramMap.get('id');
   }
  
   async ngOnInit() {
@@ -305,6 +304,10 @@ cargar() {
 
 terminado() {
   this.progressRef.complete();
+}
+irTareas(){
+
+  this.router.navigate(['/todas-tareas',this.id]);
 }
 }
    
