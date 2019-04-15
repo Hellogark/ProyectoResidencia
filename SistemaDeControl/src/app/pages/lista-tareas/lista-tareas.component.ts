@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild,Input } from '@angular/core';
 import { ProyectoService, UsuarioService } from 'src/app/services/service.index';
 import { Usuario } from 'src/app/models/usuario.model';
+import { MostrarTareaComponent } from '../../shared/mostrar-tarea/mostrar-tarea.component';
 import { EditarTareaComponent } from '../../shared/editar-tarea/editar-tarea.component';
 import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';

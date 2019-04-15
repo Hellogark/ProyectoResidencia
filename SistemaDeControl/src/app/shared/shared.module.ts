@@ -12,6 +12,9 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { EditarTareaComponent } from './editar-tarea/editar-tarea.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { TagInputModule } from 'ngx-chips';
+import { MostrarTareaComponent } from './mostrar-tarea/mostrar-tarea.component';
+
 
 
 
@@ -21,7 +24,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
         CommonModule,
         PipesModule,      
         NgxMyDatePickerModule.forRoot(),
-        FormsModule
+        FormsModule,
+        TagInputModule
     ],
     declarations: [
         NopagefoundComponent,
@@ -31,7 +35,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
         NopagefoundComponent,
         ModalUploadComponent,
         DatepickerComponent,
-        EditarTareaComponent
+        EditarTareaComponent,
+        MostrarTareaComponent,
         
 
     ],
@@ -43,7 +48,8 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
         NopagefoundComponent,
         ModalUploadComponent,
         DatepickerComponent,
-        EditarTareaComponent
+        EditarTareaComponent,
+        MostrarTareaComponent
         
 
     ]

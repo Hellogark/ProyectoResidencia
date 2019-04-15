@@ -14,10 +14,7 @@ export class DatepickerComponent implements OnInit {
   @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
   fechaInput: any;
   arreglo: string []= [];
-  private fechaInicial = new Date();
-  public dia = this.fechaInicial.getDate();
-  private mes = this.fechaInicial.getMonth();
-  private anio = this.fechaInicial.getFullYear();
+
   myOptions: INgxMyDpOptions = {
     // other options...
     dateFormat: 'dd/m/yyyy',
@@ -42,7 +39,6 @@ private inputText: string = "";
     let dia = this.fecha.split('/')[0];
     let mes = this.fecha.split('/')[1];
     let anio = this.fecha.split('/')[2];
-    console.log(this.dia);
       this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
       this.disableUntil();
     }

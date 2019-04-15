@@ -181,7 +181,7 @@ export class UsuarioService {
   }
 
   actualizarUsuarios(usuario:Usuario){
-
+    console.log(usuario);
   let url = URL_SERVICIOS+'usuario/editarUsuario/'+usuario._id;
     url+='?token='+this.token;
     return this.http.put(url,usuario).pipe(map((res: any) => {   

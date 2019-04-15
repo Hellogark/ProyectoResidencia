@@ -50,13 +50,16 @@ export class RegisterComponent implements OnInit {
    
     if(this.forma.invalid){ return;}
  
-    let fecha = new Date();
+    const fecha = new Date().toLocaleDateString('es-ES');
+    
+    
+
     let usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.correo,
       this.forma.value.password,
       this.forma.value.empresa,
-      fecha.toString(),
+      fecha,
           
 
     );

@@ -130,6 +130,7 @@ onPageChange(number: number) {
 
   }
   guardarUsuario(usuario:Usuario){
+    console.log(usuario)
     this._usuarioService.actualizarUsuarios(usuario)
     .subscribe(res =>{
       console.log(res);
