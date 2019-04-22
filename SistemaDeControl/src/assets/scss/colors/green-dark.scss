@@ -15,6 +15,7 @@ $sidebar-dark: #1c2128;
 $sidebar-alt:#1c2128;
 $themecolor-alt: #26c6da;
 $topbar: #06d79c;
+$border: #06d79c;
 $topbar-alt: #272c33;
 /*******************
 /*Top bar
@@ -128,6 +129,9 @@ a.link {
     }
 }
 
+.borde-lista{
+    border-color: $border;
+}
 
 /*******************
 /*Buttons

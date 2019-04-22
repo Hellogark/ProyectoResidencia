@@ -11,6 +11,7 @@ import { MostrarTareaComponent } from '../../shared/mostrar-tarea/mostrar-tarea.
 import { EditarTareaComponent } from '../../shared/editar-tarea/editar-tarea.component';
 import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
+import { TareasService } from '../../services/proyectos/tareas.service';
 
 @Component({
   selector: 'app-lista-tareas',
@@ -23,7 +24,7 @@ export class ListaTareasComponent implements OnInit {
   proyecto:Proyecto;
   dataLista:boolean = false;
   descripcionTarea: string;
-  nuevoParticipantes = {};
+  nuevosParticipantes = {};
   fecha: any ;
   nombreTarea: string;
   terminado: boolean;
@@ -36,14 +37,47 @@ export class ListaTareasComponent implements OnInit {
 
   
   token: string = this._usuarioService.token;
-  constructor(public _usuarioService: UsuarioService, public router:Router,
+  constructor(public _usuarioService: UsuarioService,public _tareaService:TareasService,public _proyectoService: ProyectoService, public router:Router,
     public rutaActiva:ActivatedRoute, public _location:Location) {
     this.id = this.rutaActiva.snapshot.paramMap.get('id');
    }
 
   ngOnInit() {
-
+    this.obtenerUsuarios();
+    this.obtenerTareas();
+    this.obtenerProyecto();
   }
+  obtenerUsuarios(){
+     
+    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
+    .subscribe(res =>{
+        this.todosUsuarios = res.usuarios;
+        this.todosUsuarios.map( res =>{
+        this.nuevosParticipantes  ={
+            _id: res._id,
+            nombre:res.nombre.toString()          
+        }
+            this.nombres.push(this.nuevosParticipantes );
+        });
+        console.log(this.nombres); 
+    });
+   }
+
+ 
+    obtenerTareas(){
+      this._tareaService.obtenerTodasTareas(this.id).subscribe( res =>{
+        console.log(res);
+      });
+    } 
+    obtenerProyecto(){
+      this._proyectoService.obtenerProyecto(this.id).subscribe( res =>{
+        console.log(res);
+        this.proyecto = res.proyecto;
+      });
+
+    }
+
+   
 
   obtenerFecha = (fecha) =>this.fecha = fecha;
 

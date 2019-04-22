@@ -22,7 +22,7 @@ const pagesRoutes: Routes = [
                 canActivate: [VerificaTokenGuard]
                 },
             {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'}},
-            { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '} },
+            
             { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' } },            
             { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
             { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo: 'Buscador'},           
@@ -34,13 +34,20 @@ const pagesRoutes: Routes = [
             {path: 'ver-usuarios/:termino', component: UsuariosComponent, data:{titulo: 'Usuario Seleccionado'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
             //Proyecto
-            {path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
-                canActivate: [AdminGuard,VerificaTokenGuard]},
+            
             {path: 'ver-proyectos', component: VerTodosProyectosComponent, data:{titulo: 'Ver todos los proyectos'},
-            canActivate:[AdminGuard,VerificaTokenGuard]},
+             canActivate:[AdminGuard,VerificaTokenGuard],
+            
+        },{path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
+            canActivate: [AdminGuard,VerificaTokenGuard]},
             {path: 'editarProyecto/:id', component: EditarProyectoComponent, data:{titulo: 'Editar Proyecto'},
-            canActivate:[AdminGuard,VerificaTokenGuard]},
-            { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' } },
+            canActivate:[AdminGuard,VerificaTokenGuard],
+            
+            },
+            { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' },
+                
+        }, { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '} },
+
             { path: 'nuevoProyecto', component: CrearProyectoComponent, data: { titulo: 'Crear Nuevo Proyecto' }, 
             canActivate:[AdminGuard,VerificaTokenGuard] },
             

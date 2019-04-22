@@ -34,6 +34,7 @@ import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component';
 import { FileUploadModule } from "ng2-file-upload";
 import { NgProgressModule } from '@ngx-progressbar/core';
 
+
 @NgModule({
     declarations: [
        

@@ -32,4 +32,12 @@ export class TareasService {
 
   }
 
+  obtenerTodasTareas(id:string ){
+    let url = URL_SERVICIOS +'proyectos/'+id+'/tareas?token='+this.token;
+    return this.http.get(url).pipe( map((res:any)=>{
+      console.log(res);
+      return res;
+    } ) );
+  }
+
 }

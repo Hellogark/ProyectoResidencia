@@ -83,6 +83,7 @@ public labels: any = {
   }
  
   async ngOnInit() {
+    
     this.cargarProyecto(this.id);
     this.progressRef = this.progress.ref('progreso');
     
@@ -307,7 +308,7 @@ terminado() {
 }
 irTareas(){
 
-  this.router.navigate(['/todas-tareas',this.id]);
+  this.router.navigate(['todas-tareas',this.id]);
 }
 }
    

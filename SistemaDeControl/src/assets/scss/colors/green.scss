@@ -9,6 +9,7 @@ File: scss
 $themecolor: #06d79c;
 $themecolor-dark: #028ee1;
 $topbar: #06d79c;
+$border: #06d79c;
 $themecolor-alt: #26c6da;
 $topbar-alt: #ffffff;
 $sidebar-icons: #a6b7bf; 
@@ -99,6 +100,9 @@ a.link {
             }
         }
     }
+}
+.borde-lista{
+    border-color: $border;
 }
 
 

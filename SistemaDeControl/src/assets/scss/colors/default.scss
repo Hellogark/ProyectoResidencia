@@ -7,6 +7,7 @@ File: scss
 @import '../variable';
 $themecolor: #009efb;
 $themecolor-dark: #028ee1;
+$border: #028ee1;
 $topbar: #2a3e52;
 $themecolor-alt: #26c6da;
 $topbar-alt: #ffffff;
@@ -94,6 +95,9 @@ a.link {
             }
         }
     }
+}
+.borde-lista{
+    border-color: $border;
 }
 
 

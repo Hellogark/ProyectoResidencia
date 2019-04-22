@@ -49,7 +49,8 @@ import { MostrarTareaComponent } from './mostrar-tarea/mostrar-tarea.component';
         ModalUploadComponent,
         DatepickerComponent,
         EditarTareaComponent,
-        MostrarTareaComponent
+        MostrarTareaComponent,
+
         
 
     ]

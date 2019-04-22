@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
@@ -17,9 +17,9 @@ export class EditarTareaComponent implements OnInit {
   asignado:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
   nuevosParticipantes  = {};
-  nombres: any [] = [];
+  @Input() nombres: any [] = [];
+  @Input() proyecto: Proyecto;
   descripcion: string;
-  proyecto: Proyecto;
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
@@ -29,24 +29,20 @@ export class EditarTareaComponent implements OnInit {
    }
 
   ngOnInit() {
+    setTimeout(() => {
+      
+    }, 10);
+   
 
   }
 
-  obtenerUsuarios(){
-     
-    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
-    .subscribe(res =>{
-        this.todosUsuarios = res.usuarios;
-        this.todosUsuarios.map( res =>{
-        this.nuevosParticipantes  ={
-            _id: res._id,
-            nombre:res.nombre.toString()          
-        }
-            this.nombres.push(this.nuevosParticipantes );
-        });
-        console.log(this.nombres); 
-    });
-   }
   
+  
+   nuevaTarea(){
+
+
+
+    
+   }
 
 }

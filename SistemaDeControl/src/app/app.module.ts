@@ -26,6 +26,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 
+//librerias
+
 
 
 
@@ -40,6 +42,7 @@ import { RegisterComponent } from './login/register.component';
     LoginComponent,
     RegisterComponent,
     PagesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { RegisterComponent } from './login/register.component';
     ServiceModule,
     PipesModule,
     SharedModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
       
   ],
   providers: [],

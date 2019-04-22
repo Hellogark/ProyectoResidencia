@@ -9,6 +9,7 @@ File: scss
 $themecolor: #7460ee;
 $themecolor-dark: #028ee1;
 $topbar: #7460ee;
+$border: #7460ee;
 $sidebar:#242a33;
 $sidebar-text: #687384;
 $sidebar-icons: #424a56;
@@ -128,6 +129,9 @@ a.link {
     }
 }
 
+.borde-lista{
+    border-color: $border;
+}
 
 /*******************
 /*Buttons

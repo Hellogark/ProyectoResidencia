@@ -1,11 +1,15 @@
 <div class="card">
   <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="editarTarea(f.value)" autocomplete="off" class="form-material">
-  <div class="card-header bg-white">
+  <div class="card-header bg-white mt-2">
     <div class="row border-bottom">
      
       <div class="col-6">
-        <button type="button" class="btn btn-outline-secondary"><i class="fa fa-check" aria-hidden="true"></i> Marcar cómo completado</button>
-        <button type="button" class="btn btn-themecolor"><i class="fa fa-check-square" aria-hidden="true"></i> Tarea completada</button>
+        <div class="row">
+          <div class=" col-12"><button type="button" class="btn btn-outline-secondary"><i class="fa fa-check" aria-hidden="true"></i><span>Terminar tarea </span></button></div>
+          <div class=" col-12">  <button type="button" class="btn btn-themecolor"><i class="fa fa-check-square" aria-hidden="true"></i> <span> Tarea terminada </span></button></div>
+        </div>
+        
+      
       </div>
       <div class="col-6 text-right">
         <i class="fa fa-times fa-xs" aria-hidden="true"></i>
@@ -21,13 +25,13 @@
       </div>
       <div class="col-12 d-block">
         <div class="row d-flex align-items-center justify-content-around">
-          <div class="col-6 p-0">
+          <div class=" col-12 col-lg-6 col-xl-6 p-0">
             <div class="col-12">
 
               <div class="form-group">   
                 
-                <tag-input class="p-0 border" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participantes"
-                name="participantes" class="form-control" [identifyBy]="'_id'" [displayBy]="'nombre'" [maxItems]="1"[placeholder]="''" [secondaryPlaceholder]="'Selecciona un particip...'">
+                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participantes"
+                name="participantes"  [identifyBy]="'_id'" [displayBy]="'nombre'" [maxItems]="1"[placeholder]="''" [secondaryPlaceholder]="'Asignar a'">
                 <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres" >
                 </tag-input-dropdown>
                 </tag-input>  
@@ -36,7 +40,7 @@
             </div>
 
           </div>
-          <div class="col-6 mb-3 p-0">
+          <div class="col-12 col-lg-6 col-xl-6 mb-3 p-0">
               <div class="col-12 align-self-center">
 
                  <app-datepicker  [fecha] = "this.fecha"(fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
@@ -47,7 +51,7 @@
       </div>
       <div class="col-12">
         <div class="form-group d-flex w-100 ">
-        <div class="col-1">
+        <div class="col-1 pl-0">
           <i class="fa fa-align-left"></i>           
         </div>
         <div class="col-11 w-100">
@@ -58,11 +62,11 @@
         <div class="form-group">
         <div class="row d-flex align-items-center justify-content-around">
 
-            <div class="col-3">
+            <div class="col-12 col-xl-4 ">
               
-              <i class="ti-blackboard"></i> <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">Proyecto </span>
+              <i class="ti-blackboard"></i> <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">  </span>
             </div>
-            <div class="col-8 float-left">
+            <div class="col-12 col-xl-8 float-left">
               <p class="text-muted">Tarea completada por  el</p>
             </div>
           </div>
