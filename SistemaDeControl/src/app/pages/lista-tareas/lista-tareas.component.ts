@@ -22,7 +22,7 @@ export class ListaTareasComponent implements OnInit {
   id :string;
   cargando: boolean = true;
   proyecto:Proyecto;
-  dataLista:boolean = false;
+  dataLista:boolean = true;
   descripcionTarea: string;
   nuevosParticipantes = {};
   fecha: any ;
@@ -32,7 +32,9 @@ export class ListaTareasComponent implements OnInit {
   participantes:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
   tareas: Tareas[];
-  mostrar: boolean;
+  mostrar: boolean ;
+  
+
 
 
   
@@ -40,12 +42,15 @@ export class ListaTareasComponent implements OnInit {
   constructor(public _usuarioService: UsuarioService,public _tareaService:TareasService,public _proyectoService: ProyectoService, public router:Router,
     public rutaActiva:ActivatedRoute, public _location:Location) {
     this.id = this.rutaActiva.snapshot.paramMap.get('id');
+   
    }
 
   ngOnInit() {
+    this.dataLista = false;    
     this.obtenerUsuarios();
     this.obtenerTareas();
     this.obtenerProyecto();
+    this.dataLista = true;
   }
   obtenerUsuarios(){
      
@@ -77,6 +82,7 @@ export class ListaTareasComponent implements OnInit {
 
     }
 
+    mostrarEditar =(mostrar:boolean) => this.mostrar = mostrar;
    
 
   obtenerFecha = (fecha) =>this.fecha = fecha;

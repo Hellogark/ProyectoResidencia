@@ -1,13 +1,13 @@
 
 <div class="container-fluid ">
-  <div class="row">
-    <div class="col-12 col-xl-6">
-      <app-mostrar-tarea ></app-mostrar-tarea>
+  <div class="row d-flex justify-content-center">
+    <div class="col-12" [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}" *ngIf="dataLista">
+      <app-mostrar-tarea  [proyecto]="proyecto" (editar)="mostrarEditar($event)" ></app-mostrar-tarea>
 
 
     </div>
-    <div class="col-12 col-xl-6">
-      <app-editar-tarea [proyecto]="proyecto" [nombres]="nombres"></app-editar-tarea> 
+    <div class="col-12 col-xl-6" *ngIf="dataLista && mostrar">
+      <app-editar-tarea [proyecto]="proyecto" [nombres]="nombres" (editar)="mostrarEditar($event)"></app-editar-tarea> 
 
     </div>
   </div>

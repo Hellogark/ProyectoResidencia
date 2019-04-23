@@ -11,8 +11,8 @@
         
       
       </div>
-      <div class="col-6 text-right">
-        <i class="fa fa-times fa-xs" aria-hidden="true"></i>
+      <div class="col-6 text-right r" >
+        <i class="fa fa-times fa-xs pointe" aria-hidden="true" (click)="cerrarTarea()"></i>
      </div>
     </div>    
   </div>
@@ -64,7 +64,8 @@
 
             <div class="col-12 col-xl-4 ">
               
-              <i class="ti-blackboard"></i> <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">  </span>
+              <i class="ti-blackboard"></i> 
+              <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">{{proyecto.nombre}} </span>
             </div>
             <div class="col-12 col-xl-8 float-left">
               <p class="text-muted">Tarea completada por  el</p>

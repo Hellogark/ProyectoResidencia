@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
@@ -17,8 +17,11 @@ export class EditarTareaComponent implements OnInit {
   asignado:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
   nuevosParticipantes  = {};
+  mostrar:boolean = false;
   @Input() nombres: any [] = [];
   @Input() proyecto: Proyecto;
+  @Output() editar = new EventEmitter();
+  
   descripcion: string;
 
   @ViewChild(DatepickerComponent) date;
@@ -31,11 +34,14 @@ export class EditarTareaComponent implements OnInit {
   ngOnInit() {
     
    
-
   }
 
   
-  
+  cerrarTarea(){
+    this.mostrar = false;
+    this.editar.emit(this.mostrar);
+    
+  }
    nuevaTarea(){
 
 
