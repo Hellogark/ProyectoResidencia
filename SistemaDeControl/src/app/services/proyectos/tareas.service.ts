@@ -25,7 +25,7 @@ export class TareasService {
 
   }
   crearTarea(tarea:Tareas[], id:string){
-    let url = URL_SERVICIOS +'proyectos/'+ id+'/tareas?token='+this.token;
+    let url = URL_SERVICIOS +'tareas/'+ id+'/tareas?token='+this.token;
        return this.http.post(url,tarea).pipe(map((res:any) =>{
         console.log(res);
       } ));
@@ -33,7 +33,7 @@ export class TareasService {
   }
 
   obtenerTodasTareas(id:string ){
-    let url = URL_SERVICIOS +'proyectos/'+id+'/tareas?token='+this.token;
+    let url = URL_SERVICIOS +'tareas/'+id+'/tareas?token='+this.token;
     return this.http.get(url).pipe( map((res:any)=>{
       console.log(res);
       return res;
