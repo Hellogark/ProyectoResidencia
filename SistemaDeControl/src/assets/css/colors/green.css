@@ -108,13 +108,13 @@ a.link:hover, a.link:focus {
 
 /* line 104, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .borde-lista {
-  border-color: #06d79c;
+  border-bottom: 1px solid #06d79c;
 }
 
 /*******************
 /*Buttons
 *******************/
-/* line 113, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 114, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .btn-themecolor,
 .btn-themecolor.disabled {
   background: #06d79c;
@@ -122,7 +122,7 @@ a.link:hover, a.link:focus {
   border: 1px solid #06d79c;
 }
 
-/* line 118, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 119, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .btn-themecolor:hover,
 .btn-themecolor.disabled:hover {
   background: #06d79c;
@@ -130,7 +130,7 @@ a.link:hover, a.link:focus {
   border: 1px solid #06d79c;
 }
 
-/* line 123, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 124, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .btn-themecolor.active, .btn-themecolor:focus,
 .btn-themecolor.disabled.active,
 .btn-themecolor.disabled:focus {
@@ -140,33 +140,33 @@ a.link:hover, a.link:focus {
 /*******************
 /*sidebar navigation
 *******************/
-/* line 134, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 135, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .label-themecolor {
   background: #06d79c;
 }
 
-/* line 138, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 139, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .sidebar-nav > ul > li.active > a {
   color: #06d79c;
   border-color: #06d79c;
 }
 
-/* line 141, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 142, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .sidebar-nav > ul > li.active > a i {
   color: #06d79c;
 }
 
-/* line 147, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 148, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
   color: #06d79c;
 }
 
-/* line 150, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 151, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
   color: #06d79c;
 }
 
-/* line 155, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
+/* line 156, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/green.scss */
 .sidebar-nav > ul > li > a i {
   color: #a6b7bf;
 }

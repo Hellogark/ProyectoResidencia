@@ -108,13 +108,13 @@ a.link:hover, a.link:focus {
 
 /* line 104, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .borde-lista {
-  border-color: #00897b;
+  border-bottom: 1px solid #00897b;
 }
 
 /*******************
 /*Buttons
 *******************/
-/* line 113, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 114, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .btn-themecolor,
 .btn-themecolor.disabled {
   background: #56c0d8;
@@ -122,7 +122,7 @@ a.link:hover, a.link:focus {
   border: 1px solid #56c0d8;
 }
 
-/* line 118, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 119, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .btn-themecolor:hover,
 .btn-themecolor.disabled:hover {
   background: #56c0d8;
@@ -130,7 +130,7 @@ a.link:hover, a.link:focus {
   border: 1px solid #56c0d8;
 }
 
-/* line 123, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 124, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .btn-themecolor.active, .btn-themecolor:focus,
 .btn-themecolor.disabled.active,
 .btn-themecolor.disabled:focus {
@@ -140,33 +140,33 @@ a.link:hover, a.link:focus {
 /*******************
 /*sidebar navigation
 *******************/
-/* line 134, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 135, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .label-themecolor {
   background: #56c0d8;
 }
 
-/* line 138, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 139, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .sidebar-nav > ul > li.active > a {
   color: #56c0d8;
   border-color: #56c0d8;
 }
 
-/* line 141, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 142, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .sidebar-nav > ul > li.active > a i {
   color: #56c0d8;
 }
 
-/* line 147, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 148, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .sidebar-nav ul li a.active, .sidebar-nav ul li a:hover {
   color: #56c0d8;
 }
 
-/* line 150, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 151, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .sidebar-nav ul li a.active i, .sidebar-nav ul li a:hover i {
   color: #56c0d8;
 }
 
-/* line 155, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+/* line 156, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
 .sidebar-nav > ul > li > a i {
   color: #a6b7bf;
 }

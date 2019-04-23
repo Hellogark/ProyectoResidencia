@@ -29,9 +29,7 @@ export class EditarTareaComponent implements OnInit {
    }
 
   ngOnInit() {
-    setTimeout(() => {
-      
-    }, 10);
+    
    
 
   }
