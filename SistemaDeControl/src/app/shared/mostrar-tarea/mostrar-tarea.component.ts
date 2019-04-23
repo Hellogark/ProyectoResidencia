@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { ProyectoService } from '../../services/proyectos/proyecto.service';
 import { TareasService } from '../../services/proyectos/tareas.service';
@@ -15,7 +15,9 @@ import { ActivatedRoute } from '@angular/router';
 export class MostrarTareaComponent implements OnInit {
 
   arregloTareas: Tareas[] = [];
-  //@Input() proyecto: Proyecto;
+  @Output() editar = new EventEmitter();
+  @Input() proyecto: Proyecto;
+  mostrar: boolean = false;
   idProyecto: string;
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService,  public rutaActiva: ActivatedRoute) { 
@@ -29,7 +31,9 @@ export class MostrarTareaComponent implements OnInit {
     //this.obtenerTareas();
   }
 
-  obtenerProyecto(){
+  editarTarea(){
+    this.mostrar = !this.mostrar;
+    this.editar.emit(this.mostrar);
     
   }
 
