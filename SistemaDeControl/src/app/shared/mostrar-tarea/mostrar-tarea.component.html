@@ -4,32 +4,32 @@
           <div class="card-header bg-white ">
             <div class="row ">
               <div class="col-xl-8 col-12" *ngIf="dataLista"> <h3> <b> Tareas de {{proyecto?.nombre}} </b></h3></div>
-              <div class="col-xl-4 col-12 text-right">  <button type="button" class="btn btn-themecolor" (click)="crearTarea()"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Nueva Tarea</button> </div>
+              <div class="col-xl-4 col-12 text-right">  <button type="button" class="btn btn-themecolor" (click)="editarTarea('crear')"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Nueva Tarea</button> </div>
             </div>
             
           </div>
           <div class="card-body pl-0 pr-0">
             <div class="col-12"> 
-              <div class="row no-gutters text-left align-items-center borde-lista justify-content-around pointer " (click)="editarTarea()"><!-- Aquí ng for -->
-                <div class="col-1  col-md-1 col-lg-1 col-xl-1 d-flex align-items-end ">
-                  <div class="custom-control custom-checkbox mt-1 p-0 pl-xl-2">
-                    <input type="checkbox" class="custom-control-input " id="customCheck1">
+              <div class="row no-gutters text-left align-items-center borde-lista justify-content-around  "  *ngFor="let tarea of tareas; let i = index"><!-- Aquí ng for -->
+                <div class="col-1  col-md-1 col-lg-1 col-xl-1 d-flex align-items-end pointer">
+                  <div class="custom-control custom-checkbox mt-1 p-0 pl-xl-2" >
+                    <input type="checkbox" class="custom-control-input " id="customCheck1" (click)="chkTarea(tarea)" [checked]="tarea.finalizado">
                     <label class="custom-control-label m-0" for="customCheck1"></label>
                   </div>
                 </div>
-                <div class="col-10  col-md-6 col-lg-6 col-xl-7 overflowTarea ml-2 ml-xl-0 ">
+                <div class="col-10  col-md-6 col-lg-6 col-xl-7 overflowTarea ml-2 ml-xl-0 pointer " (click)="editarTarea('editar')">
                     <div>
-                        <span class="">Hacer el sidebar del sitio y terminar el pendiente con el sadasd jashdjkas dsadas jkahsdjk hasd kk</span>
+                        <span class="">{{tarea.nombre}}</span>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3 col-xl-3 text-right align-items-center   ">
                   <div class="row no-gutters">
                     <div class="col-10 align-self-center">
-                      <p class="badge badge-pill bg-theme text-break d-block mb-0">Eduardo Moreno López</p>
+                      <p class="badge badge-pill bg-theme text-break d-block mb-0">{{tarea.creador.nombre}}</p>
 
                     </div>
                     <div class="col-2 align-self-center">
-                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                      <i class="fa fa-chevron-right pointer" aria-hidden="true" (click)="editarTarea('editar')"></i>
 
                     </div> 
 

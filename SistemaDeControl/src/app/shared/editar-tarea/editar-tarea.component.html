@@ -1,5 +1,5 @@
 <div class="card">
-  <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="editarTarea(f.value)" autocomplete="off" class="form-material">
+  <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material">
   <div class="card-header bg-white mt-2">
     <div class="row border-bottom">
      
@@ -20,7 +20,7 @@
     <div class="row no-gutters">
       <div class="col-12">
         <div class="form-group">      
-          <input type="text" class="form-control" name="nombreTarea" id="" aria-describedby="helpId" placeholder="Nombre de la tarea...">
+          <input type="text" [(ngModel)]="tarea.nombreTarea" class="form-control" name="nombreTarea" id="" aria-describedby="helpId" placeholder="Nombre de la tarea...">
         </div>      
       </div>
       <div class="col-12 d-block">
@@ -55,7 +55,7 @@
           <i class="fa fa-align-left"></i>           
         </div>
         <div class="col-11 w-100">
-          <textarea name="descTarea" id="" cols="30" rows="5" placeholder="Descripción de la tarea" class="w-100 form-control"></textarea></div>
+          <textarea [(ngModel)]="tarea.descTarea" name="descTarea" id="" cols="30" rows="5" placeholder="Descripción de la tarea" class="w-100 form-control"></textarea></div>
         </div>
       </div>
       <div class="col-12 d-block ">
@@ -79,7 +79,10 @@
   </div>
 </form>
   <div class="card-footer text-muted bg-white text-right">
-    div
-    <button type="submit" class="btn btn-themecolor">Guardar cambios</button>
+    <div class="row d-flex justify-content-around">
+      <div class="col-6 text-left" *ngIf="crear"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
+      <div class="col-6" [ngClass]="{'col-12': !crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
+    </div>
+    
   </div>
 </div>

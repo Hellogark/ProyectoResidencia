@@ -16,9 +16,10 @@ import * as moment from 'moment';
 export class MostrarTareaComponent implements OnInit {
   @Input() proyecto: Proyecto;
   @Output() editar = new EventEmitter();
-  arregloTareas: Tareas[] = [];
+  @Input() tareas: Tareas[] = [];
   nuevaTarea:Tareas;
   mostrar: boolean = false;
+  crear: boolean = false;
   idProyecto: string;
   @Input() dataLista:boolean;
 
@@ -31,12 +32,21 @@ export class MostrarTareaComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+  
   }
 
-  editarTarea(){
+  editarTarea( tipo:string ){
     this.mostrar = !this.mostrar;
-    this.editar.emit(this.mostrar);    
+    if(tipo == 'crear'){
+      this.crear = true;
+      this.editar.emit(this.mostrar);
+      this.editar.emit(this.crear);
+
+    }
+    if(tipo == 'editar'){
+
+      this.editar.emit(this.mostrar);
+    }
   }
 
   crearTarea(){
@@ -55,6 +65,11 @@ export class MostrarTareaComponent implements OnInit {
 
 
     });
+
+  }
+  chkTarea(tarea:Tareas){
+    console.log(tarea);
+    alert(tarea);
 
   }
 

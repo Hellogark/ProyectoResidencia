@@ -73,6 +73,7 @@ public labels: any = {
   formData = new FormData(); 
   comentario: string;
   progressRef: NgProgressRef;
+
   
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _proyectoService:ProyectoService, 

@@ -216,6 +216,7 @@ export class UsuarioService {
 
    let url = URL_SERVICIOS + 'usuario?token='+token+'&amp;desde='+desde;
    return this.http.get(url).pipe(map((res:any)=>{
+     console.log(res );
     return res;
 
    }));

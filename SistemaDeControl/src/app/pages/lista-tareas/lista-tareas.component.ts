@@ -71,7 +71,8 @@ export class ListaTareasComponent implements OnInit {
  
     obtenerTareas(){
       this._tareaService.obtenerTodasTareas(this.id).subscribe( res =>{
-        console.log(res);
+        this.tareas = res.tareas;
+        console.log(this.tareas);
       });
     } 
     obtenerProyecto(){

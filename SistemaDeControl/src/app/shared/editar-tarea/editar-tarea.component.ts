@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { ProyectoService, UsuarioService, TareasService } from 'src/app/services/service.index';
 import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
+import { Tareas } from '../../models/tareas.model';
 
 @Component({
   selector: 'app-editar-tarea',
@@ -16,11 +17,14 @@ export class EditarTareaComponent implements OnInit {
   fecha: any;
   asignado:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
+  tarea:Tareas = {};
   nuevosParticipantes  = {};
   mostrar:boolean = false;
+  crear: boolean = false;
   @Input() nombres: any [] = [];
   @Input() proyecto: Proyecto;
   @Output() editar = new EventEmitter();
+
   
   descripcion: string;
 
@@ -32,21 +36,22 @@ export class EditarTareaComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    if(this.crear){
+    this.tarea = {};
+    }
    
   }
 
+    crearEditarTarea(tarea:Tareas){
+      
+      console.log(tarea);
+
+    }
   
   cerrarTarea(){
     this.mostrar = false;
     this.editar.emit(this.mostrar);
-    
   }
-   nuevaTarea(){
-
-
-
-    
-   }
+ 
 
 }

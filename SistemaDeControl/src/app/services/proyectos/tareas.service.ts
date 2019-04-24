@@ -35,8 +35,11 @@ export class TareasService {
   obtenerTodasTareas(id:string ){
     let url = URL_SERVICIOS +'tareas/'+id+'/tareas?token='+this.token;
     return this.http.get(url).pipe( map((res:any)=>{
-      console.log(res);
-      return res;
+     
+       res.proyectos.forEach(element => {
+        this.proyecto = element;
+      });
+      return this.proyecto;
     } ) );
   }
 
