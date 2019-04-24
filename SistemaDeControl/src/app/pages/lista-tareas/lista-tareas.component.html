@@ -2,7 +2,7 @@
 <div class="container-fluid ">
   <div class="row d-flex justify-content-center">
     <div class="col-12" [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}" *ngIf="dataLista">
-      <app-mostrar-tarea  [proyecto]="proyecto" (editar)="mostrarEditar($event)" ></app-mostrar-tarea>
+      <app-mostrar-tarea [dataLista]="dataLista" [proyecto]="proyecto" (editar)="mostrarEditar($event)" ></app-mostrar-tarea>
 
 
     </div>

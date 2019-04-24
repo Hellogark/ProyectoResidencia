@@ -5,6 +5,7 @@ import { TareasService } from '../../services/proyectos/tareas.service';
 import { Tareas } from '../../models/tareas.model';
 import { Proyecto } from '../../models/proyectos.model';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 
 @Component({
@@ -13,28 +14,48 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./mostrar-tarea.component.css']
 })
 export class MostrarTareaComponent implements OnInit {
-
-  arregloTareas: Tareas[] = [];
-  @Output() editar = new EventEmitter();
   @Input() proyecto: Proyecto;
+  @Output() editar = new EventEmitter();
+  arregloTareas: Tareas[] = [];
+  nuevaTarea:Tareas;
   mostrar: boolean = false;
   idProyecto: string;
+  @Input() dataLista:boolean;
 
-  constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService,  public rutaActiva: ActivatedRoute) { 
-     this.rutaActiva.params.subscribe( (param:any) =>{   
-      this.idProyecto = param;
-    });
+
+  constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
+    public _tareasService:TareasService, public rutaActiva: ActivatedRoute) { 
+    this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
+
 
   }
 
   ngOnInit() {
-    //this.obtenerTareas();
+    
   }
 
   editarTarea(){
     this.mostrar = !this.mostrar;
-    this.editar.emit(this.mostrar);
-    
+    this.editar.emit(this.mostrar);    
+  }
+
+  crearTarea(){
+    this.nuevaTarea = {
+      nombreTarea: '',
+      descTarea: '',
+      creador: this._usuarioService.usuario._id,
+      finalizado: false,
+      ultimoEditor:this._usuarioService.usuario._id,
+      fechaCreacion: moment().locale('es').format('LL'),
+      participante: null 
+
+    }
+    this._tareasService.crearTarea(this.nuevaTarea,this.idProyecto).subscribe( res =>{
+      alert(res);
+
+
+    });
+
   }
 
  

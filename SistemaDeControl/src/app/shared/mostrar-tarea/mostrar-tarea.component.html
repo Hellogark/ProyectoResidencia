@@ -3,8 +3,8 @@
       <div class="card">
           <div class="card-header bg-white ">
             <div class="row ">
-              <div class="col-xl-8 col-12"> <h3> <b> Tareas de {{proyecto.nombre}} </b></h3></div>
-              <div class="col-xl-4 col-12 text-right">  <button type="button" class="btn btn-themecolor"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Nueva Tarea</button> </div>
+              <div class="col-xl-8 col-12" *ngIf="dataLista"> <h3> <b> Tareas de {{proyecto?.nombre}} </b></h3></div>
+              <div class="col-xl-4 col-12 text-right">  <button type="button" class="btn btn-themecolor" (click)="crearTarea()"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Nueva Tarea</button> </div>
             </div>
             
           </div>

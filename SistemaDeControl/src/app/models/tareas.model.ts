@@ -3,7 +3,7 @@ import { Proyecto } from './proyectos.model';
 export class Tareas {
 
             constructor(
-                public proyecto: Proyecto,
+                public proyecto?: string,
                 public nombreTarea?: string,
                 public descTarea?: string,
                 public creador?: string,
@@ -11,10 +11,9 @@ export class Tareas {
                 public ultimoEditor?: string,
                 public fechaCreacion?: string,
                 public fechaFinalizado?: string,
-                public participantes?: Usuario[],
+                public participante?: Usuario,
                 public _id?: string
+            ){}
 
-            ){
 
-            }
 }
