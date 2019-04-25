@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable, throwError, Subject } from 'rxjs';
+import { Observable, throwError, ReplaySubject } from 'rxjs';
 import { Archivos } from './../../models/archivos.model';
 import { URL_SERVICIOS } from './../../config/config';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -18,9 +18,10 @@ export class TareasService {
 
   proyecto: Proyecto;
   usuario: Usuario; 
+  tarea: Tareas
   mostrar:boolean;
   crear:boolean;
-  private mostrarTareaSubject = new Subject<boolean>();
+  private mostrarTareaSubject = new ReplaySubject<any>(3);
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
  
   token =this._usuarioService.token;
@@ -48,11 +49,14 @@ export class TareasService {
     } ) );
   }
 
-    estadoTarea(mostrarT:boolean, crearT:boolean){
+    estadoTarea(mostrarT:boolean, crearT:boolean,tarea?:Tareas){
       this.mostrar = mostrarT;
       this.mostrarTareaSubject.next(mostrarT);
       this.crear = crearT;
       this.mostrarTareaSubject.next(crearT);
+      this.tarea = tarea;
+      this.mostrarTareaSubject.next(tarea);
+      console.log(tarea);
       
     }
 }

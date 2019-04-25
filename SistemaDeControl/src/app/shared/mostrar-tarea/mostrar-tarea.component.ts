@@ -19,36 +19,40 @@ export class MostrarTareaComponent implements OnInit {
   @Input() eventoTarea:{};
   @Input() dataLista;
   nuevaTarea:Tareas;
-  mostrar: boolean = false;
-  crear: boolean = false;
+  mostrar: boolean;
+  crear: boolean ;
   idProyecto: string;
 
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
     public _tareasService:TareasService, public rutaActiva: ActivatedRoute) { 
     this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
-    this._tareasService.mostrarTareaObservable.subscribe( res =>{
-      console.log(res);
-     });
+   
 
 
    
   }
 
   ngOnInit() {
-  
+   this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
+    this.mostrar = this._tareasService.mostrar;
+    this.crear = this._tareasService.crear;
+     console.log("mostrar "+this.mostrar+"crear " +this.crear);
+     console.log(res);
+     });
   }
 
-  editarTarea( tipo:string ){
+  editarTarea( tipo:string,tarea:Tareas ){
     this.mostrar = !this.mostrar;
     if(tipo === 'crear'){
       this.crear = true;
-      this._tareasService.estadoTarea(this.mostrar,this.crear);      
-
+      this._tareasService.estadoTarea(this.mostrar,this.crear); 
+      
     }
     if(tipo === 'editar'){
       this.crear=false;
-      this._tareasService.estadoTarea(this.mostrar,this.crear); 
+      this._tareasService.estadoTarea(this.mostrar,this.crear,tarea);
+      console.log(tarea);      
     }
   }
 

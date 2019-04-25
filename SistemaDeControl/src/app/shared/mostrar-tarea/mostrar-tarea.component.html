@@ -17,7 +17,7 @@
                     <label class="custom-control-label m-0" for="customCheck1"></label>
                   </div>
                 </div>
-                <div class="col-10  col-md-6 col-lg-6 col-xl-7 overflowTarea ml-2 ml-xl-0 pointer " (click)="editarTarea('editar')">
+                <div class="col-10  col-md-6 col-lg-6 col-xl-7 overflowTarea ml-2 ml-xl-0 pointer " (click)="editarTarea('editar',tarea)">
                     <div>
                         <span class="">{{tarea.nombre}}</span>
                     </div>
@@ -29,7 +29,7 @@
 
                     </div>
                     <div class="col-2 align-self-center">
-                      <i class="fa fa-chevron-right pointer" aria-hidden="true" (click)="editarTarea('editar')"></i>
+                      <i class="fa fa-chevron-right pointer" aria-hidden="true" (click)="editarTarea('editar',tarea)"></i>
 
                     </div> 
 

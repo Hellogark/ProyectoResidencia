@@ -17,12 +17,14 @@ export class EditarTareaComponent implements OnInit {
   fecha: any;
   asignado:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
-  tarea:Tareas = {};
+  tarea:Tareas;
   nuevosParticipantes  = {};
+ 
 
   @Input() nombres: any [] = [];
   @Input() proyecto: Proyecto;
   @Input() dataLista;
+  datos: boolean = false;
   crear:boolean;
   mostrar:boolean;
   
@@ -33,19 +35,25 @@ export class EditarTareaComponent implements OnInit {
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
-   public _tareasService:TareasService ) {
-     this._tareasService.mostrarTareaObservable.subscribe( res =>{
-      console.log(res);
-     });
-
-
-   }
-
-  ngOnInit() {
-    if(this.crear){
-    this.tarea = {};
+    
+    public _tareasService:TareasService ) {
+      
     }
+    
+    ngOnInit() {
+      this.datos = false;
+      if(this.crear){
+        this.tarea = {};
+      }
+
+            this._tareasService.mostrarTareaObservable.subscribe( res =>{
+             this.mostrar = this._tareasService.mostrar;
+             this.crear = this._tareasService.crear;
+             this.tarea = this._tareasService.tarea;
+            });
     console.log("crear"+this.crear);
+    console.log(this.tarea);
+    this.datos = true;
    
   }
 
@@ -57,6 +65,8 @@ export class EditarTareaComponent implements OnInit {
   
   cerrarTarea(){
     this.mostrar = false;
+    this.crear = false;
+    this._tareasService.estadoTarea(this.mostrar,this.crear );
     this.editar.emit(this.mostrar);
   }
  

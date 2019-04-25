@@ -41,7 +41,7 @@ export class ListaTareasComponent implements OnInit {
 
   
   token: string = this._usuarioService.token;
-  constructor(public _usuarioService: UsuarioService,public _tareaService:TareasService,public _proyectoService: ProyectoService, public router:Router,
+  constructor(public _usuarioService: UsuarioService,public _tareasService:TareasService,public _proyectoService: ProyectoService, public router:Router,
     public rutaActiva:ActivatedRoute, public _location:Location) {
     this.id = this.rutaActiva.snapshot.paramMap.get('id');  
    
@@ -52,6 +52,12 @@ export class ListaTareasComponent implements OnInit {
     this.obtenerUsuarios();
     this.obtenerTareas();
     this.obtenerProyecto();
+    this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
+      this.mostrar = this._tareasService.mostrar;
+      this.crear = this._tareasService.crear;
+      console.log("mostrar "+this.mostrar+"crear " +this.crear);
+      console.log(res);
+      });
     this.dataLista = true;
   }
 
@@ -73,7 +79,7 @@ export class ListaTareasComponent implements OnInit {
 
  
     obtenerTareas(){
-      this._tareaService.obtenerTodasTareas(this.id).subscribe( res =>{
+      this._tareasService.obtenerTodasTareas(this.id).subscribe( res =>{
         this.tareas = res.tareas;
         console.log(this.tareas);
       });
