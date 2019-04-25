@@ -14,21 +14,25 @@ import * as moment from 'moment';
   styleUrls: ['./mostrar-tarea.component.css']
 })
 export class MostrarTareaComponent implements OnInit {
-  @Input() proyecto: Proyecto;
-  @Output() editar = new EventEmitter();
+  @Input() proyecto: Proyecto; 
   @Input() tareas: Tareas[] = [];
+  @Input() eventoTarea:{};
+  @Input() dataLista;
   nuevaTarea:Tareas;
   mostrar: boolean = false;
   crear: boolean = false;
   idProyecto: string;
-  @Input() dataLista:boolean;
 
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
     public _tareasService:TareasService, public rutaActiva: ActivatedRoute) { 
     this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
+    this._tareasService.mostrarTareaObservable.subscribe( res =>{
+      console.log(res);
+     });
 
 
+   
   }
 
   ngOnInit() {
@@ -37,15 +41,14 @@ export class MostrarTareaComponent implements OnInit {
 
   editarTarea( tipo:string ){
     this.mostrar = !this.mostrar;
-    if(tipo == 'crear'){
+    if(tipo === 'crear'){
       this.crear = true;
-      this.editar.emit(this.mostrar);
-      this.editar.emit(this.crear);
+      this._tareasService.estadoTarea(this.mostrar,this.crear);      
 
     }
-    if(tipo == 'editar'){
-
-      this.editar.emit(this.mostrar);
+    if(tipo === 'editar'){
+      this.crear=false;
+      this._tareasService.estadoTarea(this.mostrar,this.crear); 
     }
   }
 
@@ -74,7 +77,7 @@ export class MostrarTareaComponent implements OnInit {
   }
 
  
-
+ 
 
 
 }

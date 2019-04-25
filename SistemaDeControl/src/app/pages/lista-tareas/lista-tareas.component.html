@@ -2,12 +2,13 @@
 <div class="container-fluid ">
   <div class="row d-flex justify-content-center">
     <div class="col-12" [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}" *ngIf="dataLista">
-      <app-mostrar-tarea [dataLista]="dataLista" [proyecto]="proyecto" [tareas]="tareas" (editar)="mostrarEditar($event)" ></app-mostrar-tarea>
+      <app-mostrar-tarea   [dataLista]="dataLista" [proyecto]="proyecto" [tareas]="tareas"
+       (editar)="mostrarEditar(eventoTareas = $event)" ></app-mostrar-tarea>
 
 
     </div>
     <div class="col-12 col-xl-6" *ngIf="dataLista && mostrar">
-      <app-editar-tarea [proyecto]="proyecto" [nombres]="nombres" (editar)="mostrarEditar($event)"></app-editar-tarea> 
+      <app-editar-tarea   [proyecto]="proyecto" [nombres]="nombres" (editar)="mostrarEditar($event)"></app-editar-tarea> 
 
     </div>
   </div>

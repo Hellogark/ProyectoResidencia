@@ -19,10 +19,13 @@ export class EditarTareaComponent implements OnInit {
   todosUsuarios:Usuario[] = [];
   tarea:Tareas = {};
   nuevosParticipantes  = {};
-  mostrar:boolean = false;
-  crear: boolean = false;
+
   @Input() nombres: any [] = [];
   @Input() proyecto: Proyecto;
+  @Input() dataLista;
+  crear:boolean;
+  mostrar:boolean;
+  
   @Output() editar = new EventEmitter();
 
   
@@ -30,7 +33,10 @@ export class EditarTareaComponent implements OnInit {
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
-   public _tareasService:TareasService ) { 
+   public _tareasService:TareasService ) {
+     this._tareasService.mostrarTareaObservable.subscribe( res =>{
+      console.log(res);
+     });
 
 
    }
@@ -39,6 +45,7 @@ export class EditarTareaComponent implements OnInit {
     if(this.crear){
     this.tarea = {};
     }
+    console.log("crear"+this.crear);
    
   }
 

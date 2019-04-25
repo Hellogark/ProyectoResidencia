@@ -1,8 +1,9 @@
 import { Tareas } from './../../models/tareas.model';
 import { Injectable } from '@angular/core';
+
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { Archivos } from './../../models/archivos.model';
 import { URL_SERVICIOS } from './../../config/config';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -17,6 +18,10 @@ export class TareasService {
 
   proyecto: Proyecto;
   usuario: Usuario; 
+  mostrar:boolean;
+  crear:boolean;
+  private mostrarTareaSubject = new Subject<boolean>();
+  mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
  
   token =this._usuarioService.token;
 
@@ -43,4 +48,11 @@ export class TareasService {
     } ) );
   }
 
+    estadoTarea(mostrarT:boolean, crearT:boolean){
+      this.mostrar = mostrarT;
+      this.mostrarTareaSubject.next(mostrarT);
+      this.crear = crearT;
+      this.mostrarTareaSubject.next(crearT);
+      
+    }
 }

@@ -32,7 +32,9 @@ export class ListaTareasComponent implements OnInit {
   participantes:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
   tareas: Tareas[];
-  mostrar: boolean ;
+  eventoTareas = {};
+  mostrar: boolean;
+  crear: boolean;
   
 
 
@@ -41,7 +43,7 @@ export class ListaTareasComponent implements OnInit {
   token: string = this._usuarioService.token;
   constructor(public _usuarioService: UsuarioService,public _tareaService:TareasService,public _proyectoService: ProyectoService, public router:Router,
     public rutaActiva:ActivatedRoute, public _location:Location) {
-    this.id = this.rutaActiva.snapshot.paramMap.get('id');
+    this.id = this.rutaActiva.snapshot.paramMap.get('id');  
    
    }
 
@@ -52,6 +54,7 @@ export class ListaTareasComponent implements OnInit {
     this.obtenerProyecto();
     this.dataLista = true;
   }
+
   obtenerUsuarios(){
      
     this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
@@ -83,7 +86,7 @@ export class ListaTareasComponent implements OnInit {
 
     }
 
-    mostrarEditar =(mostrar:boolean) => this.mostrar = mostrar;
+  mostrarEditar =(mostrar:boolean) => this.mostrar = mostrar;
    
 
   obtenerFecha = (fecha) =>this.fecha = fecha;
