@@ -46,7 +46,8 @@ export class MostrarTareaComponent implements OnInit {
     this.mostrar = !this.mostrar;
     if(tipo === 'crear'){
       this.crear = true;
-      this._tareasService.estadoTarea(this.mostrar,this.crear); 
+      tarea = {};
+      this._tareasService.estadoTarea(this.mostrar,this.crear,tarea); 
       
     }
     if(tipo === 'editar'){

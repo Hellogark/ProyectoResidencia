@@ -3,26 +3,44 @@
   <div class="card-header bg-white mt-2">
     <div class="row border-bottom">
      
-      <div class="col-6">
+      <div class="col-6" [ngClass]="{'col-11': crear}">
         <div class="row">
-          <div [ngSwitch]="tarea.finalizado">
-            <div *ngSwitchCase="true">
-                <div class=" col-12">  <button type="button" class="btn btn-themecolor">
-                  <i class="fa fa-check-square" aria-hidden="true"></i> <span> Tarea terminada </span></button>
-                </div>
+          <div [ngSwitch]="crear">
+            <div *ngSwitchCase="false">
+              <div class="col-6">
+                <div [ngSwitch]="tarea.finalizado">
+                  <div *ngSwitchCase="true">
+                    <div class=" col-12" >  
+                      
+                      <button type="button" class="btn btn-themecolor"   (click)="tarea.finalizado = true">
+                        <i class="fa fa-check-square" aria-hidden="true"></i> <span> Tarea terminada </span></button>
+                    </div>
 
+                  </div>
+                  <div *ngSwitchDefault>
+                    <div class=" col-12">
+                      <button type="button" class="btn btn-outline-secondary " (click)="tarea.finalizado = false">
+                        <i class="fa fa-check" aria-hidden="true"></i><span>Terminar tarea </span></button>
+                    </div>
+
+                  </div>
+                </div>
+                    
+                </div>
             </div>
-            <div *ngSwitchDefault>         
-              <div class=" col-12"><button type="button" class="btn btn-outline-secondary">
-                 <i class="fa fa-check" aria-hidden="true"></i><span>Terminar tarea </span></button>
-              </div>
-          </div>
+           <div *ngSwitchCase = "true">
+             <div class="col-12">
+                <h3>Llena los campos necesarios</h3>
+             </div>
+            
+
+           </div>
           </div>
         </div>
         
       
       </div>
-      <div class="col-6 text-right r" >
+      <div class="col-1 text-right " [ngClass]="{'col-6': !crear}" >
         <i class="fa fa-times fa-xs pointer" aria-hidden="true" (click)="cerrarTarea()"></i>
      </div>
     </div>    
@@ -41,7 +59,7 @@
 
               <div class="form-group">   
                 
-                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participantes"
+                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participante"
                 name="participantes"  [identifyBy]="'_id'" [displayBy]="'nombre'" [maxItems]="1"[placeholder]="''" [secondaryPlaceholder]="'Asignar a'">
                 <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres" >
                 </tag-input-dropdown>
@@ -79,7 +97,7 @@
               <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">{{proyecto.nombre}} </span>
             </div>
             <div class="col-12 col-xl-8 float-left">
-              <p class="text-muted">Tarea completada por  el</p>
+              <p class="text-muted" *ngIf="tarea.finalizado">Tarea completada por  el</p>
             </div>
           </div>
         </div>
@@ -88,7 +106,6 @@
 
     </div>
   </div>
-</form>
   <div class="card-footer text-muted bg-white text-right">
     <div class="row d-flex justify-content-around">
       <div class="col-6 text-left" *ngIf="!crear"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
@@ -96,4 +113,5 @@
     </div>
     
   </div>
+</form>
 </div>
