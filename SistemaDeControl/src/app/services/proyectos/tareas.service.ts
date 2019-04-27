@@ -49,6 +49,10 @@ export class TareasService {
     } ) );
   }
 
+  editarTarea(tarea:Tareas,idProyecto:string){
+    let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/actualizar/'+tarea._id+'?token='+this.token;
+
+  }
     estadoTarea(mostrarT:boolean, crearT:boolean,tarea?:Tareas){
       this.mostrar = mostrarT;
       this.mostrarTareaSubject.next(mostrarT);

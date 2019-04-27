@@ -1,4 +1,18 @@
 <div class="row justify-content-center">
+        
+<div class="row" *ngIf="!dataLista">
+    <div class="col-12 justify-content-center">
+        <div class="alert-warning text-center">
+            <p>
+               <strong>Cargando</strong>
+            </p>            
+             <i class="fa fa-refresh fa-spin fa-3x">           
+             </i>
+             <br>
+             <p> <span>Espere por favor...</span></p>
+           </div>       
+         </div>
+    </div>
   <div class="col-12">
       <div class="card">
           <div class="card-header bg-white ">
@@ -10,11 +24,11 @@
           </div>
           <div class="card-body pl-0 pr-0">
             <div class="col-12"> 
-              <div class="row no-gutters text-left align-items-center borde-lista justify-content-around  "  *ngFor="let tarea of tareas; let i = index"><!-- Aquí ng for -->
+              <div class="row no-gutters text-left align-items-center borde-lista justify-content-around p-2 "  *ngFor="let tarea of tareas; let i = index"><!-- Aquí ng for -->
                 <div class="col-1  col-md-1 col-lg-1 col-xl-1 d-flex align-items-end pointer">
                   <div class="custom-control custom-checkbox mt-1 p-0 pl-xl-2" >
-                    <input type="checkbox" class="custom-control-input " id="customCheck1" (click)="chkTarea(tarea)" [checked]="tarea.finalizado">
-                    <label class="custom-control-label m-0" for="customCheck1"></label>
+                    <input type="checkbox" class="custom-control-input " [attr.id]="'customCheck'+i" (click)="chkTarea(tarea)" [checked]="tarea.finalizado">
+                    <label class="custom-control-label m-0" [attr.for]="'customCheck'+i"></label>
                   </div>
                 </div>
                 <div class="col-10  col-md-6 col-lg-6 col-xl-7 overflowTarea ml-2 ml-xl-0 pointer " (click)="editarTarea('editar',tarea)">

@@ -19,19 +19,14 @@ export class EditarTareaComponent implements OnInit {
   todosUsuarios:Usuario[] = [];
   tarea:Tareas;
   nuevosParticipantes  = {};
-  participante:any;
- 
-
+  participante:Usuario; 
   @Input() nombres: any [] = [];
   @Input() proyecto: Proyecto;
   @Input() dataLista;
+  @Output() editar = new EventEmitter();
   datos: boolean = false;
   crear:boolean;
-  mostrar:boolean;
-  
-  @Output() editar = new EventEmitter();
-
-  
+  mostrar:boolean;  
   descripcion: string;
 
   @ViewChild(DatepickerComponent) date;
@@ -66,6 +61,8 @@ export class EditarTareaComponent implements OnInit {
              this.mostrar = this._tareasService.mostrar;
              this.crear = this._tareasService.crear;
              this.tarea = this._tareasService.tarea;
+             this.fecha = this.tarea.fechaFinalizado;
+             this.participante = this.tarea.participante;
             });
     console.log("crear"+this.crear);
     console.log(this.tarea);
@@ -81,6 +78,7 @@ export class EditarTareaComponent implements OnInit {
         this.tarea.fechaFinalizado = this.fecha;
         this.tarea.ultimoEditor = this._usuarioService.usuario._id;
         this.tarea.participante = tarea.participante;
+        console.log(this.tarea.participante);
 
 
 
@@ -91,6 +89,7 @@ export class EditarTareaComponent implements OnInit {
           });
 
         }else{
+
 
         }
       
@@ -104,7 +103,8 @@ export class EditarTareaComponent implements OnInit {
   cerrarTarea(){
     this.mostrar = false;
     this.crear = false;
-    this._tareasService.estadoTarea(this.mostrar,this.crear );
+    this.tarea={};
+    this._tareasService.estadoTarea(this.mostrar,this.crear,this.tarea );
     this.editar.emit(this.mostrar);
   }
  

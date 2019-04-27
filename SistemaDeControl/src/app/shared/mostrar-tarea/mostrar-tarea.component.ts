@@ -34,16 +34,18 @@ export class MostrarTareaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataLista=false;
    this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
     this.mostrar = this._tareasService.mostrar;
     this.crear = this._tareasService.crear;
      console.log("mostrar "+this.mostrar+"crear " +this.crear);
      console.log(res);
      });
+     this.dataLista=true;
   }
 
   editarTarea( tipo:string,tarea:Tareas ){
-    this.mostrar = !this.mostrar;
+    this.mostrar = true;
     if(tipo === 'crear'){
       this.crear = true;
       tarea = {};
@@ -69,7 +71,7 @@ export class MostrarTareaComponent implements OnInit {
 
     }
     this._tareasService.crearTarea(this.nuevaTarea,this.idProyecto).subscribe( res =>{
-      alert(res);
+      alert(JSON.stringify(res));
 
 
     });
