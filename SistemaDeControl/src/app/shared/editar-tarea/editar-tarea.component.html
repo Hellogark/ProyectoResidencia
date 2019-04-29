@@ -59,7 +59,7 @@
 
               <div class="form-group">   
                 
-                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participante"
+                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="arregloParticipante"
                 name="participante"  [identifyBy]="'_id'" [displayBy]="'nombre'" [maxItems]="1"[placeholder]="''" [secondaryPlaceholder]="'Asignar a'">
                 <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres" >
                 </tag-input-dropdown>
@@ -72,7 +72,7 @@
           <div class="col-12 col-lg-6 col-xl-6 mb-3 p-0">
               <div class="col-12 align-self-center">
 
-                 <app-datepicker  [fecha] = "this.fecha"(fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
+                 <app-datepicker  [fecha] = "fecha" (fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
               </div>
 
           </div>
@@ -97,7 +97,7 @@
               <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">{{proyecto.nombre}} </span>
             </div>
             <div class="col-12 col-xl-8 float-left">
-              <p class="text-muted" *ngIf="tarea.finalizado">Tarea completada por  el</p>
+              <p class="text-muted" *ngIf="tarea.finalizado">Tarea completada el {{tarea.fechaFinalizado}}</p>
             </div>
           </div>
         </div>

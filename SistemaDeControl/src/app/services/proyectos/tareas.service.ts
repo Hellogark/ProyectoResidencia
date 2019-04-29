@@ -21,6 +21,7 @@ export class TareasService {
   tarea: Tareas
   mostrar:boolean;
   crear:boolean;
+  finalizado: boolean;
   private mostrarTareaSubject = new ReplaySubject<any>(3);
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
  
@@ -49,8 +50,16 @@ export class TareasService {
     } ) );
   }
 
+  editarChecked(datosTarea:Object,idTarea:string){
+    let url = URL_SERVICIOS + 'tareas/tareaTerminada/'+idTarea+'?token='+this.token;
+    return this.http.put(url,datosTarea).pipe( map( (res:any)=>{
+        console.log(res);
+    }));
+  }
+
   editarTarea(tarea:Tareas,idProyecto:string){
     let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/actualizar/'+tarea._id+'?token='+this.token;
+
 
   }
     estadoTarea(mostrarT:boolean, crearT:boolean,tarea?:Tareas){
@@ -59,8 +68,6 @@ export class TareasService {
       this.crear = crearT;
       this.mostrarTareaSubject.next(crearT);
       this.tarea = tarea;
-      this.mostrarTareaSubject.next(tarea);
-      console.log(tarea);
-      
+      this.mostrarTareaSubject.next(tarea);        
     }
 }

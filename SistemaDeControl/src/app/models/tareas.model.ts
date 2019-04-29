@@ -11,6 +11,7 @@ export class Tareas {
                 public ultimoEditor?: string,
                 public fechaCreacion?: string,
                 public fechaFinalizado?: string,
+                public fechaLimite?: string,
                 public participante?: Usuario,
                 public _id?: string
             ){}

@@ -7,6 +7,7 @@ import { ProyectoService, UsuarioService, TareasService } from 'src/app/services
 import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
 import { Tareas } from '../../models/tareas.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-editar-tarea',
@@ -19,26 +20,24 @@ export class EditarTareaComponent implements OnInit {
   todosUsuarios:Usuario[] = [];
   tarea:Tareas;
   nuevosParticipantes  = {};
-  participante:Usuario; 
+  participante:any; 
+  arregloParticipante:any [] = [];
   @Input() nombres: any [] = [];
   @Input() proyecto: Proyecto;
   @Input() dataLista;
   @Output() editar = new EventEmitter();
   datos: boolean = false;
   crear:boolean;
-  mostrar:boolean;  
+  mostrar:boolean; 
+  finalizado:boolean; 
   descripcion: string;
+  datosTarea: Object = {};
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
     
     public _tareasService:TareasService ) {
       
-    }
-    ngOnChanges(){
-
-    }
-    ngOnInit() {
       this.datos = false;
       if(this.crear){        
         this.tarea = {
@@ -51,31 +50,46 @@ export class EditarTareaComponent implements OnInit {
           fechaCreacion: '',
           fechaFinalizado: '',
           participante: null,
-
-
+  
+  
         };   
         this.datos = true;    
       }
-
+      this.tarea = this._tareasService.tarea;
             this._tareasService.mostrarTareaObservable.subscribe( res =>{
              this.mostrar = this._tareasService.mostrar;
              this.crear = this._tareasService.crear;
              this.tarea = this._tareasService.tarea;
-             this.fecha = this.tarea.fechaFinalizado;
-             this.participante = this.tarea.participante;
+             this.fecha = this.tarea.fechaLimite;
+             console.log(this.fecha);
+             
+             if(this.tarea.participante != null){
+               this.participante = Object.values(this.tarea.participante);              
+                this.arregloParticipante.push(this.participante[5]);
+                
+               }
             });
-    console.log("crear"+this.crear);
+            //Se itera el objeto del participante para extraer después el nombre
+              console.log("crear"+this.crear);
     console.log(this.tarea);
     this.datos = true;
+    
+    }
+    ngDoCheck(){
+
+    }
+    ngOnInit() {
    
   }
-
+  ngOnDestroy(){
+    this.fecha = '';
+  }
     crearEditarTarea(tarea:Tareas){
         this.tarea.proyecto = tarea.proyecto;
         this.tarea.nombreTarea = tarea.nombreTarea;
         this.tarea.descTarea = tarea.descTarea;
         this.tarea.creador = this._usuarioService.usuario._id;
-        this.tarea.fechaFinalizado = this.fecha;
+        this.tarea.fechaLimite = this.fecha;
         this.tarea.ultimoEditor = this._usuarioService.usuario._id;
         this.tarea.participante = tarea.participante;
         console.log(this.tarea.participante);
@@ -96,8 +110,20 @@ export class EditarTareaComponent implements OnInit {
 
     }
     finalizarTarea(){
+      this.finalizado != this.tarea.finalizado;
+      this.datosTarea={
 
-    }
+       fechaFinalizado: moment().locale('es').format('L'),
+       finalizado: this.finalizado,
+       ultimoEditor: this._usuarioService.usuario._id
+
+      }
+      this._tareasService.editarChecked(this.datosTarea,this.tarea._id).subscribe(res =>{
+
+      });
+
+      }
+    
     obtenerFecha = (fecha) =>this.fecha = fecha;
 
   cerrarTarea(){

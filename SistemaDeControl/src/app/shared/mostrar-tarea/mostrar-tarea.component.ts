@@ -21,7 +21,10 @@ export class MostrarTareaComponent implements OnInit {
   nuevaTarea:Tareas;
   mostrar: boolean;
   crear: boolean ;
+  finalizado:boolean; 
+
   idProyecto: string;
+  datosTarea: Object = {};
 
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
@@ -38,8 +41,7 @@ export class MostrarTareaComponent implements OnInit {
    this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
     this.mostrar = this._tareasService.mostrar;
     this.crear = this._tareasService.crear;
-     console.log("mostrar "+this.mostrar+"crear " +this.crear);
-     console.log(res);
+
      });
      this.dataLista=true;
   }
@@ -82,7 +84,20 @@ export class MostrarTareaComponent implements OnInit {
     alert(tarea);
 
   }
+  finalizarTarea(tarea:Tareas){
+    this.finalizado = !tarea.finalizado;
+    this.datosTarea={
 
+     fechaFinalizado: moment().locale('es').format('L'),
+     finalizado: this.finalizado,
+     ultimoEditor: this._usuarioService.usuario._id
+
+    }
+    this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe(res =>{
+      console.log(res);
+    });
+
+    }
  
  
 

@@ -27,7 +27,7 @@
               <div class="row no-gutters text-left align-items-center borde-lista justify-content-around p-2 "  *ngFor="let tarea of tareas; let i = index"><!-- Aquí ng for -->
                 <div class="col-1  col-md-1 col-lg-1 col-xl-1 d-flex align-items-end pointer">
                   <div class="custom-control custom-checkbox mt-1 p-0 pl-xl-2" >
-                    <input type="checkbox" class="custom-control-input " [attr.id]="'customCheck'+i" (click)="chkTarea(tarea)" [checked]="tarea.finalizado">
+                    <input type="checkbox" class="custom-control-input " [attr.id]="'customCheck'+i" (click)="finalizarTarea(tarea)" [checked]="tarea.finalizado">
                     <label class="custom-control-label m-0" [attr.for]="'customCheck'+i"></label>
                   </div>
                 </div>
@@ -39,7 +39,8 @@
                 <div class="col-12 col-md-4 col-lg-3 col-xl-3 text-right align-items-center   ">
                   <div class="row no-gutters">
                     <div class="col-10 align-self-center">
-                      <p class="badge badge-pill bg-theme text-break d-block mb-0">{{tarea.creador.nombre}}</p>
+                      <p class="badge badge-pill bg-theme text-break d-block mb-0" *ngIf="tarea.participante === null || !tarea.participante">Sin asignar</p>
+                      <p class="badge badge-pill bg-theme text-break d-block mb-0" *ngIf="tarea.participante != null">{{tarea.participante?.nombre}}</p>
 
                     </div>
                     <div class="col-2 align-self-center">
