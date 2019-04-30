@@ -37,7 +37,10 @@ export class EditarTareaComponent implements OnInit {
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
     
     public _tareasService:TareasService ) {
-      
+  
+    
+    }
+    ngOnInit(){          
       this.datos = false;
       if(this.crear){        
         this.tarea = {
@@ -55,35 +58,38 @@ export class EditarTareaComponent implements OnInit {
         };   
         this.datos = true;    
       }
-      this.tarea = this._tareasService.tarea;
-            this._tareasService.mostrarTareaObservable.subscribe( res =>{
-             this.mostrar = this._tareasService.mostrar;
-             this.crear = this._tareasService.crear;
-             this.tarea = this._tareasService.tarea;
-             this.fecha = this.tarea.fechaLimite;
-             console.log(this.fecha);
-             
-             if(this.tarea.participante != null){
-               this.participante = Object.values(this.tarea.participante);              
-                this.arregloParticipante.push(this.participante[5]);
-                
-               }
-            });
-            //Se itera el objeto del participante para extraer después el nombre
+      this._tareasService.mostrarTareaObservable.subscribe( res =>{
+        this.tarea = {};
+        this.arregloParticipante = [];
+        this.fecha = '';
+        this.mostrar = this._tareasService.mostrar;
+        this.crear = this._tareasService.crear;
+        this.tarea = this._tareasService.tarea;
+        
+        if(this.tarea.participante != null){
+          if(this.arregloParticipante.length >=0 && this.arregloParticipante.length <1){
+            this.arregloParticipante = [];
+            this.participante = Object.values(this.tarea.participante);              
+            this.arregloParticipante.push(this.participante[5]);
+
+          }
+          
+          this.fecha = this.tarea.fechaLimite;
+        }
+      });
+      console.log(this.fecha);
+      //Se itera el objeto del participante para extraer después el nombre
               console.log("crear"+this.crear);
-    console.log(this.tarea);
-    this.datos = true;
-    
-    }
-    ngDoCheck(){
+      console.log(this.tarea);
+      this.datos = true;
 
     }
-    ngOnInit() {
+  
+  ngOnDestroy(){
+    console.log('Destroy');
    
   }
-  ngOnDestroy(){
-    this.fecha = '';
-  }
+
     crearEditarTarea(tarea:Tareas){
         this.tarea.proyecto = tarea.proyecto;
         this.tarea.nombreTarea = tarea.nombreTarea;
@@ -133,6 +139,9 @@ export class EditarTareaComponent implements OnInit {
     this._tareasService.estadoTarea(this.mostrar,this.crear,this.tarea );
     this.editar.emit(this.mostrar);
   }
- 
+  ngAfterContentInit(){
+    console.log('Init');
+  }
+
 
 }

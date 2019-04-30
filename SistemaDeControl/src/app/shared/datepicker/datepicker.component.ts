@@ -41,6 +41,7 @@ private inputText: string = "";
     let anio = this.fecha.split('/')[2];
       this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
       this.disableUntil();
+     
     }
   ngOnChange(){
     if(this.fecha == '' || this.fecha == undefined|| this.fecha == null){console.log(this.fecha);return;   }
@@ -48,6 +49,7 @@ private inputText: string = "";
     let mes = this.fecha.split('/')[1];
     let anio = this.fecha.split('/')[2];
       this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
+    
       this.disableUntil();
 
   }

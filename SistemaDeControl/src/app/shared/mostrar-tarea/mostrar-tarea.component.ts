@@ -47,17 +47,20 @@ export class MostrarTareaComponent implements OnInit {
   }
 
   editarTarea( tipo:string,tarea:Tareas ){
-    this.mostrar = true;
     if(tipo === 'crear'){
+      this.mostrar = true;
       this.crear = true;
       tarea = {};
       this._tareasService.estadoTarea(this.mostrar,this.crear,tarea); 
       
     }
     if(tipo === 'editar'){
-      this.crear=false;
+      this.crear=false; 
+   
+      this.mostrar = true;
       this._tareasService.estadoTarea(this.mostrar,this.crear,tarea);
-      console.log(tarea);      
+      this.mostrar=false;
+      console.log(tarea);
     }
   }
 
@@ -79,11 +82,7 @@ export class MostrarTareaComponent implements OnInit {
     });
 
   }
-  chkTarea(tarea:Tareas){
-    console.log(tarea);
-    alert(tarea);
-
-  }
+ 
   finalizarTarea(tarea:Tareas){
     this.finalizado = !tarea.finalizado;
     this.datosTarea={

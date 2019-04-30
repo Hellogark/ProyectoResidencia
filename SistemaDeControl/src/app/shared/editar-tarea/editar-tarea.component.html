@@ -59,7 +59,7 @@
 
               <div class="form-group">   
                 
-                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="arregloParticipante"
+                <tag-input class="p-0  form-control w-100" theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="arregloParticipante "
                 name="participante"  [identifyBy]="'_id'" [displayBy]="'nombre'" [maxItems]="1"[placeholder]="''" [secondaryPlaceholder]="'Asignar a'">
                 <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres" >
                 </tag-input-dropdown>
@@ -72,7 +72,7 @@
           <div class="col-12 col-lg-6 col-xl-6 mb-3 p-0">
               <div class="col-12 align-self-center">
 
-                 <app-datepicker  [fecha] = "fecha" (fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
+                 <app-datepicker  [fecha] = "tarea.fechaFinalizado" (fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
               </div>
 
           </div>
@@ -89,7 +89,7 @@
       </div>
       <div class="col-12 d-block ">
         <div class="form-group">
-        <div class="row d-flex align-items-center justify-content-around">
+        <div class="row  align-items-center justify-content-around">
 
             <div class="col-12 col-xl-4 ">
               
@@ -107,9 +107,9 @@
     </div>
   </div>
   <div class="card-footer text-muted bg-white text-right">
-    <div class="row d-flex justify-content-around">
-      <div class="col-6 text-left" *ngIf="!crear"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
-      <div class="col-6" [ngClass]="{'col-12': crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
+    <div class="row  justify-content-around">
+      <div class="col-4 col-xl-6 text-left" *ngIf="!crear"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
+      <div class="col-4 col-xl-6" [ngClass]="{'col-12': crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
     </div>
     
   </div>
