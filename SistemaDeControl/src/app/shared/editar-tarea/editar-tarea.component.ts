@@ -15,7 +15,7 @@ import * as moment from 'moment';
   styleUrls: ['./editar-tarea.component.css']
 })
 export class EditarTareaComponent implements OnInit {
-  fecha: any;
+  @Input() fecha: any;
   asignado:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
   tarea:Tareas;
@@ -73,17 +73,18 @@ export class EditarTareaComponent implements OnInit {
             this.arregloParticipante.push(this.participante[5]);
 
           }
-          
-          this.fecha = this.tarea.fechaLimite;
         }
+        
       });
-      console.log(this.fecha);
+      
+      
       //Se itera el objeto del participante para extraer después el nombre
-              console.log("crear"+this.crear);
+      console.log("crear"+this.crear);
       console.log(this.tarea);
       this.datos = true;
-
+      
     }
+ 
   
   ngOnDestroy(){
     console.log('Destroy');
@@ -139,8 +140,8 @@ export class EditarTareaComponent implements OnInit {
     this._tareasService.estadoTarea(this.mostrar,this.crear,this.tarea );
     this.editar.emit(this.mostrar);
   }
-  ngAfterContentInit(){
-    console.log('Init');
+  ngOnChange(){
+    console.log(this.tarea.fechaLimite);
   }
 
 

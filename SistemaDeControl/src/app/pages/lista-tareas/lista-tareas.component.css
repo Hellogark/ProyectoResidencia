@@ -1,0 +1,6 @@
+.overflowY{
+    max-height: 498.5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+
+}

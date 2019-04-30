@@ -12,6 +12,7 @@ import { EditarTareaComponent } from '../../shared/editar-tarea/editar-tarea.com
 import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
 import { TareasService } from '../../services/proyectos/tareas.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lista-tareas',
@@ -56,8 +57,8 @@ export class ListaTareasComponent implements OnInit {
       this.mostrar = this._tareasService.mostrar;
       this.crear = this._tareasService.crear;
       console.log("mostrar "+this.mostrar+"crear " +this.crear);
-      console.log(res);
-      });
+      
+    });
     this.dataLista = true;
   }
 

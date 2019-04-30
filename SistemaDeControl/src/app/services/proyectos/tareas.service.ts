@@ -20,11 +20,14 @@ export class TareasService {
   usuario: Usuario; 
   tarea: Tareas;
   tareas: Tareas[];
+  fecha: any;
   mostrar:boolean;
   crear:boolean;
   finalizado: boolean;
   private mostrarTareaSubject = new BehaviorSubject<any>(null);
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
+  private enviarFechaSubject = new BehaviorSubject <any>(null);
+  enviarFechaObservable = this.enviarFechaSubject.asObservable();
  
   token =this._usuarioService.token;
 
@@ -72,5 +75,11 @@ export class TareasService {
       this.mostrarTareaSubject.next(crearT);
       this.tarea = tarea;
       this.mostrarTareaSubject.next(tarea);
+    }
+
+    enviarFecha(fecha: any){
+      this.fecha = fecha;
+      this.enviarFechaSubject.next(fecha);
+
     }
 }

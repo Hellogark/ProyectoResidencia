@@ -59,8 +59,15 @@ export class MostrarTareaComponent implements OnInit {
    
       this.mostrar = true;
       this._tareasService.estadoTarea(this.mostrar,this.crear,tarea);
+      this._tareasService.enviarFechaObservable(tarea.fechaFinalizado);
+      if(tarea.fechaFinalizado === undefined || tarea.fechaFinalizado === null){
+        this._tareasService.fecha = '';
+      }else{
+        
+       
+      }
       this.mostrar=false;
-      console.log(tarea);
+      console.log(this._tareasService.fecha);
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="card" *ngIf="datos">
+<div class="card mb-0" *ngIf="datos">
   <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material">
   <div class="card-header bg-white mt-2">
     <div class="row border-bottom">
@@ -72,7 +72,7 @@
           <div class="col-12 col-lg-6 col-xl-6 mb-3 p-0">
               <div class="col-12 align-self-center">
 
-                 <app-datepicker  [fecha] = "tarea.fechaFinalizado" (fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
+                 <app-datepicker  [fecha] = "fecha" (fechaSeleccion)="obtenerFecha($event)"></app-datepicker>
               </div>
 
           </div>
