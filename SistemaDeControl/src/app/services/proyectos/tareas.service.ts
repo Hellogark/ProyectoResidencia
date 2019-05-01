@@ -26,7 +26,7 @@ export class TareasService {
   finalizado: boolean;
   private mostrarTareaSubject = new BehaviorSubject<any>(null);
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
-  private enviarFechaSubject = new BehaviorSubject <any>(null);
+  private enviarFechaSubject = new BehaviorSubject <string>('');
   enviarFechaObservable = this.enviarFechaSubject.asObservable();
  
   token =this._usuarioService.token;
@@ -77,7 +77,7 @@ export class TareasService {
       this.mostrarTareaSubject.next(tarea);
     }
 
-    enviarFecha(fecha: any){
+    enviarFecha(fecha: string){
       this.fecha = fecha;
       this.enviarFechaSubject.next(fecha);
 
