@@ -76,6 +76,13 @@ export class EditarTareaComponent implements OnInit {
         }
         
       });
+      this._tareasService.enviarFechaObservable.subscribe( res =>{
+        this.fecha = '';
+        this.fecha = res;
+        console.log(this.fecha);
+      });
+
+      
       
       
       //Se itera el objeto del participante para extraer después el nombre
@@ -119,14 +126,22 @@ export class EditarTareaComponent implements OnInit {
     finalizarTarea(){
       this.finalizado != this.tarea.finalizado;
       this.datosTarea={
-
        fechaFinalizado: moment().locale('es').format('L'),
        finalizado: this.finalizado,
        ultimoEditor: this._usuarioService.usuario._id
-
+      }
+      if(!this.finalizado){
+        this.datosTarea={
+          fechaFinalizado: '',
+          finalizado: this.finalizado,
+          ultimoEditor: this._usuarioService.usuario._id
+         }
+         this._tareasService.editarChecked(this.datosTarea,this.tarea._id).subscribe(res =>{
+          this._tareasService.tareaChk(this.finalizado);
+        });
       }
       this._tareasService.editarChecked(this.datosTarea,this.tarea._id).subscribe(res =>{
-
+        this._tareasService.tareaChk(this.finalizado);
       });
 
       }

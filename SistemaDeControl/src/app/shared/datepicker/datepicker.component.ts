@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter,ViewChild } from '@angular/core';
 import {INgxMyDpOptions, IMyDateModel, IMyInputFieldChanged, IMyOptions, NgxMyDatePickerDirective} from 'ngx-mydatepicker';
+import { TareasService } from '../../services/proyectos/tareas.service';
 
 
 @Component({
@@ -31,29 +32,35 @@ export class DatepickerComponent implements OnInit {
 private validDate: boolean = false;
 private inputText: string = "";
  
-  constructor() {  
+  constructor( public _tareasService:TareasService) {  
+    this.disableUntil();
   }
 
   ngOnInit() {
-    if(this.fecha == '' || this.fecha == undefined|| this.fecha == null){console.log(this.fecha);return;   }
-    let dia = this.fecha.split('/')[0];
-    let mes = this.fecha.split('/')[1];
-    let anio = this.fecha.split('/')[2];
-      this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
-      this.disableUntil();
-     
+    if(this._tareasService.mostrar){     
+      this._tareasService.enviarFechaObservable.subscribe( res =>{
+        this.clearDate();
+        this.iniciarFecha(res);          
+        
+      });
     }
-  ngOnChange(){
-    if(this.fecha == '' || this.fecha == undefined|| this.fecha == null){console.log(this.fecha);return;   }
-    let dia = this.fecha.split('/')[0];
-    let mes = this.fecha.split('/')[1];
-    let anio = this.fecha.split('/')[2];
-      this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
-    
-      this.disableUntil();
-
+    this.iniciarFecha(this.fecha);   
   }
+    
+   
+  ngOnChange(){
+    
+   this.iniciarFecha(this.fecha);   
+}
 
+  iniciarFecha( fecha: any){
+    this.disableUntil();
+    if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
+    let dia = fecha.split('/')[0];
+    let mes = fecha.split('/')[1];
+    let anio = fecha.split('/')[2];
+      this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
+  }
   clearDate(): void {
     this.ngxdp.clearDate();
 }

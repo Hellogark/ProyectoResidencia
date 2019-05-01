@@ -43,6 +43,9 @@ export class MostrarTareaComponent implements OnInit {
     this.crear = this._tareasService.crear;
 
      });
+     this._tareasService.chkTareaObservable.subscribe((res:any) =>{
+      this.finalizado = this._tareasService.finalizado;
+     } );
      this.dataLista=true;
   }
 
@@ -59,12 +62,9 @@ export class MostrarTareaComponent implements OnInit {
    
       this.mostrar = true;
       this._tareasService.estadoTarea(this.mostrar,this.crear,tarea);
-      this._tareasService.enviarFechaObservable(tarea.fechaFinalizado);
+      this._tareasService.enviarFecha(tarea.fechaFinalizado);
       if(tarea.fechaFinalizado === undefined || tarea.fechaFinalizado === null){
         this._tareasService.fecha = '';
-      }else{
-        
-       
       }
       this.mostrar=false;
       console.log(this._tareasService.fecha);
@@ -92,6 +92,7 @@ export class MostrarTareaComponent implements OnInit {
  
   finalizarTarea(tarea:Tareas){
     this.finalizado = !tarea.finalizado;
+    console.log(this.finalizado);
     this.datosTarea={
 
      fechaFinalizado: moment().locale('es').format('L'),
@@ -99,9 +100,11 @@ export class MostrarTareaComponent implements OnInit {
      ultimoEditor: this._usuarioService.usuario._id
 
     }
-    this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe(res =>{
+    this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe( (res: any) =>{
+
       console.log(res);
-    });
+    }); 
+    
 
     }
  

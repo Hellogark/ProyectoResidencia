@@ -59,7 +59,14 @@ export class ListaTareasComponent implements OnInit {
       console.log("mostrar "+this.mostrar+"crear " +this.crear);
       
     });
+    this._tareasService.chkTareaObservable.subscribe( (res:any) =>{
+      console.log(res);
+    this.obtenerUsuarios();
+    this.obtenerTareas();
+    this.obtenerProyecto();
+    });
     this.dataLista = true;
+    console.log("Datos Listos");
   }
 
   obtenerUsuarios(){
@@ -96,7 +103,7 @@ export class ListaTareasComponent implements OnInit {
   mostrarEditar =(mostrar:boolean) => this.mostrar = mostrar;
    
 
-  obtenerFecha = (fecha) =>this.fecha = fecha;
+
 
 
 }
