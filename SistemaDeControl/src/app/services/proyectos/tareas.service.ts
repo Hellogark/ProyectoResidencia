@@ -63,6 +63,10 @@ export class TareasService {
     } ) );
   }
   obtenerTarea(id:string){
+    let url = URL_SERVICIOS + 'tareas/tareaEditar/'+id+'?token='+this.token;
+    return this.http.get(url).pipe(map((res:any) =>{
+      return res;
+    } ));
 
   }
   editarChecked(datosTarea:Object,idTarea:string){

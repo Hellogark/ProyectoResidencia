@@ -47,8 +47,8 @@
         </div>
       </div>
     </div>
-            <div class="col-12 col-xl-6 pl-3" *ngIf="dataLista && mostrar">
-            <app-editar-tarea [finalizado]="finalizado" [proyecto]="proyecto" [mostrar]="mostrar"></app-editar-tarea> 
+            <div class="col-12 col-xl-6 pl-0 pl-xl-3" *ngIf="dataLista && mostrar">
+            <app-editar-tarea [idTarea]="idTarea" [cambio]="cambio" [proyecto]="proyecto" [mostrar]="mostrar"></app-editar-tarea> 
     
             </div>
 </div>   

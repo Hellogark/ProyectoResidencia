@@ -19,6 +19,7 @@ export class MostrarTareaComponent implements OnInit {
   tareas: Tareas[] = [];
   @Input() eventoTarea:{};
   dataLista;
+  cambio:boolean = false;
   @Output () actualizado = new EventEmitter();
   participantes:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
@@ -28,6 +29,7 @@ export class MostrarTareaComponent implements OnInit {
    mostrar: boolean;
   crear: boolean ;
   finalizado:boolean; 
+  idTarea;
 
   idProyecto: string;
   datosTarea: Object = {};
@@ -105,17 +107,24 @@ export class MostrarTareaComponent implements OnInit {
     }
     if(tipo === 'editar'){
       this.crear=false; 
+     this.editarTareaF(tarea);
+     
+      console.log(this.mostrar);
+      console.log(this._tareasService.fecha);
+    }
+  }
+
+  editarTareaF(tarea:Tareas){
+    this.idTarea = tarea._id;
    
       this.mostrar = true;
-      this._tareasService.estadoTarea(this.mostrar,this.crear,tarea);
+      this._tareasService.estadoTarea(this.mostrar,this.crear);
       this._tareasService.enviarFecha(tarea.fechaFinalizado);
       if(tarea.fechaFinalizado === undefined || tarea.fechaFinalizado === null){
         this._tareasService.fecha = '';
       }
      
-      console.log(this.mostrar);
-      console.log(this._tareasService.fecha);
-    }
+
   }
 
   crearTarea(){
@@ -148,14 +157,16 @@ export class MostrarTareaComponent implements OnInit {
      ultimoEditor: this._usuarioService.usuario._id
 
     }
+    
     this._tareasService.tarea = tarea;
     this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe( (res: any) =>{
       console.log(res.tarea.finalizado);
       this.finalizado = res.tarea.finalizado;
-      this._tareasService.tareaChk(res.tarea.finalizado);
+      this.cambio = !this.cambio;
+      this.obtenerTareas();
+     // this._tareasService.tareaChk(res.tarea.finalizado);
       
     }); 
-    this.obtenerTareas();
     
 
     }
