@@ -6,6 +6,7 @@ import { Tareas } from '../../models/tareas.model';
 import { Proyecto } from '../../models/proyectos.model';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { Usuario } from '../../models/usuario.model';
 
 
 @Component({
@@ -14,12 +15,17 @@ import * as moment from 'moment';
   styleUrls: ['./mostrar-tarea.component.css']
 })
 export class MostrarTareaComponent implements OnInit {
-  @Input() proyecto: Proyecto; 
-  @Input() tareas: Tareas[] = [];
+  proyecto: Proyecto; 
+  tareas: Tareas[] = [];
   @Input() eventoTarea:{};
-  @Input() dataLista;
+  dataLista;
+  @Output () actualizado = new EventEmitter();
+  participantes:Usuario[] = [];
+  todosUsuarios:Usuario[] = [];
+  nombres: any [] = [];
+  nuevosParticipantes = {};
   nuevaTarea:Tareas;
-  mostrar: boolean;
+   mostrar: boolean;
   crear: boolean ;
   finalizado:boolean; 
 
@@ -38,16 +44,56 @@ export class MostrarTareaComponent implements OnInit {
 
   ngOnInit() {
     this.dataLista=false;
-   this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
+    this.obtenerTareas();
+    this.obtenerProyecto();
+    this.nombres =  this._tareasService.nombres;      
+    this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
     this.mostrar = this._tareasService.mostrar;
     this.crear = this._tareasService.crear;
 
      });
      this._tareasService.chkTareaObservable.subscribe((res:any) =>{
+       console.log(res + "cambió")
       this.finalizado = this._tareasService.finalizado;
      } );
      this.dataLista=true;
   }
+  
+ 
+/*   obtenerUsuarios(){
+     //Obtener los nombres de los usuarios 
+    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
+    .subscribe(res =>{
+        this.todosUsuarios = res.usuarios;
+        this.todosUsuarios.map( res =>{
+        this.nuevosParticipantes  ={
+            _id: res._id,
+            nombre:res.nombre.toString()          
+        }
+            this.nombres.push(this.nuevosParticipantes );
+        });
+        console.log(this.nombres); 
+    });
+   } */
+
+ 
+    obtenerTareas(){
+      this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
+        
+        this._tareasService.tareas=res;
+        this.tareas = this._tareasService.tareas;
+        console.log(this.tareas);
+      });
+    } 
+    obtenerProyecto(){
+      this._proyectoService.obtenerProyecto(this.idProyecto).subscribe( res =>{
+        console.log(res);
+        this.proyecto = res.proyecto;
+      });
+
+    }
+
+  mostrarEditar =(mostrar:boolean) => this.mostrar = mostrar;
 
   editarTarea( tipo:string,tarea:Tareas ){
     if(tipo === 'crear'){
@@ -66,7 +112,8 @@ export class MostrarTareaComponent implements OnInit {
       if(tarea.fechaFinalizado === undefined || tarea.fechaFinalizado === null){
         this._tareasService.fecha = '';
       }
-      this.mostrar=false;
+     
+      console.log(this.mostrar);
       console.log(this._tareasService.fecha);
     }
   }
@@ -83,7 +130,8 @@ export class MostrarTareaComponent implements OnInit {
 
     }
     this._tareasService.crearTarea(this.nuevaTarea,this.idProyecto).subscribe( res =>{
-      alert(JSON.stringify(res));
+      this.obtenerTareas();
+      this._tareasService.obtenerUsuarios();
 
 
     });
@@ -95,18 +143,23 @@ export class MostrarTareaComponent implements OnInit {
     console.log(this.finalizado);
     this.datosTarea={
 
-     fechaFinalizado: moment().locale('es').format('L'),
+     fechaFinalizado: moment().locale('es').format('l'),
      finalizado: this.finalizado,
      ultimoEditor: this._usuarioService.usuario._id
 
     }
+    this._tareasService.tarea = tarea;
     this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe( (res: any) =>{
-
-      console.log(res);
+      console.log(res.tarea.finalizado);
+      this.finalizado = res.tarea.finalizado;
+      this._tareasService.tareaChk(res.tarea.finalizado);
+      
     }); 
+    this.obtenerTareas();
     
 
     }
+
  
  
 

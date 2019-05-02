@@ -20,6 +20,9 @@ export class TareasService {
   usuario: Usuario; 
   tarea: Tareas;
   tareas: Tareas[];
+  todosUsuarios:Usuario[] = [];
+  nombres: any [] = [];
+  nuevosParticipantes = {};
   fecha: any;
   mostrar:boolean;
   crear:boolean;
@@ -55,19 +58,25 @@ export class TareasService {
       });
       
       this.tareas = this.proyecto.tareas;
+      this.obtenerUsuarios();
       return this.tareas;
     } ) );
   }
+  obtenerTarea(id:string){
 
+  }
   editarChecked(datosTarea:Object,idTarea:string){
     let url = URL_SERVICIOS + 'tareas/tareaTerminada/'+idTarea+'?token='+this.token;
     return this.http.put(url,datosTarea).pipe( map( (res:any)=>{
-        console.log(res);
+        return res;
     }));
   }
 
   editarTarea(tarea:Tareas,idProyecto:string){
     let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/actualizar/'+tarea._id+'?token='+this.token;
+    return this.http.put(url,tarea).pipe( map(  (res:any) =>{
+
+    }));
 
 
   }
@@ -89,4 +98,20 @@ export class TareasService {
       this.finalizado =  check;
       this.chkTareaSubject.next(check);
     }
+     
+  obtenerUsuarios(){
+    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
+    .subscribe(res =>{
+      this.nombres = [];
+        this.todosUsuarios = res.usuarios;
+        this.todosUsuarios.map( res =>{
+        this.nuevosParticipantes  ={
+            _id: res._id,
+            nombre:res.nombre.toString()          
+        }
+            this.nombres.push(this.nuevosParticipantes );
+        });        
+    });
+   }
+ 
 }

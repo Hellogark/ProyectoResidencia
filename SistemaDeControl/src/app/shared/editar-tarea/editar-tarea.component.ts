@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -22,21 +22,24 @@ export class EditarTareaComponent implements OnInit {
   nuevosParticipantes  = {};
   participante:any; 
   arregloParticipante:any [] = [];
-  @Input() nombres: any [] = [];
+   nombres: any [] = [];
   @Input() proyecto: Proyecto;
+  idProyecto: string;
   @Input() dataLista;
   @Output() editar = new EventEmitter();
   datos: boolean = false;
   crear:boolean;
-  mostrar:boolean; 
-  finalizado:boolean; 
+  @Input() mostrar:boolean; 
+  @Input() finalizado:boolean; 
   descripcion: string;
   datosTarea: Object = {};
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
     
-    public _tareasService:TareasService ) {
+    public _tareasService:TareasService, public rutaActiva: ActivatedRoute ) {
+      this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
+
   
     
     }
@@ -74,6 +77,7 @@ export class EditarTareaComponent implements OnInit {
 
           }
         }
+        this.nombres = this._tareasService.nombres ;
         
       });
       this._tareasService.enviarFechaObservable.subscribe( res =>{
@@ -81,6 +85,7 @@ export class EditarTareaComponent implements OnInit {
         this.fecha = res;
         console.log(this.fecha);
       });
+      
 
       
       
@@ -91,7 +96,14 @@ export class EditarTareaComponent implements OnInit {
       this.datos = true;
       
     }
- 
+    ngOnChanges(){
+      if(this.tarea === this._tareasService.tarea){
+        alert('asdsdad');
+      }
+       this._tareasService.chkTareaObservable.subscribe( res =>{
+        this.finalizado = res;
+      }); 
+    }
   
   ngOnDestroy(){
     console.log('Destroy');
@@ -126,7 +138,7 @@ export class EditarTareaComponent implements OnInit {
     finalizarTarea(){
       this.finalizado != this.tarea.finalizado;
       this.datosTarea={
-       fechaFinalizado: moment().locale('es').format('L'),
+       fechaFinalizado: moment().locale('es').format('l'),
        finalizado: this.finalizado,
        ultimoEditor: this._usuarioService.usuario._id
       }
@@ -137,7 +149,8 @@ export class EditarTareaComponent implements OnInit {
           ultimoEditor: this._usuarioService.usuario._id
          }
          this._tareasService.editarChecked(this.datosTarea,this.tarea._id).subscribe(res =>{
-          this._tareasService.tareaChk(this.finalizado);
+           this.obtenerTareas();
+         console.log(res)
         });
       }
       this._tareasService.editarChecked(this.datosTarea,this.tarea._id).subscribe(res =>{
@@ -146,6 +159,13 @@ export class EditarTareaComponent implements OnInit {
 
       }
     
+      obtenerTareas(){
+        this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
+          
+          this._tareasService.tareas=res;
+         
+        });
+      } 
     obtenerFecha = (fecha) =>this.fecha = fecha;
 
   cerrarTarea(){

@@ -1,8 +1,8 @@
-<div class="row justify-content-center">
-        
 
-  <div class="col-12">
-      <div class="card mb-0">
+<div class="row no-gutters justify-content-center" >     
+<div class="col-12 col-xl-6 " [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}" *ngIf="dataLista" >
+  <div class="overflowY col-12 col-xl-12 ">
+      <div class="card mb-0 ">
           <div class="card-header bg-white ">
             <div class="row ">
               <div class="col-xl-8 col-12" *ngIf="dataLista"> <h3> <b> Tareas de {{proyecto?.nombre}} </b></h3></div>
@@ -45,6 +45,11 @@
           </div>
           
         </div>
-  </div>
-</div>
+      </div>
+    </div>
+            <div class="col-12 col-xl-6 pl-3" *ngIf="dataLista && mostrar">
+            <app-editar-tarea [finalizado]="finalizado" [proyecto]="proyecto" [mostrar]="mostrar"></app-editar-tarea> 
+    
+            </div>
+</div>   
 

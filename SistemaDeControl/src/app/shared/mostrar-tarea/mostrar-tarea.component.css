@@ -5,3 +5,10 @@
     scrollbar-width: thin;
     
 }
+.overflowY{
+    max-height: 498.5px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    padding: 0;
+
+}

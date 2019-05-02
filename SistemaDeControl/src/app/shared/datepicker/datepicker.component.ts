@@ -50,16 +50,20 @@ private inputText: string = "";
    
   ngOnChange(){
     
-   this.iniciarFecha(this.fecha);   
+   //this.iniciarFecha(this.fecha);   
 }
 
   iniciarFecha( fecha: any){
     this.disableUntil();
     if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
     let dia = fecha.split('/')[0];
+    if(dia == '01' ){
+      dia = '01';
+    }
     let mes = fecha.split('/')[1];
     let anio = fecha.split('/')[2];
-      this.fechaInput = {date: { year: anio, month: mes, day: dia}};   
+      this.fechaInput = {date: { year: anio, month: mes, day: dia}};
+      console.log(this.fechaInput)   
   }
   clearDate(): void {
     this.ngxdp.clearDate();

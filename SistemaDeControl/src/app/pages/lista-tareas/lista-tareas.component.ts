@@ -50,7 +50,7 @@ export class ListaTareasComponent implements OnInit {
 
   ngOnInit() {
     this.dataLista = false;    
-    this.obtenerUsuarios();
+  
     this.obtenerTareas();
     this.obtenerProyecto();
     this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
@@ -60,8 +60,7 @@ export class ListaTareasComponent implements OnInit {
       
     });
     this._tareasService.chkTareaObservable.subscribe( (res:any) =>{
-      console.log(res);
-    this.obtenerUsuarios();
+      console.log(res);   
     this.obtenerTareas();
     this.obtenerProyecto();
     });
@@ -69,21 +68,12 @@ export class ListaTareasComponent implements OnInit {
     console.log("Datos Listos");
   }
 
-  obtenerUsuarios(){
-     
-    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
-    .subscribe(res =>{
-        this.todosUsuarios = res.usuarios;
-        this.todosUsuarios.map( res =>{
-        this.nuevosParticipantes  ={
-            _id: res._id,
-            nombre:res.nombre.toString()          
-        }
-            this.nombres.push(this.nuevosParticipantes );
-        });
-        console.log(this.nombres); 
-    });
-   }
+    ngOnChanges(){
+      console.log(this.terminado);
+
+
+    }
+
 
  
     obtenerTareas(){

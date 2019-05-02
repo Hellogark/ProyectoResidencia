@@ -1,4 +1,4 @@
-<div class="card mb-0" *ngIf="datos">
+<div class="card mb-0 p-0" *ngIf="datos">
   <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material">
   <div class="card-header bg-white mt-2">
     <div class="row border-bottom">
@@ -7,20 +7,20 @@
         <div class="row">
           <div [ngSwitch]="crear">
             <div *ngSwitchCase="false">
-              <div class="col-6">
-                <div [ngSwitch]="tarea.finalizado">
+              <div class="col-12">
+                <div [ngSwitch]="finalizado">
                   <div *ngSwitchCase="true">
                     <div class=" col-12" >  
                       
-                      <button type="button" class="btn btn-themecolor"   (click)="tarea.finalizado = true">
+                      <button type="button" class="btn btn-themecolor btnTerminado"    >
                         <i class="fa fa-check-square" aria-hidden="true"></i> <span> Tarea terminada </span></button>
                     </div>
 
                   </div>
                   <div *ngSwitchDefault>
                     <div class=" col-12">
-                      <button type="button" class="btn btn-outline-secondary " (click)="tarea.finalizado = false">
-                        <i class="fa fa-check" aria-hidden="true"></i><span>Terminar tarea </span></button>
+                      <button type="button" class="btn btn-outline-secondary btnTerminado" >
+                        <i class="fa fa-check" aria-hidden="true"></i><span>Tarea pendiente </span></button>
                     </div>
 
                   </div>
