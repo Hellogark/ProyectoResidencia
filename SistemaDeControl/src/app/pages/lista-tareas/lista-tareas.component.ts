@@ -58,12 +58,7 @@ export class ListaTareasComponent implements OnInit {
       this.crear = this._tareasService.crear;
       console.log("mostrar "+this.mostrar+"crear " +this.crear);
       
-    });
-    this._tareasService.chkTareaObservable.subscribe( (res:any) =>{
-      console.log(res);   
-    this.obtenerTareas();
-    this.obtenerProyecto();
-    });
+    });    
     this.dataLista = true;
     console.log("Datos Listos");
   }

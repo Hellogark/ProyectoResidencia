@@ -115,7 +115,7 @@
   </div>
   <div class="card-footer text-muted bg-white text-right">
     <div class="row  justify-content-around">
-      <div class="col-4 col-xl-6 text-left" *ngIf="!crear"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
+      <div class="col-4 col-xl-6 text-left" *ngIf="!crear" (click)="eliminarTarea(tarea)"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
       <div class="col-4 col-xl-6" [ngClass]="{'col-12': crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
     </div>
     

@@ -30,7 +30,7 @@ export class MostrarTareaComponent implements OnInit {
   crear: boolean ;
   finalizado:boolean; 
   idTarea;
-
+  eliminar: boolean = false;
   idProyecto: string;
   datosTarea: Object = {};
 
@@ -54,13 +54,13 @@ export class MostrarTareaComponent implements OnInit {
     this.crear = this._tareasService.crear;
 
      });
-     this._tareasService.chkTareaObservable.subscribe((res:any) =>{
-       console.log(res + "cambió")
-      this.finalizado = this._tareasService.finalizado;
-     } );
+     this.eliminar = this._tareasService.eliminar;
+   
      this.dataLista=true;
   }
-  
+  ngOnChanges(){
+    this.obtenerTareas();
+  }
  
 /*   obtenerUsuarios(){
      //Obtener los nombres de los usuarios 
@@ -79,11 +79,12 @@ export class MostrarTareaComponent implements OnInit {
    } */
 
  
-    obtenerTareas(){
+    obtenerTareas(event?){
       this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
         
         this._tareasService.tareas=res;
         this.tareas = this._tareasService.tareas;
+        this.eliminar = !event;
         console.log(this.tareas);
       });
     } 
@@ -164,7 +165,7 @@ export class MostrarTareaComponent implements OnInit {
       this.finalizado = res.tarea.finalizado;
       this.cambio = !this.cambio;
       this.obtenerTareas();
-     // this._tareasService.tareaChk(res.tarea.finalizado);
+     
       
     }); 
     

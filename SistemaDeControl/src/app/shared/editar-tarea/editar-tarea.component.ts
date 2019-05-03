@@ -29,6 +29,7 @@ export class EditarTareaComponent implements OnInit {
   @Input() dataLista;
   @Input() cambio = false;
   @Output() editar = new EventEmitter();
+  eliminar: boolean =  false;
   datos: boolean = false;
   crear:boolean;
   @Input() mostrar:boolean; 
@@ -146,13 +147,33 @@ export class EditarTareaComponent implements OnInit {
         });
       } 
     obtenerFecha = (fecha) =>this.fecha = fecha;
+  eliminarTarea(tarea:Tareas){
+    Swal.fire({
+      title: 'Estás seguro que deseas eliminar esta tarea?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar!'
+    }).then((result) => {
+      if (result) {
+        this._tareasService.eliminarTarea(this.idProyecto,tarea._id).subscribe( res =>{
+          this.cerrarTarea(event);     
+          this.eliminar = !this.eliminar;
+        });
+       
+      }
+    });
+    
 
-  cerrarTarea(){
+  }
+  cerrarTarea(event?){
     this.mostrar = false;
     this.crear = false;
     this.tarea={};
     this._tareasService.estadoTarea(this.mostrar,this.crear,this.tarea );
     this.editar.emit(this.mostrar);
+    this._tareasService.eliminar = !this.eliminar;    
   }
 
 

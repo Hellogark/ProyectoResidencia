@@ -27,13 +27,13 @@ export class TareasService {
   mostrar:boolean;
   crear:boolean;
   finalizado: boolean;
+  eliminar:boolean;
  
   private mostrarTareaSubject = new BehaviorSubject<any>(null);
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
   private enviarFechaSubject = new BehaviorSubject <string>('');
   enviarFechaObservable = this.enviarFechaSubject.asObservable();
-  private chkTareaSubject = new BehaviorSubject <boolean>(false);
-  chkTareaObservable = this.chkTareaSubject.asObservable();
+  
  
   token =this._usuarioService.token;
 
@@ -84,6 +84,13 @@ export class TareasService {
 
 
   }
+  eliminarTarea(idProyecto:string,idTarea:string){
+    let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/eliminarTarea/'+idTarea;
+    url+='?token='+this.token;
+    return this.http.delete(url).pipe( map( (res:any) =>{
+      return res;
+    }));
+  }
     estadoTarea(mostrarT:boolean, crearT?:boolean,tarea?:Tareas){
       this.mostrar = mostrarT;
       this.mostrarTareaSubject.next(mostrarT);
@@ -98,10 +105,7 @@ export class TareasService {
       this.enviarFechaSubject.next(fecha);
 
     }
-    tareaChk(check:boolean){
-      this.finalizado =  check;
-      this.chkTareaSubject.next(check);
-    }
+    
      
   obtenerUsuarios(){
     this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
