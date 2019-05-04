@@ -154,7 +154,8 @@ public labels: any = {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar!'
+      confirmButtonText: 'Eliminar!',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result) {
         this._proyectoService.eliminarArchivo(archivo._id,this.proyecto)

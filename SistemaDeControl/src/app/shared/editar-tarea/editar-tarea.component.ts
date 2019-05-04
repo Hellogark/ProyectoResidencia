@@ -8,6 +8,7 @@ import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
 import { Tareas } from '../../models/tareas.model';
 import * as moment from 'moment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-editar-tarea',
@@ -45,60 +46,20 @@ export class EditarTareaComponent implements OnInit {
   
     
     }
-   async ngOnInit(){          
-      this.datos = false;
-      if(this.crear){        
-        this.tarea = {
-          proyecto: this.proyecto._id,
-          nombreTarea: '',
-          descTarea: '',
-          creador: '',
-          finalizado: false,
-          ultimoEditor: '',
-          fechaCreacion: '',
-          fechaFinalizado: '',
-          participante: null,
-  
-  
-        };   
-        this.datos = true;    
-      }
-      this._tareasService.mostrarTareaObservable.subscribe(async res =>{
-        this.tarea = {};
-        this.arregloParticipante = [];
-        this.fecha = '';
-        this.mostrar = this._tareasService.mostrar;
-        this.crear = this._tareasService.crear;
-       await  this.obtenerTarea();
-        //this.tarea = this._tareasService.tarea;
-        
-        if(this.tarea.participante != null){
-          if(this.arregloParticipante.length >=0 && this.arregloParticipante.length <1){
-            this.arregloParticipante = [];
-            this.participante = Object.values(this.tarea.participante);              
-            this.arregloParticipante.push(this.participante[5]);
+  ngOnInit(){          
+    this._tareasService.mostrarTareaObservable.subscribe( res =>{ 
 
-          }
-        }
-        this.nombres = this._tareasService.nombres ;
-        
-      });
-      this._tareasService.enviarFechaObservable.subscribe( res =>{
-        this.fecha = '';
-        this.fecha = res;
-        console.log(this.fecha);
-      });
+      this.obtenerTarea();
 
-      //Se itera el objeto del participante para extraer después el nombre
-      console.log("crear"+this.crear);
-      console.log(this.tarea);
-      this.datos = true;
+    
+
+    });
       
     }
     ngOnChanges(){
-       this.datos = false;           
-         this.obtenerTarea();       
-      this.datos = true; 
+      this.datos = false;         
+      this.obtenerTarea();       
+      
     }
   
   ngOnDestroy(){
@@ -107,19 +68,73 @@ export class EditarTareaComponent implements OnInit {
   }
 
   obtenerTarea(){
-    this._tareasService.obtenerTarea(this.idTarea).subscribe(async (res:any)=>{
+    
+    this._tareasService.obtenerTarea(this.idTarea).subscribe( (res:any)=>{
+      this.datos = false;
+      if(this.crear){        
+        this.tarea = {
+          proyecto: this.proyecto._id,
+          nombre: '',
+          descTarea: '',
+          creador: '',
+          finalizado: false,
+          ultimoEditor: '',
+          fechaCreacion: '',
+          fechaFinalizado: '',
+          participante: null,
+          
+          
+        };   
+        this.datos = true;    
+      }
+      
       this.tarea = res.tarea;
+          
+      this.arregloParticipante = [];
+      this.participante = {};
+      this.fecha = '';         
+        console.log(this.tarea);
+        this.mostrar = this._tareasService.mostrar;
+        this.crear = this._tareasService.crear;
+         
+        //this.tarea = this._tareasService.tarea;
+        
+        if(this.tarea.participante != null){
+          if(this.arregloParticipante.length >=0 && this.arregloParticipante.length <1){
+            this.arregloParticipante = [];
+            
+            this.participante = this.tarea.participante;              
+            this.arregloParticipante.push(this.participante);
+            console.log(this.arregloParticipante);
+
+          }
+        }
+        this.nombres = this._tareasService.nombres ;
+        this.datos=true;
+       
+        //this.tarea = this._tareasService.tarea;
+       
+    
+      this._tareasService.enviarFechaObservable.subscribe( res =>{
+        this.fecha = '';
+        this.fecha = res;
+        console.log(this.fecha);
+      });
+      //Se itera el objeto del participante para extraer después el nombre
+      console.log("crear"+this.crear);                       
     } );
   }
 
     crearEditarTarea(tarea:Tareas){
         this.tarea.proyecto = tarea.proyecto;
-        this.tarea.nombreTarea = tarea.nombreTarea;
+        this.tarea.nombre = tarea.nombre;
         this.tarea.descTarea = tarea.descTarea;
         this.tarea.creador = this._usuarioService.usuario._id;
         this.tarea.fechaLimite = this.fecha;
         this.tarea.ultimoEditor = this._usuarioService.usuario._id;
         this.tarea.participante = tarea.participante;
+      
+        
         console.log(this.tarea.participante);
 
 
@@ -127,10 +142,16 @@ export class EditarTareaComponent implements OnInit {
        
         if(this.crear){
           this._tareasService.crearTarea(this.tarea,this.proyecto._id).subscribe( res =>{
-            console.log(res);
+            this._tareasService.recargarTarea();
+
           });
 
         }else{
+          this._tareasService.editarTarea(this.tarea,this.idProyecto).subscribe( res =>{
+            console.log(res);
+            this._tareasService.recargarTarea();
+
+          });
 
 
         }
@@ -139,13 +160,7 @@ export class EditarTareaComponent implements OnInit {
     }
 
     
-      obtenerTareas(){
-        this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
-          
-          this._tareasService.tareas=res;
-         
-        });
-      } 
+    
     obtenerFecha = (fecha) =>this.fecha = fecha;
   eliminarTarea(tarea:Tareas){
     Swal.fire({
@@ -154,12 +169,13 @@ export class EditarTareaComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar!'
+      confirmButtonText: 'Eliminar!',
+      cancelButtonText:'Cancelar'
     }).then((result) => {
       if (result) {
         this._tareasService.eliminarTarea(this.idProyecto,tarea._id).subscribe( res =>{
-          this.cerrarTarea(event);     
-          this.eliminar = !this.eliminar;
+          this.cerrarTarea();     
+          this._tareasService.recargarTarea();
         });
        
       }
@@ -167,14 +183,14 @@ export class EditarTareaComponent implements OnInit {
     
 
   }
-  cerrarTarea(event?){
+  cerrarTarea(){
     this.mostrar = false;
     this.crear = false;
     this.tarea={};
     this._tareasService.estadoTarea(this.mostrar,this.crear,this.tarea );
     this.editar.emit(this.mostrar);
-    this._tareasService.eliminar = !this.eliminar;    
   }
+
 
 
 

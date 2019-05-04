@@ -6,7 +6,9 @@ import { Tareas } from '../../models/tareas.model';
 import { Proyecto } from '../../models/proyectos.model';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { Usuario } from '../../models/usuario.model';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -16,27 +18,28 @@ import { Usuario } from '../../models/usuario.model';
 })
 export class MostrarTareaComponent implements OnInit {
   proyecto: Proyecto; 
-  tareas: Tareas[] = [];
-  @Input() eventoTarea:{};
+  nuevaTarea:Tareas;
   dataLista;
-  cambio:boolean = false;
+  idTarea;
+  @Input() eventoTarea:{};
   @Output () actualizado = new EventEmitter();
   participantes:Usuario[] = [];
   todosUsuarios:Usuario[] = [];
+  tareas: Tareas[] = [];
   nombres: any [] = [];
   nuevosParticipantes = {};
-  nuevaTarea:Tareas;
-   mostrar: boolean;
+  mostrar: boolean;
   crear: boolean ;
   finalizado:boolean; 
-  idTarea;
+  cambio:boolean = false;
   eliminar: boolean = false;
   idProyecto: string;
   datosTarea: Object = {};
+  progressRef: NgProgressRef;
 
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
-    public _tareasService:TareasService, public rutaActiva: ActivatedRoute) { 
+    public _tareasService:TareasService, public rutaActiva: ActivatedRoute, private _location:Location,private progress: NgProgress) { 
     this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
    
 
@@ -46,6 +49,8 @@ export class MostrarTareaComponent implements OnInit {
 
   ngOnInit() {
     this.dataLista=false;
+    this.progressRef = this.progress.ref('progreso');
+    this.cargar();
     this.obtenerTareas();
     this.obtenerProyecto();
     this.nombres =  this._tareasService.nombres;      
@@ -54,31 +59,17 @@ export class MostrarTareaComponent implements OnInit {
     this.crear = this._tareasService.crear;
 
      });
-     this.eliminar = this._tareasService.eliminar;
-   
+     if(this._tareasService.subscripcion === undefined){
+      this._tareasService.subscripcion = this._tareasService.llamarRecargar.subscribe(  (data:any) =>{
+        this.obtenerTareas();
+      });
+     }
+   this.terminado();
      this.dataLista=true;
   }
   ngOnChanges(){
     this.obtenerTareas();
-  }
- 
-/*   obtenerUsuarios(){
-     //Obtener los nombres de los usuarios 
-    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
-    .subscribe(res =>{
-        this.todosUsuarios = res.usuarios;
-        this.todosUsuarios.map( res =>{
-        this.nuevosParticipantes  ={
-            _id: res._id,
-            nombre:res.nombre.toString()          
-        }
-            this.nombres.push(this.nuevosParticipantes );
-        });
-        console.log(this.nombres); 
-    });
-   } */
-
- 
+  } 
     obtenerTareas(event?){
       this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
         
@@ -130,7 +121,7 @@ export class MostrarTareaComponent implements OnInit {
 
   crearTarea(){
     this.nuevaTarea = {
-      nombreTarea: '',
+      nombre: '',
       descTarea: '',
       creador: this._usuarioService.usuario._id,
       finalizado: false,
@@ -149,6 +140,7 @@ export class MostrarTareaComponent implements OnInit {
   }
  
   finalizarTarea(tarea:Tareas){
+    this.cargar();
     this.finalizado = !tarea.finalizado;
     console.log(this.finalizado);
     this.datosTarea={
@@ -164,14 +156,27 @@ export class MostrarTareaComponent implements OnInit {
       console.log(res.tarea.finalizado);
       this.finalizado = res.tarea.finalizado;
       this.cambio = !this.cambio;
+      this.terminado();
       this.obtenerTareas();
      
       
     }); 
     
-
+  }
+  
+  cargar() {
+    this.progressRef.start();
+  }
+  
+  terminado() {
+    this.progressRef.complete();
+  }
+  regresar(){
+    if (window.history.length > 1) {
+      this._location.back();
     }
-
+  }
+  
  
  
 

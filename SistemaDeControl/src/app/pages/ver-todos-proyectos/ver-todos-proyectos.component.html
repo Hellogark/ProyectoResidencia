@@ -69,12 +69,15 @@
                            </ul>                                                      
                           </td>
                      
-                          <td class="align-middle align-content-stretch">
-                            <button class="btn btn-themecolor mr-3" [routerLink]="['/editarProyecto', proyecto._id]">
+                          <td class="align-middle border-bottom border-white   d-inline-block d-flex flex-xl-nowrap flex-md-nowrap">
+                            <button class="btn btn-themecolor mb-2" [routerLink]="['/todas-tareas', proyecto._id]">
+                                <i class="fa fa-tasks" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-themecolor ml-xl-3 mr-xl-3 mr-1 ml-1 mb-2" [routerLink]="['/editarProyecto', proyecto._id]">
                               <i class="fa fa-edit" aria-hidden="true"></i>
 
                             </button>
-                            <button class="btn btn-danger " (click)="eliminarProyecto(proyecto)">
+                            <button class="btn btn-danger h-50 " (click)="eliminarProyecto(proyecto)">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                           </td>

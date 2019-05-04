@@ -14,6 +14,8 @@ import { EditarTareaComponent } from './editar-tarea/editar-tarea.component';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TagInputModule } from 'ngx-chips';
 import { MostrarTareaComponent } from './mostrar-tarea/mostrar-tarea.component';
+import { NgProgressModule } from '@ngx-progressbar/core';
+
 
 
 
@@ -25,7 +27,8 @@ import { MostrarTareaComponent } from './mostrar-tarea/mostrar-tarea.component';
         PipesModule,      
         NgxMyDatePickerModule.forRoot(),
         FormsModule,
-        TagInputModule
+        TagInputModule,
+        NgProgressModule
     ],
     declarations: [
         NopagefoundComponent,

@@ -31,7 +31,8 @@ export class ProyectoService {
         showCancelButton: false,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar'
       }).then(result =>{
         this.router.navigate(['/misproyectos']);
       });

@@ -116,7 +116,8 @@ onPageChange(number: number) {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar!'
+      confirmButtonText: 'Eliminar!',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result) {
         this._usuarioService.borrarUsuario(usuarioBorrar._id)

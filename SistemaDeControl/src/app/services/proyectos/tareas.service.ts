@@ -1,9 +1,9 @@
 import { Tareas } from './../../models/tareas.model';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable, throwError, BehaviorSubject} from 'rxjs';
+import { Observable, throwError, BehaviorSubject, Subscription} from 'rxjs';
 import { Archivos } from './../../models/archivos.model';
 import { URL_SERVICIOS } from './../../config/config';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -33,6 +33,8 @@ export class TareasService {
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
   private enviarFechaSubject = new BehaviorSubject <string>('');
   enviarFechaObservable = this.enviarFechaSubject.asObservable();
+  llamarRecargar = new EventEmitter<any>();
+  subscripcion: Subscription;
   
  
   token =this._usuarioService.token;
@@ -64,7 +66,7 @@ export class TareasService {
   }
   obtenerTarea(id:string){
     let url = URL_SERVICIOS + 'tareas/tareaEditar/'+id+'?token='+this.token;
-    return this.http.get(url).pipe(map((res:any) =>{
+    return this.http.get(url).pipe(map((res:any) =>{     
       return res;
     } ));
 
@@ -79,6 +81,7 @@ export class TareasService {
   editarTarea(tarea:Tareas,idProyecto:string){
     let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/actualizar/'+tarea._id+'?token='+this.token;
     return this.http.put(url,tarea).pipe( map(  (res:any) =>{
+      return res;
 
     }));
 
@@ -88,6 +91,7 @@ export class TareasService {
     let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/eliminarTarea/'+idTarea;
     url+='?token='+this.token;
     return this.http.delete(url).pipe( map( (res:any) =>{
+     
       return res;
     }));
   }
@@ -121,5 +125,5 @@ export class TareasService {
         });        
     });
    }
- 
+   recargarTarea(){ this.llamarRecargar.emit();}
 }

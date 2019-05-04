@@ -27,7 +27,7 @@ export class ListaTareasComponent implements OnInit {
   descripcionTarea: string;
   nuevosParticipantes = {};
   fecha: any ;
-  nombreTarea: string;
+  nombre: string;
   terminado: boolean;
   nombres: any [] = [];
   participantes:Usuario[] = [];
