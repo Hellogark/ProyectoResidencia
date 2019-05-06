@@ -64,6 +64,7 @@ onPageChange(number: number) {
   ngOnInit() {         
     this.cargarUsuario();
     this._modalUploadService.notificacion.subscribe( res =>{
+      console.log(res);
       this.cargarUsuario();
     });
    

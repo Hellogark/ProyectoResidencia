@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/service.index';
 import  Swal from 'sweetalert2';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 
 @Component({
@@ -10,12 +11,16 @@ import  Swal from 'sweetalert2';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild ('inputFile')  inputFile :any;
   usuario:Usuario;
   passwordAnterior ='';
   passwordNuevo1='';
   passwordNuevo2='';
   imagenSubir: File;
   imagenTemp: string;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  archivoEnviar: any;  
 
   constructor(public _usuarioService:UsuarioService) { 
     
@@ -50,31 +55,43 @@ export class ProfileComponent implements OnInit {
   }
 
   seleccionImagen(archivo){
+    this.imageChangedEvent = archivo;
+    this.archivoEnviar = archivo.target.files[0];
+    
     if(!archivo){
       this.imagenSubir = null;
       return;
     }
- 
-    if(archivo.type.indexOf('image') <0){
+    
+    
+    if(this.archivoEnviar.type.indexOf('image') <0){
       Swal.fire({
         title: 'Solo se permiten imágenes',
         type: 'error'       
       });
       this.imagenSubir=null;
       return;
-
-    }
-    this.imagenSubir = archivo;
+      
+    }  
     let reader = new FileReader();
-    let urlImagenTemp = reader.readAsDataURL(archivo);
-    reader.onloadend = () =>this.imagenTemp = reader.result.toString();
-
+    let urlImagenTemp = reader.readAsDataURL(this.archivoEnviar);
+    reader.onloadend = () =>{
+      this.imagenTemp = reader.result.toString();
+      return console.log(this.imagenSubir);
+    }
   }
   cambiarImagen(){
     console.log(this.imagenSubir);
     this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id);
   }
- 
+  imageCropped(event: ImageCroppedEvent) {
+    //preview
+    this.croppedImage = event.base64;
+    //Convertir para subir
+    const archivoSeleccionado = this.archivoEnviar;
+    this.imagenSubir = new File([event.file], archivoSeleccionado.name,
+      {type: archivoSeleccionado.type});
+}
  
 
 }

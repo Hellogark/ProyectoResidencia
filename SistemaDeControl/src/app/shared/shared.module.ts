@@ -15,7 +15,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { TagInputModule } from 'ngx-chips';
 import { MostrarTareaComponent } from './mostrar-tarea/mostrar-tarea.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 
@@ -28,7 +28,8 @@ import { NgProgressModule } from '@ngx-progressbar/core';
         NgxMyDatePickerModule.forRoot(),
         FormsModule,
         TagInputModule,
-        NgProgressModule
+        NgProgressModule,
+        ImageCropperModule,
     ],
     declarations: [
         NopagefoundComponent,
@@ -40,6 +41,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
         DatepickerComponent,
         EditarTareaComponent,
         MostrarTareaComponent,
+        
         
 
     ],

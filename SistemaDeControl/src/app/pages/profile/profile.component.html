@@ -65,14 +65,41 @@
 <div class="col-lg-5">
   <div class="card">
       <div class="card-body text-center">
-          <legend>Imagen de Perfil de {{this.usuario.nombre}}</legend>
-          <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="" class="prevImgPerfil ">
-          <img *ngIf="imagenTemp" [src]="imagenTemp" alt="user" class="prevImgPerfil ">
-          <input  type="file" (change)="seleccionImagen($event.target.files[0])" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >
-          <br>
-          <i class="fa fas-save">
-            <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-block btn-themecolor waves-effect waves-light m-r-10">Actualizar foto</button>
-          </i>
+          <div class="row">
+
+              <legend>Imagen de Perfil de {{this.usuario.nombre}}</legend>
+                <div class="col-12">
+
+                  <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="" class="prevImgPerfil ">
+                  <img *ngIf="imagenTemp" [src]="croppedImage" alt="user" class="prevImgPerfil img-circle ">
+                </div>
+                <div class="col-12">
+
+                    <image-cropper 
+                    [imageChangedEvent]="imageChangedEvent  "
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="1 / 1"
+                    [resizeToWidth]="128"
+                    [onlyScaleDown]="true"
+                    [roundCropper]="true"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"></image-cropper>
+            </div>
+            <div class="col-12">
+
+                <input #inputFile type="file" (change)="seleccionImagen($event)" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >
+            </div>
+            <div class="col-12">
+
+                
+                <i class="fa fas-save">
+                    <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-block btn-themecolor waves-effect waves-light m-r-10">Actualizar foto</button>
+                </i>
+            </div>
+        </div>
 
       </div>
     </div>

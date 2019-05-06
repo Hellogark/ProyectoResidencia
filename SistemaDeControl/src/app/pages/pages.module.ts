@@ -33,6 +33,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component'; 
 import { FileUploadModule } from "ng2-file-upload";
 import { NgProgressModule } from '@ngx-progressbar/core';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
         MisTareasComponent,
         
         
+        
       
     ],
     exports: [
@@ -68,6 +70,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
         TagInputModule, 
         FileUploadModule,
         NgProgressModule,
+        ImageCropperModule
         
         
         

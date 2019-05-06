@@ -1,2 +1,10 @@
 
 
+.resizeDiv{
+    max-width: 125px; 
+    text-align:center; 
+    padding:20px; 
+}
+.resizeImg{
+    display:block; width:100%; height:auto;
+}

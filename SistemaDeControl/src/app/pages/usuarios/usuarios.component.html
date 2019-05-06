@@ -58,8 +58,13 @@
                       </tr>
                       </thead>
                       <tbody class="">
-                        <tr *ngFor="let usuario of usuarios | paginate: config" class=" fila  w-100 h-50 ">
-                          <td><img  [src]="usuario.img | archivo:usuario._id:'usuarios'" (click)="mostrarModal(usuario._id)"  class=" w-50 img-circle pointer" alt=""></td>
+                        <tr *ngFor="let usuario of usuarios | paginate: config" class=" fila">
+                          <td class="resizeDiv">
+                            <div class="" >
+                              <img  [src]="usuario.img | archivo:usuario._id:'usuarios'" (click)="mostrarModal(usuario._id)"  class="resizeImg rounded-circle pointer" alt="">
+
+                            </div>
+                          </td>
                           <td class="align-middle">{{usuario.correo}}</td>
                           <td class="align-middle">{{usuario.nombre}}</td>
                           <td class="align-middle">{{usuario.empresa}}</td>

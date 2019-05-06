@@ -2,6 +2,9 @@ import { ModalUploadService } from './modal-upload.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import  Swal from 'sweetalert2';
 import { UsuarioService, CambiarImagenService } from 'src/app/services/service.index';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+
+
 
 
 
@@ -14,34 +17,49 @@ export class ModalUploadComponent implements OnInit {
   @ViewChild ('inputFile')  inputFile :any;
   imagenSubir: File;
   imagenTemp: string;
+  imageChangedEvent: any = '';
+    croppedImage: any = '';
+    archivoEnviar: any;    
+    
+ 
+ 
+
+
   constructor(public _usuarioService:UsuarioService, public _cambiarImageService: CambiarImagenService,
-    public _modalUploadService: ModalUploadService
-    ) { }
+    public _modalUploadService: ModalUploadService) { 
+   
+    }
 
   ngOnInit() {
   }
   seleccionImagen(archivo){
+    this.imageChangedEvent = archivo;
+    this.archivoEnviar = archivo.target.files[0];
+    
     if(!archivo){
       this.imagenSubir = null;
       return;
     }
- 
-    if(archivo.type.indexOf('image') <0){
+    
+    
+    if(this.archivoEnviar.type.indexOf('image') <0){
       Swal.fire({
         title: 'Solo se permiten imágenes',
         type: 'error'       
       });
       this.imagenSubir=null;
       return;
-
-    }
-    this.imagenSubir = archivo;
+      
+    }  
     let reader = new FileReader();
-    let urlImagenTemp = reader.readAsDataURL(archivo);
-    reader.onloadend = () =>this.imagenTemp = reader.result.toString();
-
+    let urlImagenTemp = reader.readAsDataURL(this.archivoEnviar);
+    reader.onloadend = () =>{
+      this.imagenTemp = reader.result.toString();
+      return console.log(this.imagenSubir);
+    }
   }
-
+ 
+  
   subirImagen(){
     this._cambiarImageService.subirImagen(this.imagenSubir, this._modalUploadService.tipo, 
       this._modalUploadService.id, this._usuarioService.token)
@@ -66,7 +84,25 @@ export class ModalUploadComponent implements OnInit {
   cerrarModal(){
     this.imagenTemp = null;
     this.imagenSubir = null;
+    this.croppedImage = null;
+    this.imageChangedEvent = null;
     this._modalUploadService.ocultarModal();
   }
-
+  imageCropped(event: ImageCroppedEvent) {
+    //preview
+    this.croppedImage = event.base64;
+    //Convertir para subir
+    const archivoSeleccionado = this.archivoEnviar;
+    this.imagenSubir = new File([event.file], archivoSeleccionado.name,
+      {type: archivoSeleccionado.type});
+}
+imageLoaded() {
+    // show cropper
+}
+cropperReady() {
+    // cropper ready
+}
+loadImageFailed() {
+    // show message
+}
 }
