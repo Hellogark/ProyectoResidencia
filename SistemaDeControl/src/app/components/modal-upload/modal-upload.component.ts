@@ -52,7 +52,6 @@ export class ModalUploadComponent implements OnInit {
       
     }  
     let reader = new FileReader();
-    let urlImagenTemp = reader.readAsDataURL(this.archivoEnviar);
     reader.onloadend = () =>{
       this.imagenTemp = reader.result.toString();
       return console.log(this.imagenSubir);
@@ -96,13 +95,13 @@ export class ModalUploadComponent implements OnInit {
     this.imagenSubir = new File([event.file], archivoSeleccionado.name,
       {type: archivoSeleccionado.type});
 }
-imageLoaded() {
-    // show cropper
-}
-cropperReady() {
-    // cropper ready
-}
+
 loadImageFailed() {
-    // show message
+   Swal.fire({
+     title: 'Hubo un problema al cargar la imagen',
+     type: 'error',
+     timer:3500,
+     toast:true
+   })
 }
 }

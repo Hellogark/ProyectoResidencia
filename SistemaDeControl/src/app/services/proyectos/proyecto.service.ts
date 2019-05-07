@@ -1,15 +1,15 @@
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 
 import { Archivos } from './../../models/archivos.model';
 import { URL_SERVICIOS } from './../../config/config';
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { map, catchError } from 'rxjs/operators';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })

@@ -24,6 +24,8 @@ export class VerProyectoComponent implements OnInit {
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
   public responsive: boolean = true;
+  public cargando: boolean = true;
+
   fecha: any;
   public config: PaginationInstance = {
    
@@ -95,6 +97,7 @@ public labels: any = {
         this.obtenerUsuarios();
         console.log(this.proyecto);
         this.dataLista=true;
+        this.cargando = false;
     }, (err) =>{
      console.log(err);
     });

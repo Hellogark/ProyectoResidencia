@@ -92,6 +92,14 @@ export class ProfileComponent implements OnInit {
     this.imagenSubir = new File([event.file], archivoSeleccionado.name,
       {type: archivoSeleccionado.type});
 }
+loadImageFailed() {
+  Swal.fire({
+    title: 'Hubo un problema al cargar la imagen',
+    type: 'error',
+    timer:3500,
+    toast:true
+  })
+}
  
 
 }

@@ -141,7 +141,8 @@ export class EditarTareaComponent implements OnInit {
 
        
         if(this.crear){
-          this._tareasService.crearTarea(this.tarea,this.proyecto._id).subscribe( res =>{
+        this._tareasService.crearTarea(this.tarea,this.proyecto._id).                  
+          subscribe( res =>{           
             this._tareasService.recargarTarea();
 
           });

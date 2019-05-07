@@ -15,7 +15,7 @@ export class DatepickerComponent implements OnInit {
   @ViewChild('dp') ngxdp: NgxMyDatePickerDirective;
   fechaInput: any;
   arreglo: string []= [];
-
+  disabled = false;
   myOptions: INgxMyDpOptions = {
     // other options...
     dateFormat: 'dd/m/yyyy',
@@ -44,7 +44,10 @@ private inputText: string = "";
         
       });
     }
-    this.iniciarFecha(this.fecha);   
+    this.iniciarFecha(this.fecha);  
+    if(this.fecha){
+      this.disabled = true;
+    }
   }
     
    

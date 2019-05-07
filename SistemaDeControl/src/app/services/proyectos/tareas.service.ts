@@ -1,12 +1,12 @@
-import { Tareas } from './../../models/tareas.model';
 import { Injectable, EventEmitter } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Tareas } from './../../models/tareas.model';
 
-import { map, catchError } from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable, throwError, BehaviorSubject, Subscription} from 'rxjs';
-import { Archivos } from './../../models/archivos.model';
+import {  BehaviorSubject, Subscription} from 'rxjs';
+
 import { URL_SERVICIOS } from './../../config/config';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -46,8 +46,13 @@ export class TareasService {
   crearTarea(tarea:Tareas, id:string){
     let url = URL_SERVICIOS +'tareas/'+ id+'/crear?token='+this.token;
        return this.http.post(url,tarea).pipe(map((res:any) =>{
-        console.log(res);
-      } ));
+        Swal.fire({
+          title: 'Tarea creada correctamente',
+          type: 'success',
+          timer: 3500,
+          toast:true
+        })
+      }));
 
   }
 
@@ -81,6 +86,12 @@ export class TareasService {
   editarTarea(tarea:Tareas,idProyecto:string){
     let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/actualizar/'+tarea._id+'?token='+this.token;
     return this.http.put(url,tarea).pipe( map(  (res:any) =>{
+      Swal.fire({
+        title: 'Tarea editada correctamente',
+        type: 'success',
+        timer: 3500,
+        toast:true
+      })
       return res;
 
     }));
@@ -91,7 +102,12 @@ export class TareasService {
     let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/eliminarTarea/'+idTarea;
     url+='?token='+this.token;
     return this.http.delete(url).pipe( map( (res:any) =>{
-     
+     Swal.fire({
+       title: 'Tarea eliminada',
+       type: 'success',
+       timer: 3500,
+       toast:true
+     })
       return res;
     }));
   }
