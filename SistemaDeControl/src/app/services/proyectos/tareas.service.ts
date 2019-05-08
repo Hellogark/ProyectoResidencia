@@ -69,6 +69,16 @@ export class TareasService {
       return this.tareas;
     } ) );
   }
+
+  obtenerMisTareas(id:string){
+    let url = URL_SERVICIOS +'tareas/'+id+'/mistareas?token='+this.token;
+    return this.http.get(url).pipe( map( (res:any) =>{
+      console.log(res);
+      return res;
+      
+    }));
+
+  }
   obtenerTarea(id:string){
     let url = URL_SERVICIOS + 'tareas/tareaEditar/'+id+'?token='+this.token;
     return this.http.get(url).pipe(map((res:any) =>{     

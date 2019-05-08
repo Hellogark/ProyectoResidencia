@@ -34,25 +34,22 @@ export class MostrarTareaComponent implements OnInit {
   cambio:boolean = false;
   eliminar: boolean = false;
   idProyecto: string;
+  path: string;
   datosTarea: Object = {};
   progressRef: NgProgressRef;
 
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
     public _tareasService:TareasService, public rutaActiva: ActivatedRoute, private _location:Location,private progress: NgProgress) { 
-    this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
-   
-
-
-   
+    this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');         
   }
 
   ngOnInit() {
     this.dataLista=false;
+    this.path = this._location.path().toString();
     this.progressRef = this.progress.ref('progreso');
     this.cargar();
-    this.obtenerTareas();
-    this.obtenerProyecto();
+    this.mostrarTipo();    
     this.nombres =  this._tareasService.nombres;      
     this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
     this.mostrar = this._tareasService.mostrar;
@@ -61,24 +58,34 @@ export class MostrarTareaComponent implements OnInit {
      });
      if(this._tareasService.subscripcion === undefined){
       this._tareasService.subscripcion = this._tareasService.llamarRecargar.subscribe(  (data:any) =>{
-        this.obtenerTareas();
+        this.mostrarTipo()
       });
      }
    this.terminado();
-     this.dataLista=true;
+     
   }
   ngOnChanges(){
-    this.obtenerTareas();
+    this.mostrarTipo();
   } 
-    obtenerTareas(event?){
-      this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
+
+  obtenerTareas(event?){
+    this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
         
-        this._tareasService.tareas=res;
+      this._tareasService.tareas=res;
         this.tareas = this._tareasService.tareas;
         this.eliminar = !event;
+        this.dataLista=true;
         console.log(this.tareas);
       });
     } 
+    obtenerMisTareas(){      
+      this._tareasService.obtenerMisTareas(this._usuarioService.usuario._id.toString()).subscribe( res =>{
+        this._tareasService.tareas=res.tareas;      
+        this.tareas = res.tareas;
+        this.dataLista = true;
+        console.log(this.tareas);
+      });
+    }
     obtenerProyecto(){
       this._proyectoService.obtenerProyecto(this.idProyecto).subscribe( res =>{
         console.log(res);
@@ -131,7 +138,7 @@ export class MostrarTareaComponent implements OnInit {
 
     }
     this._tareasService.crearTarea(this.nuevaTarea,this.idProyecto).subscribe( res =>{
-      this.obtenerTareas();
+      this.mostrarTipo();
       this._tareasService.obtenerUsuarios();
 
 
@@ -177,8 +184,12 @@ export class MostrarTareaComponent implements OnInit {
     }
   }
   
+  mostrarTipo(){
+    if(this.path == '/mistareas'){this.obtenerMisTareas(); this.proyecto = null}else{this.obtenerTareas();this.obtenerProyecto();}        
+
+  }
  
- 
+  
 
 
 }

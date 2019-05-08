@@ -11,11 +11,14 @@ export class ArchivoPipe implements PipeTransform {
   transform(archivo: string,id:string ,tipo: string,_usuarioService:UsuarioService  ): any {
   
     //this.id = localStorage.getItem('id');
+    if(!id){
+      return;
+    }
     let url = URL_SERVICIOS + 'descarga';
     if(!archivo){
       return url + '/'+tipo+'/'+id+'/noImagenExistente';
     }
-    if ( archivo == undefined) {
+    if ( archivo == undefined || tipo === undefined) {
       return url +  '/'+tipo+'/'+id+'/noImagen';
       }
     

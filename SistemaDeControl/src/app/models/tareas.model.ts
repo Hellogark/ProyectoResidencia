@@ -12,7 +12,7 @@ export class Tareas {
                 public fechaCreacion?: string,
                 public fechaFinalizado?: string,
                 public fechaLimite?: string,
-                public participante?: Usuario[],
+                public participante?: Usuario,
                 public _id?: string
             ){}
 

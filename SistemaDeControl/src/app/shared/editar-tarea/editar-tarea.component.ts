@@ -36,23 +36,22 @@ export class EditarTareaComponent implements OnInit {
   @Input() mostrar:boolean; 
   descripcion: string;
   datosTarea: Object = {};
+  path:string;
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
     
-    public _tareasService:TareasService, public rutaActiva: ActivatedRoute ) {
+    public _tareasService:TareasService, public rutaActiva: ActivatedRoute, public _location:Location ) {
       this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
+      this.path = this._location.path().toString();
+
 
   
     
     }
   ngOnInit(){          
     this._tareasService.mostrarTareaObservable.subscribe( res =>{ 
-
-      this.obtenerTarea();
-
-    
-
+      this.obtenerTarea();    
     });
       
     }
