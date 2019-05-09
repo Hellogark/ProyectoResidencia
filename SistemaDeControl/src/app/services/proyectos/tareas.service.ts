@@ -93,8 +93,9 @@ export class TareasService {
     }));
   }
 
-  editarTarea(tarea:Tareas,idProyecto:string){
-    let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/actualizar/'+tarea._id+'?token='+this.token;
+  editarTarea(tarea:Tareas){
+    console.log(tarea);
+    let url = URL_SERVICIOS + 'tareas/actualizar/'+tarea._id+'?token='+this.token;
     return this.http.put(url,tarea).pipe( map(  (res:any) =>{
       Swal.fire({
         title: 'Tarea editada correctamente',
@@ -109,9 +110,10 @@ export class TareasService {
 
   }
   eliminarTarea(idProyecto:string,idTarea:string){
-    let url = URL_SERVICIOS + 'tareas/'+idProyecto+'/eliminarTarea/'+idTarea;
+    console.log(idProyecto)
+    let url = URL_SERVICIOS + 'tareas/eliminarTarea/'+idTarea;
     url+='?token='+this.token;
-    return this.http.delete(url).pipe( map( (res:any) =>{
+    return this.http.put(url,{idProyecto}).pipe( map( (res:any) =>{
      Swal.fire({
        title: 'Tarea eliminada',
        type: 'success',

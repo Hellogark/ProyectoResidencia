@@ -4,8 +4,8 @@ export class Proyecto {
 
             constructor(
 
-                public nombre: string,
-                public descripcion: string,                               
+                public nombre?: string,
+                public descripcion?: string,                               
                 public responsable?: string,
                 public nombreEmpresa?: string,
                 public ultimoEditor?: string,

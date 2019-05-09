@@ -41,7 +41,8 @@ export class MostrarTareaComponent implements OnInit {
 
   constructor(public _usuarioService: UsuarioService, public _proyectoService:ProyectoService, 
     public _tareasService:TareasService, public rutaActiva: ActivatedRoute, private _location:Location,private progress: NgProgress) { 
-    this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');         
+    this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');   
+          
   }
 
   ngOnInit() {

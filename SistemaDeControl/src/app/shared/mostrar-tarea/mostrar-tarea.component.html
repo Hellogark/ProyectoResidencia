@@ -9,7 +9,7 @@
               <div class="col-xl-1 col-md-1 col-2"> <i class="fa fa-chevron-left pointer" aria-hidden="true" (click)="regresar()"></i> </div>              
               <div class="col-xl-6 col-md-6 col-12" *ngIf="dataLista && proyecto != null"> <h3> <b> Tareas de {{proyecto?.nombre}} </b></h3></div>
               <div class="col-xl-6 col-md-6 col-12" *ngIf="dataLista && proyecto == null"> <h3> <b> Mis Tareas </b></h3></div>
-              <div class="col-xl-4 col-md-4 col-12 text-right">  <button type="button" class="btn btn-themecolor" (click)="editarTarea('crear')"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Nueva Tarea</button> </div>
+              <div class="col-xl-4 col-md-4 col-12 text-right" *ngIf="path != '/mistareas'">  <button type="button" class="btn btn-themecolor" (click)="editarTarea('crear')"><i class="fa fa-plus mr-2" aria-hidden="true"></i>Nueva Tarea</button> </div>
             </div>
             
           </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-            <div class="col-12 col-xl-6 pl-0 pl-xl-3" *ngIf="dataLista && mostrar">
+            <div class="col-12 col-xl-6 pl-0 pl-xl-3 mt-md-3 mt-3 mt-xl-0" *ngIf="dataLista && mostrar">
             <app-editar-tarea (cerrarTarea)="obtenerTareas($event)" [idTarea]="idTarea" [cambio]="cambio" [proyecto]="proyecto" [mostrar]="mostrar"></app-editar-tarea> 
     
             </div>

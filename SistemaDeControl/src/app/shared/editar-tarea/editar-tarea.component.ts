@@ -42,27 +42,30 @@ export class EditarTareaComponent implements OnInit {
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
     
     public _tareasService:TareasService, public rutaActiva: ActivatedRoute, public _location:Location ) {
-      this.idProyecto = this.rutaActiva.snapshot.paramMap.get('id');
+     
       this.path = this._location.path().toString();
-
-
-  
-    
-    }
-  ngOnInit(){          
-    this._tareasService.mostrarTareaObservable.subscribe( res =>{ 
-      this.obtenerTarea();    
-    });
+      
+      
+      
       
     }
+    ngOnInit(){
+      this._tareasService.mostrarTareaObservable.subscribe( res =>{ 
+        this.obtenerTarea();
+      });
+    }
     ngOnChanges(){
-      this.datos = false;         
-      this.obtenerTarea();       
+       this.datos = false;         
+      if(this.tarea != null){
+        this.obtenerTarea(); 
+      }
+      console.log('change');       
       
     }
   
   ngOnDestroy(){
     console.log('Destroy');
+    return;
    
   }
 
@@ -70,6 +73,7 @@ export class EditarTareaComponent implements OnInit {
     
     this._tareasService.obtenerTarea(this.idTarea).subscribe( (res:any)=>{
       this.datos = false;
+      this.idProyecto = res.tarea.proyecto._id;
       if(this.crear){        
         this.tarea = {
           proyecto: this.proyecto._id,
@@ -87,8 +91,9 @@ export class EditarTareaComponent implements OnInit {
         this.datos = true;    
       }
       
-      this.tarea = res.tarea;
-          
+      if(res.tarea == null){return;}
+      this.tarea = res.tarea != null ? res.tarea: {};
+
       this.arregloParticipante = [];
       this.participante = {};
       this.fecha = '';         
@@ -117,21 +122,22 @@ export class EditarTareaComponent implements OnInit {
       this._tareasService.enviarFechaObservable.subscribe( res =>{
         this.fecha = '';
         this.fecha = res;
-        console.log(this.fecha);
+     
       });
       //Se itera el objeto del participante para extraer después el nombre
-      console.log("crear"+this.crear);                       
+                            
     } );
   }
 
     crearEditarTarea(tarea:Tareas){
-        this.tarea.proyecto = tarea.proyecto;
-        this.tarea.nombre = tarea.nombre;
-        this.tarea.descTarea = tarea.descTarea;
-        this.tarea.creador = this._usuarioService.usuario._id;
-        this.tarea.fechaLimite = this.fecha;
-        this.tarea.ultimoEditor = this._usuarioService.usuario._id;
-        this.tarea.participante = tarea.participante;
+ 
+      this.tarea.nombre = tarea.nombre;
+      this.tarea.descTarea = tarea.descTarea;
+      this.tarea.creador = this._usuarioService.usuario._id;
+      this.tarea.fechaLimite = this.fecha;
+      this.tarea.ultimoEditor = this._usuarioService.usuario._id;
+      this.tarea.participante = tarea.participante;
+       
       
         
         console.log(this.tarea.participante);
@@ -147,7 +153,7 @@ export class EditarTareaComponent implements OnInit {
           });
 
         }else{
-          this._tareasService.editarTarea(this.tarea,this.idProyecto).subscribe( res =>{
+          this._tareasService.editarTarea(this.tarea).subscribe( res =>{
             console.log(res);
             this._tareasService.recargarTarea();
 
