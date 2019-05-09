@@ -29,11 +29,11 @@ export class EditarTareaComponent implements OnInit {
   @Input() idTarea;
   @Input() dataLista;
   @Input() cambio = false;
+  @Input() mostrar:boolean; 
+  @Input() crear:boolean;
   @Output() editar = new EventEmitter();
   eliminar: boolean =  false;
   datos: boolean = false;
-  crear:boolean;
-  @Input() mostrar:boolean; 
   descripcion: string;
   datosTarea: Object = {};
   path:string;
@@ -50,83 +50,91 @@ export class EditarTareaComponent implements OnInit {
       
     }
     ngOnInit(){
-      this._tareasService.mostrarTareaObservable.subscribe( res =>{ 
+      
+      if(this._tareasService.subscripcionCerrar === undefined){
+        this._tareasService.subscripcionCerrar = this._tareasService.llamarCerrarTarea.subscribe( (data:any) =>{
+         this.cerrarTarea();
+        });
+      }
+      console.log(this.mostrar +' | '+this.crear)
+      if(this.tarea == undefined && !this.crear){
         this.obtenerTarea();
+        }else{
+        if(this.crear){ 
+          this.crearTareaVacia();    
+          this.inicializarTags();     
+        }
+
+      }
+      this._tareasService
+      .mostrarTareaObservable.subscribe( res =>{ 
+      /*   this.crear = this._tareasService.crear;
+      this.mostrar = this._tareasService.mostrar; */
       });
     }
-    ngOnChanges(){
-       this.datos = false;         
-      if(this.tarea != null){
-        this.obtenerTarea(); 
-      }
-      console.log('change');       
+    ngOnChanges(){       
+      
+        if(this.crear){ 
+          console.log('entrea');
+          this.crearTareaVacia();    
+          this.inicializarTags();     
+        }else{
+        if(this.tarea != undefined && !this.crear){this.obtenerTarea();}
+
+        }
+     
       
     }
   
   ngOnDestroy(){
-    console.log('Destroy');
-    return;
-   
-  }
 
-  obtenerTarea(){
+  }
+  crearTareaVacia(){
+        this.tarea = {}
+      this.tarea = {
+        proyecto: this.proyecto.nombre,
+        nombre: '',
+        descTarea: '',
+        creador: '',
+        finalizado: false,
+        ultimoEditor: '',
+        fechaCreacion: '',
+        fechaFinalizado: '',
+        participante: null,
+        
+        
+       
+      }
+      this._tareasService.enviarFecha(this.tarea.fechaLimite);
+      
+      this.datos = true;    
     
+  }
+  obtenerTarea(){
+      console.log(this.idTarea);
+        //Se itera el objeto del participante para extraer después el nombre     
     this._tareasService.obtenerTarea(this.idTarea).subscribe( (res:any)=>{
       this.datos = false;
       this.idProyecto = res.tarea.proyecto._id;
-      if(this.crear){        
-        this.tarea = {
-          proyecto: this.proyecto._id,
-          nombre: '',
-          descTarea: '',
-          creador: '',
-          finalizado: false,
-          ultimoEditor: '',
-          fechaCreacion: '',
-          fechaFinalizado: '',
-          participante: null,
-          
-          
-        };   
-        this.datos = true;    
-      }
-      
+      this.fecha = this._tareasService.fecha;    
       if(res.tarea == null){return;}
       this.tarea = res.tarea != null ? res.tarea: {};
-
-      this.arregloParticipante = [];
-      this.participante = {};
-      this.fecha = '';         
-        console.log(this.tarea);
-        this.mostrar = this._tareasService.mostrar;
-        this.crear = this._tareasService.crear;
-         
-        //this.tarea = this._tareasService.tarea;
-        
-        if(this.tarea.participante != null){
-          if(this.arregloParticipante.length >=0 && this.arregloParticipante.length <1){
-            this.arregloParticipante = [];
-            
-            this.participante = this.tarea.participante;              
-            this.arregloParticipante.push(this.participante);
-            console.log(this.arregloParticipante);
-
-          }
-        }
-        this.nombres = this._tareasService.nombres ;
-        this.datos=true;
-       
-        //this.tarea = this._tareasService.tarea;
-       
-    
+      this.inicializarTags();
+      this._tareasService.enviarFecha(this.tarea.fechaLimite);      
+      
+      this.datos=true;
+      
       this._tareasService.enviarFechaObservable.subscribe( res =>{
-        this.fecha = '';
-        this.fecha = res;
+       this.fecha = '';
+       this.fecha = res;
+       console.log(res);
+     });
+      
+       
+       
+      
+      } );
      
-      });
-      //Se itera el objeto del participante para extraer después el nombre
-                            
-    } );
   }
 
     crearEditarTarea(tarea:Tareas){
@@ -140,7 +148,7 @@ export class EditarTareaComponent implements OnInit {
        
       
         
-        console.log(this.tarea.participante);
+        console.log(tarea.participante);
 
 
 
@@ -165,6 +173,29 @@ export class EditarTareaComponent implements OnInit {
 
     }
 
+    inicializarTags(){
+      this.arregloParticipante = [];
+      this.participante = {};
+      this.fecha = '';         
+        console.log(this.tarea);
+        this.mostrar = this._tareasService.mostrar;
+        this.crear = this._tareasService.crear;
+         
+        //this.tarea = this._tareasService.tarea;
+        
+        if(this.tarea.participante != null){
+          if(this.arregloParticipante.length >=0 && this.arregloParticipante.length <1){
+            this.arregloParticipante = [];
+            
+            this.participante = this.tarea.participante;              
+            this.arregloParticipante.push(this.participante);
+            console.log(this.arregloParticipante);
+
+          }
+        }
+        this.nombres = this._tareasService.nombres ;
+    }
+
     
     
     obtenerFecha = (fecha) =>this.fecha = fecha;
@@ -180,8 +211,8 @@ export class EditarTareaComponent implements OnInit {
     }).then((result) => {
       if (result) {
         this._tareasService.eliminarTarea(this.idProyecto,tarea._id).subscribe( res =>{
-          this.cerrarTarea();     
           this._tareasService.recargarTarea();
+          this.cerrarTarea();     
         });
        
       }

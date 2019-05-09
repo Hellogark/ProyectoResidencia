@@ -18,7 +18,6 @@ import { Location } from '@angular/common';
 })
 export class MostrarTareaComponent implements OnInit {
   proyecto: Proyecto; 
-  nuevaTarea:Tareas;
   dataLista;
   idTarea;
   @Input() eventoTarea:{};
@@ -62,6 +61,7 @@ export class MostrarTareaComponent implements OnInit {
         this.mostrarTipo()
       });
      }
+     
    this.terminado();
      
   }
@@ -95,57 +95,36 @@ export class MostrarTareaComponent implements OnInit {
 
     }
 
-  mostrarEditar =(mostrar:boolean) => this.mostrar = mostrar;
 
-  editarTarea( tipo:string,tarea:Tareas ){
-    if(tipo === 'crear'){
-      this.mostrar = true;
-      this.crear = true;
-      tarea = {};
-      this._tareasService.estadoTarea(this.mostrar,this.crear,tarea); 
-      
-    }
-    if(tipo === 'editar'){
+  editarTarea(tarea:Tareas ){
+  
       this.crear=false; 
+      this.mostrar = true;
      this.editarTareaF(tarea);
      
-      console.log(this.mostrar);
-      console.log(this._tareasService.fecha);
-    }
+      console.log(this.mostrar);      
+ 
+  }
+  nuevaTarea(){
+    this.mostrar = true;
+    this.crear = true;      
+    //this._tareasService.cerrarTarea(this._tareasService.mostrar); 
+    //this._tareasService.cerrarTarea(this.mostrar);         
+    //this._tareasService.estadoTarea(this.mostrar,this.crear);  
   }
 
   editarTareaF(tarea:Tareas){
-    this.idTarea = tarea._id;
-   
-      this.mostrar = true;
-      this._tareasService.estadoTarea(this.mostrar,this.crear);
-      this._tareasService.enviarFecha(tarea.fechaFinalizado);
-      if(tarea.fechaFinalizado === undefined || tarea.fechaFinalizado === null){
+    this.idTarea = tarea._id;        
+     // this._tareasService.estadoTarea(this.mostrar,this.crear);
+     
+      if(tarea.fechaLimite === undefined || tarea.fechaLimite === null){
         this._tareasService.fecha = '';
       }
      
 
   }
 
-  crearTarea(){
-    this.nuevaTarea = {
-      nombre: '',
-      descTarea: '',
-      creador: this._usuarioService.usuario._id,
-      finalizado: false,
-      ultimoEditor:this._usuarioService.usuario._id,
-      fechaCreacion: moment().locale('es').format('LL'),
-      participante: null 
 
-    }
-    this._tareasService.crearTarea(this.nuevaTarea,this.idProyecto).subscribe( res =>{
-      this.mostrarTipo();
-      this._tareasService.obtenerUsuarios();
-
-
-    });
-
-  }
  
   finalizarTarea(tarea:Tareas){
     this.cargar();
@@ -162,8 +141,7 @@ export class MostrarTareaComponent implements OnInit {
     this._tareasService.tarea = tarea;
     this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe( (res: any) =>{
       console.log(res.tarea.finalizado);
-      this.finalizado = res.tarea.finalizado;
-      this.cambio = !this.cambio;
+      this.finalizado = res.tarea.finalizado;     
       this.terminado();
       this.obtenerTareas();
      

@@ -4,7 +4,7 @@ import { Tareas } from './../../models/tareas.model';
 
 import { map} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import {  BehaviorSubject, Subscription} from 'rxjs';
+import { Subject, BehaviorSubject, Subscription} from 'rxjs';
 
 import { URL_SERVICIOS } from './../../config/config';
 import Swal from 'sweetalert2';
@@ -29,11 +29,13 @@ export class TareasService {
   finalizado: boolean;
   eliminar:boolean;
  
-  private mostrarTareaSubject = new BehaviorSubject<any>(null);
+  private mostrarTareaSubject = new Subject<any>();
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
   private enviarFechaSubject = new BehaviorSubject <string>('');
   enviarFechaObservable = this.enviarFechaSubject.asObservable();
   llamarRecargar = new EventEmitter<any>();
+  llamarCerrarTarea = new EventEmitter<any>();
+  subscripcionCerrar: Subscription;
   subscripcion: Subscription;
   
  
@@ -125,11 +127,13 @@ export class TareasService {
   }
     estadoTarea(mostrarT:boolean, crearT?:boolean,tarea?:Tareas){
       this.mostrar = mostrarT;
-      this.mostrarTareaSubject.next(mostrarT);
+      this.mostrarTareaSubject.next(this.mostrar);
       this.crear = crearT;
-      this.mostrarTareaSubject.next(crearT);
+      this.mostrarTareaSubject.next(this.crear);
       this.tarea = tarea;
       this.mostrarTareaSubject.next(tarea);
+      this.mostrar = !this.mostrar;
+
     }
 
     enviarFecha(fecha: string){
@@ -154,4 +158,5 @@ export class TareasService {
     });
    }
    recargarTarea(){ this.llamarRecargar.emit();}
+   cerrarTarea(mostrar:boolean){if(!mostrar){return;}this.llamarCerrarTarea.emit();}
 }

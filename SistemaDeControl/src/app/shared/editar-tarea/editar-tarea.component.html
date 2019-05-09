@@ -1,5 +1,5 @@
-<div class="card mb-0 p-0 animated fadeIn" *ngIf="datos">
-  <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material">
+<div class="card mb-0 p-0 animated fadeIn" >
+  <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material" *ngIf="tarea != null">
   <div class="card-header bg-white mt-2">
     <div class="row border-bottom">
      
@@ -7,7 +7,7 @@
         <div class="row">
           <div [ngSwitch]="crear">
             <div *ngSwitchCase="false">
-              <div class="col-12" *ngIf="datos">
+              <div class="col-12" *ngIf="datos && !crear">
                 <div [ngSwitch]="tarea.finalizado">
                   <div *ngSwitchCase="true">
                     <div class=" col-12" >  
@@ -101,7 +101,7 @@
             <div class="col-12 col-xl-4 ">
               
               <i class="ti-blackboard"></i> 
-              <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">{{tarea?.proyecto?.nombre}} </span>
+              <span class="badge badge-pill btn-themecolor badgeProyecto ml-2">{{tarea?.proyecto?.nombre || proyecto?.nombre}} </span>
             </div>
             <div class="col-12 col-xl-8 float-left">
               <p class="text-muted" *ngIf="tarea.finalizado">Tarea completada el {{tarea.fechaFinalizado}}</p>
@@ -116,7 +116,7 @@
   <div class="card-footer text-muted bg-white text-right">
     <div class="row  justify-content-around">
       <div class="col-4 col-xl-6 text-left" *ngIf="!crear" (click)="eliminarTarea(tarea)"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
-      <div class="col-4 col-xl-6" [ngClass]="{'col-12': crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
+      <div class="col-4 col-xl-6" [ngClass]="{'col-xl-12': crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
     </div>
     
   </div>

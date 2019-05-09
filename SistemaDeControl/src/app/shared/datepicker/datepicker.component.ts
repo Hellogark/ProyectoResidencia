@@ -38,35 +38,34 @@ private inputText: string = "";
 
   ngOnInit() {
     if(this._tareasService.mostrar){     
-      this._tareasService.enviarFechaObservable.subscribe( res =>{
+      this._tareasService.enviarFechaObservable.subscribe( res =>{  
         this.clearDate();
-        this.iniciarFecha(res);          
+        this.iniciarFecha(res); 
+        console.log(res);         
         
       });
     }
     this.iniciarFecha(this.fecha);  
     if(this.fecha){
       this.disabled = true;
-    }
+}
   }
     
    
-  ngOnChange(){
-    
-   //this.iniciarFecha(this.fecha);   
+  ngOnChange(){   
+     
 }
 
   iniciarFecha( fecha: any){
     this.disableUntil();
-    if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
+    //if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
     let dia = fecha.split('/')[0];
     if(dia == '01' ){
       dia = '01';
     }
     let mes = fecha.split('/')[1];
     let anio = fecha.split('/')[2];
-      this.fechaInput = {date: { year: anio, month: mes, day: dia}};
-      console.log(this.fechaInput)   
+      this.fechaInput = {date: { year: anio, month: mes, day: dia}};        
   }
   clearDate(): void {
     this.ngxdp.clearDate();
