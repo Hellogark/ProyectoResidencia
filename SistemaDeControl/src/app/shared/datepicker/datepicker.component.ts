@@ -58,7 +58,7 @@ private inputText: string = "";
 
   iniciarFecha( fecha: any){
     this.disableUntil();
-    //if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
+    if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
     let dia = fecha.split('/')[0];
     if(dia == '01' ){
       dia = '01';

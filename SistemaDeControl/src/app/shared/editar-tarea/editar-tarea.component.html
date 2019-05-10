@@ -7,7 +7,7 @@
         <div class="row">
           <div [ngSwitch]="crear">
             <div *ngSwitchCase="false">
-              <div class="col-12" *ngIf="datos && !crear">
+              <div class="col-12" *ngIf="datos">
                 <div [ngSwitch]="tarea.finalizado">
                   <div *ngSwitchCase="true">
                     <div class=" col-12" >  

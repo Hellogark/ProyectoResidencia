@@ -44,10 +44,7 @@ export class EditarTareaComponent implements OnInit {
     public _tareasService:TareasService, public rutaActiva: ActivatedRoute, public _location:Location ) {
      
       this.path = this._location.path().toString();
-      
-      
-      
-      
+
     }
     ngOnInit(){
       
@@ -58,9 +55,11 @@ export class EditarTareaComponent implements OnInit {
       }
       console.log(this.mostrar +' | '+this.crear)
       if(this.tarea == undefined && !this.crear){
+        this.datos = false; 
         this.obtenerTarea();
         }else{
         if(this.crear){ 
+          this.datos = false; 
           this.crearTareaVacia();    
           this.inicializarTags();     
         }
@@ -68,8 +67,8 @@ export class EditarTareaComponent implements OnInit {
       }
       this._tareasService
       .mostrarTareaObservable.subscribe( res =>{ 
-      /*   this.crear = this._tareasService.crear;
-      this.mostrar = this._tareasService.mostrar; */
+        this.crear = this._tareasService.crear;
+      this.mostrar = this._tareasService.mostrar; 
       });
     }
     ngOnChanges(){       
@@ -91,7 +90,7 @@ export class EditarTareaComponent implements OnInit {
   }
   crearTareaVacia(){
         this.tarea = {}
-      this.tarea = {
+        this.tarea = {
         proyecto: this.proyecto.nombre,
         nombre: '',
         descTarea: '',
@@ -100,12 +99,17 @@ export class EditarTareaComponent implements OnInit {
         ultimoEditor: '',
         fechaCreacion: '',
         fechaFinalizado: '',
+        fechaLimite: moment().locale('es').format('l'),
         participante: null,
         
         
        
-      }
+      } 
       this._tareasService.enviarFecha(this.tarea.fechaLimite);
+      this.fecha = this._tareasService.fecha; 
+      if(this.tarea.fechaLimite === undefined || this.tarea.fechaLimite === null){
+        this._tareasService.fecha = '';
+      }
       
       this.datos = true;    
     
@@ -120,7 +124,7 @@ export class EditarTareaComponent implements OnInit {
       if(res.tarea == null){return;}
       this.tarea = res.tarea != null ? res.tarea: {};
       this.inicializarTags();
-      this._tareasService.enviarFecha(this.tarea.fechaLimite);      
+          
       
       this.datos=true;
       
@@ -145,14 +149,9 @@ export class EditarTareaComponent implements OnInit {
       this.tarea.fechaLimite = this.fecha;
       this.tarea.ultimoEditor = this._usuarioService.usuario._id;
       this.tarea.participante = tarea.participante;
-       
-      
-        
+
         console.log(tarea.participante);
 
-
-
-       
         if(this.crear){
         this._tareasService.crearTarea(this.tarea,this.proyecto._id).                  
           subscribe( res =>{           
@@ -224,7 +223,9 @@ export class EditarTareaComponent implements OnInit {
     this.mostrar = false;
     this.crear = false;
     this.tarea={};
-    this._tareasService.estadoTarea(this.mostrar,this.crear,this.tarea );
+    this.fecha = '';
+
+    this._tareasService.estadoTarea(this.mostrar,this.crear);
     this.editar.emit(this.mostrar);
   }
 

@@ -55,12 +55,13 @@ export class MostrarTareaComponent implements OnInit {
     this.mostrar = this._tareasService.mostrar;
     this.crear = this._tareasService.crear;
 
-     });
+    });
      if(this._tareasService.subscripcion === undefined){
       this._tareasService.subscripcion = this._tareasService.llamarRecargar.subscribe(  (data:any) =>{
         this.mostrarTipo()
       });
      }
+     
      
    this.terminado();
      
@@ -102,21 +103,24 @@ export class MostrarTareaComponent implements OnInit {
       this.mostrar = true;
      this.editarTareaF(tarea);
      
-      console.log(this.mostrar);      
+      console.log(this.crear);      
  
   }
   nuevaTarea(){
+    if(this.mostrar){
+      this._tareasService.cerrarTarea();
+      console.log('mostrado')
+    }
     this.mostrar = true;
     this.crear = true;      
-    //this._tareasService.cerrarTarea(this._tareasService.mostrar); 
-    //this._tareasService.cerrarTarea(this.mostrar);         
-    //this._tareasService.estadoTarea(this.mostrar,this.crear);  
+    let tarea = {};
+    this._tareasService.estadoTarea(this.mostrar,this.crear,tarea); 
   }
 
   editarTareaF(tarea:Tareas){
     this.idTarea = tarea._id;        
-     // this._tareasService.estadoTarea(this.mostrar,this.crear);
-     
+      this._tareasService.estadoTarea(this.mostrar,this.crear);
+      this._tareasService.enviarFecha(tarea.fechaLimite);
       if(tarea.fechaLimite === undefined || tarea.fechaLimite === null){
         this._tareasService.fecha = '';
       }
@@ -141,9 +145,9 @@ export class MostrarTareaComponent implements OnInit {
     this._tareasService.tarea = tarea;
     this._tareasService.editarChecked(this.datosTarea,tarea._id).subscribe( (res: any) =>{
       console.log(res.tarea.finalizado);
-      this.finalizado = res.tarea.finalizado;     
+      this.finalizado = res.tarea.finalizado;
       this.terminado();
-      this.obtenerTareas();
+      this.mostrarTipo();
      
       
     }); 

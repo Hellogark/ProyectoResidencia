@@ -4,7 +4,7 @@ import { Tareas } from './../../models/tareas.model';
 
 import { map} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Subject, BehaviorSubject, Subscription} from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Subscription} from 'rxjs';
 
 import { URL_SERVICIOS } from './../../config/config';
 import Swal from 'sweetalert2';
@@ -29,7 +29,7 @@ export class TareasService {
   finalizado: boolean;
   eliminar:boolean;
  
-  private mostrarTareaSubject = new Subject<any>();
+  private mostrarTareaSubject = new AsyncSubject<any>();
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
   private enviarFechaSubject = new BehaviorSubject <string>('');
   enviarFechaObservable = this.enviarFechaSubject.asObservable();
@@ -127,19 +127,17 @@ export class TareasService {
   }
     estadoTarea(mostrarT:boolean, crearT?:boolean,tarea?:Tareas){
       this.mostrar = mostrarT;
-      this.mostrarTareaSubject.next(this.mostrar);
+      this.mostrarTareaSubject.next(mostrarT);
       this.crear = crearT;
-      this.mostrarTareaSubject.next(this.crear);
+      this.mostrarTareaSubject.next(crearT);
       this.tarea = tarea;
       this.mostrarTareaSubject.next(tarea);
-      this.mostrar = !this.mostrar;
 
     }
 
     enviarFecha(fecha: string){
       this.fecha = fecha;
       this.enviarFechaSubject.next(fecha);
-
     }
     
      
@@ -158,5 +156,5 @@ export class TareasService {
     });
    }
    recargarTarea(){ this.llamarRecargar.emit();}
-   cerrarTarea(mostrar:boolean){if(!mostrar){return;}this.llamarCerrarTarea.emit();}
+   cerrarTarea(){this.llamarCerrarTarea.emit();}
 }
