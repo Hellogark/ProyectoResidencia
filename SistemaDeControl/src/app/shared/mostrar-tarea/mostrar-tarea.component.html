@@ -51,7 +51,7 @@
       </div>
     </div>
             <div class="col-12 col-xl-6 pl-0 pl-xl-3 mt-md-3 mt-3 mt-xl-0" *ngIf=" mostrar">
-            <app-editar-tarea (cerrarTarea)="obtenerTareas($event)" [idTarea]="idTarea"  [proyecto]="proyecto" [mostrar]="mostrar" [crear]="crear"></app-editar-tarea> 
+            <app-editar-tarea (cerrarTarea)="cerrarTarea($event)" [idTarea]="idTarea"  [proyecto]="proyecto" [(mostrar)]="mostrar" [(crear)]="crear"></app-editar-tarea> 
     
             </div>
 </div>   

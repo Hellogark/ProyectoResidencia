@@ -31,7 +31,7 @@ export class EditarTareaComponent implements OnInit {
   @Input() cambio = false;
   @Input() mostrar:boolean; 
   @Input() crear:boolean;
-  @Output() editar = new EventEmitter();
+   @Output() public editar = new EventEmitter();
   eliminar: boolean =  false;
   datos: boolean = false;
   descripcion: string;
@@ -86,6 +86,7 @@ export class EditarTareaComponent implements OnInit {
     }
   
   ngOnDestroy(){
+    this.cerrarTarea();
 
   }
   crearTareaVacia(){
@@ -208,7 +209,7 @@ export class EditarTareaComponent implements OnInit {
       confirmButtonText: 'Eliminar!',
       cancelButtonText:'Cancelar'
     }).then((result) => {
-      if (result) {
+      if (result.value) {
         this._tareasService.eliminarTarea(this.idProyecto,tarea._id).subscribe( res =>{
           this._tareasService.recargarTarea();
           this.cerrarTarea();     
@@ -226,7 +227,9 @@ export class EditarTareaComponent implements OnInit {
     this.fecha = '';
 
     this._tareasService.estadoTarea(this.mostrar,this.crear);
+   
     this.editar.emit(this.mostrar);
+    this.editar.emit(this.crear);
   }
 
 

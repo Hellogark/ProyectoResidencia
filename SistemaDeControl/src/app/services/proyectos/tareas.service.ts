@@ -29,7 +29,7 @@ export class TareasService {
   finalizado: boolean;
   eliminar:boolean;
  
-  private mostrarTareaSubject = new AsyncSubject<any>();
+  private mostrarTareaSubject = new BehaviorSubject<any>(null);
   mostrarTareaObservable = this.mostrarTareaSubject.asObservable(); 
   private enviarFechaSubject = new BehaviorSubject <string>('');
   enviarFechaObservable = this.enviarFechaSubject.asObservable();

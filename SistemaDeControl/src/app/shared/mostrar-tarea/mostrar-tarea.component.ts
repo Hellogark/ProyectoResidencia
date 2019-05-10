@@ -54,11 +54,12 @@ export class MostrarTareaComponent implements OnInit {
     this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
     this.mostrar = this._tareasService.mostrar;
     this.crear = this._tareasService.crear;
-
+    console.log(this.mostrar);
     });
      if(this._tareasService.subscripcion === undefined){
       this._tareasService.subscripcion = this._tareasService.llamarRecargar.subscribe(  (data:any) =>{
         this.mostrarTipo()
+       
       });
      }
      
@@ -70,7 +71,7 @@ export class MostrarTareaComponent implements OnInit {
     this.mostrarTipo();
   } 
 
-  obtenerTareas(event?){
+  obtenerTareas(){
     this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
         
       this._tareasService.tareas=res;
@@ -166,7 +167,12 @@ export class MostrarTareaComponent implements OnInit {
       this._location.back();
     }
   }
-  
+  cerrarTarea($event){
+    console.log($event);
+    this.mostrar = false;
+    this.crear = false;
+
+  }
   mostrarTipo(){
     if(this.path == '/mistareas'){this.obtenerMisTareas(); this.proyecto = null}else{this.obtenerTareas();this.obtenerProyecto();}        
 
