@@ -157,7 +157,7 @@ public labels: any = {
       confirmButtonText: 'Eliminar!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      if (result) {
+      if (result.value) {
         this._proyectoService.eliminarArchivo(archivo._id,this.proyecto)
         .subscribe(res =>{
           Swal.fire({

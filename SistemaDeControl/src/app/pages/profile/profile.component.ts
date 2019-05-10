@@ -82,8 +82,12 @@ export class ProfileComponent implements OnInit {
   }
   cambiarImagen(){
     console.log(this.imagenSubir);
-    this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id);
+    this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id)
+    this.croppedImage = null;
+    this.imageChangedEvent = null;
+    this.imagenTemp = null;
   }
+  
   imageCropped(event: ImageCroppedEvent) {
     //preview
     this.croppedImage = event.base64;

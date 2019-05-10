@@ -1,8 +1,9 @@
 .overflowTarea{
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
     text-overflow: ellipsis;
     scrollbar-width: thin;
+    
     
 }
 .overflowY{

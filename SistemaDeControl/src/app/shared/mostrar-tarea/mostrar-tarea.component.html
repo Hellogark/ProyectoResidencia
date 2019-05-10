@@ -1,8 +1,8 @@
 
-    <div class="row">
+    <div class="row" *ngIf="!dataLista">
         <div class="col-12 d-flex justify-content-center h-100">
       
-          <div class="spinner-grow text-themecolor " role="status" *ngIf="!dataLista">
+          <div class="spinner-grow text-themecolor " role="status" >
               <span class="sr-only">Cargando...</span>
             </div>
         </div>

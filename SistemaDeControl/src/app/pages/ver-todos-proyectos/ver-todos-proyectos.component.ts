@@ -64,7 +64,7 @@ export class VerTodosProyectosComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Eliminar!'
     }).then((result) => {
-      if (result) {
+      if (result.value) {
         this._proyectoService.eliminarProyecto(proyectoBorrar._id)
         .subscribe(res =>{
           this.cargarProyectos();

@@ -11,7 +11,7 @@
         <div class="modal-body ">
           <div class="row text-center">
             <div class="col-12">
-                <img *ngIf="!imagenTemp" [src]="xa  | archivo" alt="" class="prevImgPerfil ">
+                <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo:usuario._id:'usuarios'" alt="" class="prevImgPerfil ">
                 <img *ngIf="imagenTemp" [src]="croppedImage" alt="" class="prevImgPerfil img-circle">
                 <image-cropper 
                   [imageChangedEvent]="imageChangedEvent  "

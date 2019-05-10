@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import  Swal from 'sweetalert2';
 import { UsuarioService, CambiarImagenService } from 'src/app/services/service.index';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { Usuario } from '../../models/usuario.model';
 
 
 
@@ -19,7 +20,8 @@ export class ModalUploadComponent implements OnInit {
   imagenTemp: string;
   imageChangedEvent: any = '';
     croppedImage: any = '';
-    archivoEnviar: any;    
+    archivoEnviar: any; 
+    usuario:Usuario;   
     
  
  
@@ -31,6 +33,7 @@ export class ModalUploadComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.usuario = this._usuarioService.usuario ;
   }
   seleccionImagen(archivo){
     this.imageChangedEvent = archivo;

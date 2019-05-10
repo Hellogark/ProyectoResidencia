@@ -9,21 +9,21 @@
                 <div class="form-group">
                     <label for="exampleInputuname">Nombre de usuario</label>
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="ti-user"></i></div>
+                        <div class="input-group-addon mr-2 align-self-center"><i class="ti-user"></i></div>
                         <input type="text" class="form-control"  name="nombre"placeholder="Nombre de usuario" [ngModel]="usuario.nombre" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Correo electrónico</label>
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="ti-email"></i></div>
+                        <div class="input-group-addon mr-2 align-self-center"><i class="ti-email"></i></div>
                         <input type="email" class="form-control " readonly name="correo"placeholder="Correo electrónico" [ngModel]="usuario.correo">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Empresa</label>
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="ti-world"></i></div>
+                        <div class="input-group-addon mr-2 align-self-center"><i class="ti-world"></i></div>
                         <input type="text" class="form-control " readonly name="empresa"placeholder="Empresa" [ngModel]="usuario.empresa">
                     </div>
                 </div>
@@ -36,21 +36,21 @@
                  <div class="form-group">
                     <label for="pwd1">Contraseña anterior</label>
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="ti-lock"></i></div>
+                        <div class="input-group-addon  mr-2 align-self-center"><i class="ti-lock"></i></div>
                         <input type="password" #passAnt name="passwordAnterior"class="form-control" id="pwdA" placeholder="Contraseña anterior">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="pwd1">Contraseña nueva</label>
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="ti-lock"></i></div>
+                        <div class="input-group-addon  mr-2 align-self-center"><i class="ti-lock"></i></div>
                         <input type="password" #pass1 name="passwordNuevo1"class="form-control" id="pwd1" placeholder="Contraseña nueva">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="pwd2">Confirmar contraseña nueva</label>
                     <div class="input-group">
-                        <div class="input-group-addon"><i class="ti-lock"></i></div>
+                        <div class="input-group-addon  mr-2 align-self-center"><i class="ti-lock"></i></div>
                         <input type="password" #pass2 name="passwordNuevo2"class="form-control" id="pwd2" placeholder="Repetir Contraseña nueva">
                     </div>
                 </div>
@@ -70,7 +70,7 @@
               <legend>Imagen de Perfil de {{this.usuario.nombre}}</legend>
                 <div class="col-12">
 
-                  <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo" alt="" class="prevImgPerfil ">
+                  <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo:usuario._id:'usuarios'" alt="" class="prevImgPerfil img-circle ">
                   <img *ngIf="imagenTemp" [src]="croppedImage" alt="user" class="prevImgPerfil img-circle ">
                 </div>
                 <div class="col-12">

@@ -2,9 +2,9 @@ import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Tareas } from './../../models/tareas.model';
 
-import { map} from 'rxjs/operators';
+import { map, catchError} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AsyncSubject, BehaviorSubject, Subscription} from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Subscription, throwError} from 'rxjs';
 
 import { URL_SERVICIOS } from './../../config/config';
 import Swal from 'sweetalert2';
@@ -123,7 +123,17 @@ export class TareasService {
        toast:true
      })
       return res;
-    }));
+    }),catchError((err) =>{
+      console.log(err);
+      Swal.fire({
+        title: err.error.errors.message,       
+        type: 'error',        
+        timer: 3500
+
+
+      });
+      return throwError(err);
+    } ));
   }
     estadoTarea(mostrarT:boolean, crearT?:boolean,tarea?:Tareas){
       this.mostrar = mostrarT;
