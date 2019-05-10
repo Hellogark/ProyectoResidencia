@@ -1,7 +1,18 @@
 
-<div class="row no-gutters justify-content-center" >     
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center h-100">
+      
+          <div class="spinner-grow text-themecolor " role="status" *ngIf="!dataLista">
+              <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-center h-100">
+            <p>Cargando...</p>
+          </div>
+      </div>
+<div class="row no-gutters justify-content-center" *ngIf="dataLista">   
   <ng-progress id="progreso" [spinner]="true"  [thick]="true"></ng-progress>  
-  <div class="col-12 col-xl-6 " [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}" *ngIf="dataLista" >
+  <div class="col-12 col-xl-6 " [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}"  >
   <div class="overflowY col-12 col-xl-12 ">
       <div class="card mb-0 ">
           <div class="card-header bg-white ">
@@ -31,7 +42,7 @@
                   <div class="row no-gutters">
                     <div class="col-10 align-self-center">
                       <p class="badge badge-pill bg-theme text-break d-block mb-0" *ngIf="tarea.participante === null || !tarea.participante">Sin asignar</p>
-                      <p class="badge badge-pill bg-theme text-break d-block mb-0" *ngIf="tarea.participante != null">{{tarea.participante?.nombre}}</p>
+                      <p class="badge badge-pill bg-theme text-break d-block mb-0 text-white" *ngIf="tarea.participante != null">{{tarea.participante?.nombre}}</p>
 
                     </div>
                     <div class="col-2 align-self-center">
@@ -50,7 +61,8 @@
         </div>
       </div>
     </div>
-            <div class="col-12 col-xl-6 pl-0 pl-xl-3 mt-md-3 mt-3 mt-xl-0" *ngIf=" mostrar">
+    <div class="col-12 col-xl-6 pl-0 pl-xl-3 mt-md-3 mt-3 mt-xl-0" *ngIf=" mostrar">
+      
             <app-editar-tarea (cerrarTarea)="cerrarTarea($event)" [idTarea]="idTarea"  [proyecto]="proyecto" [(mostrar)]="mostrar" [(crear)]="crear"></app-editar-tarea> 
     
             </div>

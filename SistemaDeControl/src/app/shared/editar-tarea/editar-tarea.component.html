@@ -1,7 +1,18 @@
-<div class="card mb-0 p-0 animated fadeIn" >
-  <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material" *ngIf="tarea != null">
+<div class="row" *ngIf="tarea == null">
+  <div class="col-12 d-flex justify-content-center h-100">
+
+    <div class="spinner-grow text-themecolor " role="status" >
+        <span class="sr-only">Cargando...</span>
+    </div>      
+  </div>
+  <div class="col-12 d-flex justify-content-center h-100">
+    <p>Cargando...</p>
+  </div>
+</div>
+<div class="card mb-0 p-0 animated fadeIn" *ngIf="tarea != null">
+  <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material" >
   <div class="card-header bg-white mt-2">
-    <div class="row border-bottom">
+    <div class="row ">
      
       <div class="col-6" [ngClass]="{'col-11': crear}">
         <div class="row">
