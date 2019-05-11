@@ -12,6 +12,5 @@
     scrollbar-width: thin;    
     padding: 0;
 }
-::-webkit-scrollbar{
-    width: thin;
-}
+
+

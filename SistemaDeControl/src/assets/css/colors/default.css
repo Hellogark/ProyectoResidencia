@@ -161,4 +161,36 @@ a.link:hover, a.link:focus {
   color: #a6b7bf;
 }
 
+/* line 155, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/default.scss */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+}
+
+/* line 161, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/default.scss */
+::-webkit-scrollbar-thumb {
+  background: #009efb;
+}
+
+/* line 164, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/default.scss */
+::-webkit-scrollbar-thumb:hover {
+  background: #028ee1;
+}
+
+/* line 167, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/default.scss */
+::-webkit-scrollbar-thumb:active {
+  background: #028ee1;
+}
+
+/* line 171, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/default.scss */
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+
+/* line 175, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/default.scss */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /*# sourceMappingURL=default.css.map */

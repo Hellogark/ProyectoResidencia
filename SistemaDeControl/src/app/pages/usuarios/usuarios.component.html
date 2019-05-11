@@ -50,8 +50,8 @@
                         <th>Imagen</th>
                         <th>Correo</th>
                         <th>Nombre de usuario</th>
-                        <th>Empresa</th>
-                        <th>Role</th> 
+                        <th class="resizeSelect">Empresa</th>
+                        <th class="resizeSelect">Role</th> 
                         <th>Estado</th>
 
                         <th class="justify-content-center text-center">Operaciones</th>                      
@@ -68,16 +68,15 @@
                           <td class="align-middle">{{usuario.correo}}</td>
                           <td class="align-middle">{{usuario.nombre}}</td>
                           <td class="align-middle">{{usuario.empresa}}</td>
-                          <td class="align-middle">
-                            <select [(ngModel)]="usuario.role" name="role" class="fomr-control custom-select">
+                          <td class="align-middle ">
+                            <select [(ngModel)]="usuario.role" name="role" class="fomr-control custom-select" style="width: 200px">
                              <option value="ADMIN_ROLE">Administrador</option>
                              <option value="USER_ROLE">Usuario</option>
                             </select>
-                            <!--<span class="badge badge-pill badge-primary" *ngIf="usuario.role === 'ADMIN_ROLE'">{{usuario.role}}</span>
-                              <span class="badge badge-pill badge-secondary" *ngIf="usuario.role === 'USER_ROLE' ">{{usuario.role}}</span>-->
+
                           </td>
-                          <td class="align-middle">
-                              <select [(ngModel)]="usuario.activo" name="activo" class="fomr-control custom-select">
+                          <td class="align-middle ">
+                              <select [(ngModel)]="usuario.activo" name="activo" class="fomr-control custom-select" style="width: 150px">
                                <option value="true">Activo</option>
                                <option value="false">Inactivo</option>
                               </select>

@@ -243,4 +243,36 @@ a.link:hover, a.link:focus {
   }
 }
 
+/* line 221, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/purple-dark.scss */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+}
+
+/* line 227, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/purple-dark.scss */
+::-webkit-scrollbar-thumb {
+  background: #7460ee;
+}
+
+/* line 230, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/purple-dark.scss */
+::-webkit-scrollbar-thumb:hover {
+  background: #028ee1;
+}
+
+/* line 233, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/purple-dark.scss */
+::-webkit-scrollbar-thumb:active {
+  background: #028ee1;
+}
+
+/* line 237, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/purple-dark.scss */
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+
+/* line 241, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/purple-dark.scss */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /*# sourceMappingURL=purple-dark.css.map */

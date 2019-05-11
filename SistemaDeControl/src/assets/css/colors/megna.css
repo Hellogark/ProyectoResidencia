@@ -171,4 +171,36 @@ a.link:hover, a.link:focus {
   color: #a6b7bf;
 }
 
+/* line 160, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+}
+
+/* line 166, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+::-webkit-scrollbar-thumb {
+  background: #56c0d8;
+}
+
+/* line 169, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+::-webkit-scrollbar-thumb:hover {
+  background: #028ee1;
+}
+
+/* line 172, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+::-webkit-scrollbar-thumb:active {
+  background: #028ee1;
+}
+
+/* line 176, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+
+/* line 180, C:/Users/edmol/Documents/GitHub/ProyectoResidencia/SistemaDeControl/src/assets/scss/colors/megna.scss */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /*# sourceMappingURL=megna.css.map */

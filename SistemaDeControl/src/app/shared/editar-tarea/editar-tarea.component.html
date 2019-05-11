@@ -12,16 +12,16 @@
 <div class="card mb-0 p-0 animated fadeIn" *ngIf="tarea != null">
   <form action="" ngNativeValidate #f="ngForm" (ngSubmit)="crearEditarTarea(f.value)" autocomplete="off" class="form-material" >
   <div class="card-header bg-white mt-2">
-    <div class="row ">
+    <div class="row justify-content-around">
      
-      <div class="col-6" [ngClass]="{'col-11': crear}">
-        <div class="row">
-          <div [ngSwitch]="crear">
-            <div *ngSwitchCase="false">
-              <div class="col-12" *ngIf="datos">
+      <div [ngSwitch]="crear" class="col-11 text-left pl-0" [ngClass]="{'col-10 col-sm-11 col-md-11 col-lg-11 col-xl-11 ': crear}">
+  
+               
+            <div *ngSwitchCase="false" class="col-12 pr-0 justify-content-start" >
+              <div  *ngIf="datos">
                 <div [ngSwitch]="tarea.finalizado">
                   <div *ngSwitchCase="true">
-                    <div class=" col-12" >  
+                    <div class=" col-12  pl-0" >  
                       
                       <button type="button" class="btn btn-themecolor btnTerminado"    >
                         <i class="fa fa-check-square" aria-hidden="true"></i> <span> Tarea terminada </span></button>
@@ -29,36 +29,36 @@
 
                   </div>
                   <div *ngSwitchCase ="false">
-                    <div class=" col-12">
+                    <div class=" col-12 pl-0">
                       <button type="button" class="btn btn-outline-secondary btnTerminado" >
                         <i class="fa fa-check" aria-hidden="true"></i><span>Tarea pendiente </span></button>
                     </div>
 
                   </div>
                   <div *ngSwitchDefault>
-                    <div class=" col-12">
+                    <div class=" col-12  pl-0">
                       <button type="button" class="btn btn-outline-secondary btnTerminado" >
                         <i class="fa fa-check" aria-hidden="true"></i><span>Tarea pendiente </span></button>
                     </div>
 
                   </div>
-                </div>
-                    
-                </div>
+               
+              </div>
+         
             </div>
-           <div *ngSwitchCase = "true">
-             <div class="col-12">
-                <h3>Llena los campos necesarios</h3>
-             </div>
-            
-
-           </div>
           </div>
-        </div>
+             <div *ngSwitchCase = "true">
+               <div class="col-12 col-md-12 p-0">
+                  <h3>Llena los campos necesarios</h3>
+               </div>
+              
+  
+             </div>
+        
         
       
       </div>
-      <div class="col-1 text-right " [ngClass]="{'col-6': !crear}" >
+      <div class="col-1 text-right" [ngClass]="{'col-1 text-right col-sm-1 col-md-1 col-lg-1 col-xl-1': crear}"  >
         <i class="fa fa-times fa-xs pointer" aria-hidden="true" (click)="cerrarTarea()"></i>
      </div>
     </div>    
@@ -67,7 +67,7 @@
     <div class="row no-gutters">
       <div class="col-12">
         <div class="form-group">      
-          <input type="text" [(ngModel)]="tarea.nombre" class="form-control" name="nombre" id="" aria-describedby="helpId" placeholder="Nombre de la tarea...">
+          <input type="text" [(ngModel)]="tarea.nombre" class="form-control" name="nombre" id="" aria-describedby="helpId" placeholder="Nombre de la tarea..." required>
         </div>      
       </div>
       <div class="col-12 d-block">
@@ -127,7 +127,7 @@
   <div class="card-footer text-muted bg-white text-right">
     <div class="row  justify-content-around">
       <div class="col-4 col-xl-6 text-left" *ngIf="!crear" (click)="eliminarTarea(tarea)"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></div>
-      <div class="col-4 col-xl-6" [ngClass]="{'col-xl-12': crear}"><button type="submit" class="btn btn-themecolor">Guardar cambios</button></div>
+      <div class="col-4 col-xl-6" [ngClass]="{'col-12 text-center': crear}"><button type="submit" class="btn btn-themecolor">Guardar</button></div>
     </div>
     
   </div>

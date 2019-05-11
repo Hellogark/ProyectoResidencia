@@ -8,3 +8,6 @@
 .resizeImg{
     display:block; width:100%; height:auto;
 }
+table{
+    max-width: 500px
+}

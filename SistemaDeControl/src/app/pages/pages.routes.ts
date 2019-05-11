@@ -51,8 +51,8 @@ const pagesRoutes: Routes = [
             { path: 'nuevoProyecto', component: CrearProyectoComponent, data: { titulo: 'Crear Nuevo Proyecto' }, 
             canActivate:[AdminGuard,VerificaTokenGuard] },
             
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-            /*  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' } */
+            { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+            
         ];
 
 
