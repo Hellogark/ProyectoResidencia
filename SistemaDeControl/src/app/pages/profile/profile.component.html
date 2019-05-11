@@ -76,23 +76,22 @@
                 <div class="col-12">
 
                     <image-cropper 
-                    [imageChangedEvent]="imageChangedEvent  "
+                    [imageChangedEvent]="imageChangedEvent"
                     [maintainAspectRatio]="true"
                     [aspectRatio]="1 / 1"
                     [resizeToWidth]="128"
                     [onlyScaleDown]="true"
+                    [imageQuality]="95"
                     [roundCropper]="true"
-              format="png"
-              (imageCropped)="imageCropped($event)"          
-              (loadImageFailed)="loadImageFailed()"></image-cropper>
+                    croppedImageformat="png"
+                    (imageCropped)="imageCropped($event)"          
+                    (loadImageFailed)="loadImageFailed()"></image-cropper>
             </div>
             <div class="col-12">
-
                 <input #inputFile type="file" (change)="seleccionImagen($event)" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >
             </div>
             <div class="col-12">
 
-                
                 <i class="fa fas-save">
                     <button type="button" (click)="cambiarImagen()" [disabled]="!imagenSubir"class="btn btn-block btn-themecolor waves-effect waves-light m-r-10">Actualizar foto</button>
                 </i>

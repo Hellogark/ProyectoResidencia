@@ -11,29 +11,33 @@
         <div class="modal-body ">
           <div class="row text-center">
             <div class="col-12">
-                <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo:usuario._id:'usuarios'" alt="" class="prevImgPerfil ">
-                <img *ngIf="imagenTemp" [src]="croppedImage" alt="" class="prevImgPerfil img-circle">
-                <image-cropper 
-                  [imageChangedEvent]="imageChangedEvent  "
-                  [maintainAspectRatio]="true"
-                  [aspectRatio]="1 / 1"
-                  [resizeToWidth]="128"
-                  [onlyScaleDown]="true"
-                  [roundCropper]="true"
-                  format="png"
-                  (imageCropped)="imageCropped($event)"              
-                  (loadImageFailed)="loadImageFailed()"></image-cropper>
+
+              <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo:usuario._id:'usuarios'" alt="" class="prevImgPerfil img-circle "id="imgTemp">
+              <img *ngIf="imagenTemp" [src]="croppedImage" alt="user" class="prevImgPerfil img-circle " id="imgTemp">
             </div>
-            <div class="col-12 ">
-                <input  #inputFile type="file" (change)="seleccionImagen($event)" class="mb-2 mt-3 " accept=".PNG, .jpg, .jpeg"  >  
-                    
-            </div>
+            <div class="col-12">
+
+              <image-cropper 
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1 / 1"
+              [resizeToWidth]="128"
+              [onlyScaleDown]="true"
+              [roundCropper]="true"
+              [imageQuality]="95"
+              croppedImageformat="png"
+              (imageCropped)="imageCropped($event)"          
+              (loadImageFailed)="loadImageFailed()"></image-cropper>
+           </div>
+              <div class="col-12">
+                <input #inputFile type="file" (change)="seleccionImagen($event)" class="mb-2 mt-3" accept=".PNG, .jpg, .jpeg"  >
+              </div>
           </div>
           
           <br>
         </div>
         <div class="modal-footer">
-            <button [disabled]="!imagenTemp" type="button" class="btn btn-themecolor" (click)="subirImagen()">Guardar Cambios</button>
+            <button [disabled]="!imagenSubir" type="button" class="btn btn-themecolor" (click)="subirImagen()">Guardar Cambios</button>
 
           <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
         </div>

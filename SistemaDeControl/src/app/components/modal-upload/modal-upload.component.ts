@@ -38,13 +38,10 @@ export class ModalUploadComponent implements OnInit {
   seleccionImagen(archivo){
     this.imageChangedEvent = archivo;
     this.archivoEnviar = archivo.target.files[0];
-    
     if(!archivo){
       this.imagenSubir = null;
       return;
     }
-    
-    
     if(this.archivoEnviar.type.indexOf('image') <0){
       Swal.fire({
         title: 'Solo se permiten imágenes',
@@ -52,9 +49,10 @@ export class ModalUploadComponent implements OnInit {
       });
       this.imagenSubir=null;
       return;
-      
     }  
     let reader = new FileReader();
+    let urlImagenTemp = reader.readAsDataURL(this.archivoEnviar);
+
     reader.onloadend = () =>{
       this.imagenTemp = reader.result.toString();
       return console.log(this.imagenSubir);
@@ -67,7 +65,9 @@ export class ModalUploadComponent implements OnInit {
       this._modalUploadService.id, this._usuarioService.token)
     .then( res =>{
       console.log(res);
+      
       this._modalUploadService.notificacion.emit(res);
+      
       this.cerrarModal();     
       Swal.fire({
         title: 'Imagen actualizada con éxito',
@@ -83,11 +83,12 @@ export class ModalUploadComponent implements OnInit {
   clearForm() {  
     this.inputFile.nativeElement.value = "";
 }
-  cerrarModal(){
-    this.imagenTemp = null;
-    this.imagenSubir = null;
-    this.croppedImage = null;
-    this.imageChangedEvent = null;
+  cerrarModal(){   
+    this.imagenSubir = null;  
+    this.croppedImage = '';
+      this.imageChangedEvent = '';
+      this.imagenTemp = '';     
+      this.inputFile.nativeElement.value = "";
     this._modalUploadService.ocultarModal();
   }
   imageCropped(event: ImageCroppedEvent) {

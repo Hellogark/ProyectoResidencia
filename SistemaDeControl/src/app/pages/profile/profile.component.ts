@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   archivoEnviar: any;  
 
   constructor(public _usuarioService:UsuarioService) { 
-    
+
 
   }
 
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
     this.imageChangedEvent = archivo;
     this.archivoEnviar = archivo.target.files[0];
     
-    if(!archivo){
+    if(!this.archivoEnviar){
       this.imagenSubir = null;
       return;
     }
@@ -83,9 +83,10 @@ export class ProfileComponent implements OnInit {
   cambiarImagen(){
     console.log(this.imagenSubir);
     this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id)
-    this.croppedImage = null;
-    this.imageChangedEvent = null;
-    this.imagenTemp = null;
+    this.croppedImage = '';
+    this.imageChangedEvent = '';
+    this.imagenTemp = '';
+    this.inputFile.nativeElement.value = "";
   }
   
   imageCropped(event: ImageCroppedEvent) {
@@ -104,6 +105,5 @@ loadImageFailed() {
     toast:true
   })
 }
- 
 
 }

@@ -1,0 +1,7 @@
+.modal-body{
+    max-height: 269px;
+    overflow-y: scroll;
+}
+image-cropper{
+    max-height: 250px;
+}
