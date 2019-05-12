@@ -139,8 +139,8 @@ onPageChange(number: number) {
     });
 
   }
-  mostrarModal(id:string){
-    this._modalUploadService.mostrarModal('usuarios',id);
+  mostrarModal(usuario:Usuario){
+    this._modalUploadService.mostrarModal('usuarios',usuario);
 
   }
 

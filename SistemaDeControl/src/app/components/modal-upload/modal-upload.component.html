@@ -1,4 +1,4 @@
- <div class="fondoNegro animated fadeIn" [ngClass]="_modalUploadService.invisible">
+ <div class="fondoNegro animated fadeIn" >
   <div class="modal mt-5" style ="display:block;"id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -12,7 +12,7 @@
           <div class="row text-center">
             <div class="col-12">
 
-              <img *ngIf="!imagenTemp" [src]="usuario.img  | archivo:usuario._id:'usuarios'" alt="" class="prevImgPerfil img-circle "id="imgTemp">
+              <img *ngIf="!imagenTemp" [src]="this.usuario.img  | archivo:usuario._id:'usuarios'" alt="" class="prevImgPerfil img-circle "id="imgTemp">
               <img *ngIf="imagenTemp" [src]="croppedImage" alt="user" class="prevImgPerfil img-circle " id="imgTemp">
             </div>
             <div class="col-12">

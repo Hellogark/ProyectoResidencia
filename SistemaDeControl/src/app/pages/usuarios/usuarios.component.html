@@ -61,7 +61,7 @@
                         <tr *ngFor="let usuario of usuarios | paginate: config" class=" fila">
                           <td class="resizeDiv">
                             <div class="" >
-                              <img  [src]="usuario.img | archivo:usuario._id:'usuarios'" (click)="mostrarModal(usuario._id)"  class="resizeImg rounded-circle pointer" alt="">
+                              <img  [src]="usuario.img | archivo:usuario._id:'usuarios'" (click)="mostrarModal(usuario)"  class="resizeImg rounded-circle pointer" alt="">
 
                             </div>
                           </td>
@@ -121,4 +121,4 @@
       </div>
     </div>
   </div>
-  
+  <app-modal-upload *ngIf="_modalUploadService.invisible"></app-modal-upload>

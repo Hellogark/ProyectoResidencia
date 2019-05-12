@@ -21,7 +21,7 @@ export class ModalUploadComponent implements OnInit {
   imageChangedEvent: any = '';
     croppedImage: any = '';
     archivoEnviar: any; 
-    usuario:Usuario;   
+    usuario:Usuario;
     
  
  
@@ -33,7 +33,7 @@ export class ModalUploadComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.usuario = this._usuarioService.usuario ;
+    this.usuario = this._modalUploadService.usuario ;
   }
   seleccionImagen(archivo){
     this.imageChangedEvent = archivo;
@@ -89,6 +89,7 @@ export class ModalUploadComponent implements OnInit {
       this.imageChangedEvent = '';
       this.imagenTemp = '';     
       this.inputFile.nativeElement.value = "";
+      this.usuario = null;
     this._modalUploadService.ocultarModal();
   }
   imageCropped(event: ImageCroppedEvent) {
