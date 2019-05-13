@@ -21,10 +21,10 @@ const pagesRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' }, 
                 canActivate: [VerificaTokenGuard]
                 },
-            {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'}},
+            {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'},canActivate: [VerificaTokenGuard]},
             
-            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' } },            
-            { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
+            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' },canActivate: [VerificaTokenGuard] },            
+            { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'},canActivate: [VerificaTokenGuard]},
             { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo: 'Buscador'},           
             canActivate:[AdminGuard,VerificaTokenGuard]},
             

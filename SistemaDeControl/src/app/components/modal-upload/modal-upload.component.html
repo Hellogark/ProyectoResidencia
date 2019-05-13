@@ -3,6 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
+            <ng-progress id="progreso" [spinner]="true"  [thick]="true"></ng-progress>
           <h5 class="modal-title" id="exampleModalCenteredLabel">Cambiar imagen de perfil</h5>
           <button type="button" (click)="cerrarModal()" class="close pointer"  aria-label="Close">
             <span aria-hidden="true">×</span>
@@ -37,7 +38,7 @@
           <br>
         </div>
         <div class="modal-footer">
-            <button [disabled]="!imagenSubir" type="button" class="btn btn-themecolor" (click)="subirImagen()">Guardar Cambios</button>
+            <button [disabled]="!imagenSubir" type="button" class="btn btn-themecolor" (click)="subirImagen()"> Guardar Cambios</button>
 
           <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
         </div>

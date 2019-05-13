@@ -4,6 +4,7 @@ import  Swal from 'sweetalert2';
 import { UsuarioService, CambiarImagenService } from 'src/app/services/service.index';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Usuario } from '../../models/usuario.model';
+import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 
 
 
@@ -22,18 +23,20 @@ export class ModalUploadComponent implements OnInit {
     croppedImage: any = '';
     archivoEnviar: any; 
     usuario:Usuario;
-    
+    progressRef: NgProgressRef;
+
  
  
 
 
   constructor(public _usuarioService:UsuarioService, public _cambiarImageService: CambiarImagenService,
-    public _modalUploadService: ModalUploadService) { 
+    public _modalUploadService: ModalUploadService,private progress: NgProgress) { 
    
     }
 
   ngOnInit() {
     this.usuario = this._modalUploadService.usuario ;
+    this.progressRef = this.progress.ref('progreso');
   }
   seleccionImagen(archivo){
     this.imageChangedEvent = archivo;
@@ -61,11 +64,12 @@ export class ModalUploadComponent implements OnInit {
  
   
   subirImagen(){
+    this.cargar();
     this._cambiarImageService.subirImagen(this.imagenSubir, this._modalUploadService.tipo, 
       this._modalUploadService.id, this._usuarioService.token)
     .then( res =>{
       console.log(res);
-      
+      this.terminado();
       this._modalUploadService.notificacion.emit(res);
       
       this.cerrarModal();     
@@ -108,5 +112,12 @@ loadImageFailed() {
      timer:3500,
      toast:true
    })
+}
+cargar() {
+  this.progressRef.start();
+}
+
+terminado() {
+  this.progressRef.complete();
 }
 }
