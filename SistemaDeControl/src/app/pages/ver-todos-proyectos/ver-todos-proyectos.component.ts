@@ -77,7 +77,7 @@ export class VerTodosProyectosComponent implements OnInit {
   }
   buscarProyecto(termino: string){
     console.log(termino);
-    if(termino ==''){return;}
+    if(termino ==''){this.cargarProyectos(); return;}
     this.encontrado = true;
     this._proyectoService.buscarProyectos(termino)
     .subscribe((proyectos:Proyecto[]) =>{

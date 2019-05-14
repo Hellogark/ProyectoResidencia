@@ -120,7 +120,7 @@ onPageChange(number: number) {
       confirmButtonText: 'Eliminar!',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      if (result) {
+      if (result.value) {
         this._usuarioService.borrarUsuario(usuarioBorrar._id)
         .subscribe(res =>{
           this.cargarUsuario();

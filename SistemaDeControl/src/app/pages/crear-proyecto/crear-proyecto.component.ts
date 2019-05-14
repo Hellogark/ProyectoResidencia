@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
   import { Component, OnInit } from '@angular/core';
 
   import { FormGroup, FormControl, Validators } from "@angular/forms";
@@ -15,7 +16,7 @@
       formProyecto: FormGroup;
       usuario: Usuario;
       proyecto:Proyecto;
-    constructor(public _usuarioService: UsuarioService, public _proyectoService: ProyectoService) { }
+    constructor(public _usuarioService: UsuarioService, public _proyectoService: ProyectoService, public router: Router) { }
 
     ngOnInit() {
       this.usuario = this._usuarioService.usuario;
@@ -38,6 +39,7 @@
         '',
       );
         this._proyectoService.crearProyecto(this.proyecto, this.usuario._id).subscribe(res =>{
+          console.log(res);
         });
     }
 

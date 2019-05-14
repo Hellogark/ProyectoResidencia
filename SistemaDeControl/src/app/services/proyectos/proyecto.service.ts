@@ -5,7 +5,7 @@ import { Archivos } from './../../models/archivos.model';
 import { URL_SERVICIOS } from './../../config/config';
 import {HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError,debounceTime } from 'rxjs/operators';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from '../usuario/usuario.service';
@@ -34,7 +34,7 @@ export class ProyectoService {
         confirmButtonText: 'Aceptar',
         cancelButtonText: 'Cancelar'
       }).then(result =>{
-        this.router.navigate(['/misproyectos']);
+        this.router.navigate(['/ver-proyectos']);
       });
     }));
 
@@ -73,7 +73,7 @@ export class ProyectoService {
 
   buscarProyectos(termino: string){
     let url = URL_SERVICIOS + 'busqueda/info/proyectos/'+termino+'?token='+this.token;
-    return this.http.get(url).pipe(map((res:any)=>{
+    return this.http.get(url).pipe(debounceTime(2500),map((res:any)=>{
       return res.proyectos;
     }));
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -8,7 +9,6 @@ import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
 import { Tareas } from '../../models/tareas.model';
 import * as moment from 'moment';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-editar-tarea',
