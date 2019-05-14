@@ -59,20 +59,21 @@ descripcion: string;
 archivosMostrar: Archivos [] = [];  
 participantes:Usuario[] = [];
 todosUsuarios:Usuario[] = [];
-@ViewChild ('inputArchivo')  inputArchivo: any;
-  nombres: any [] = [];
-  nuevoParticipantes = {};
-  archivoTemp: string;
-  id :string;
-  comentario: string;
-  nombreArchivo: string;
-  dataLista:boolean = false;
-  cargando: boolean = true;
-  inputVacio: boolean = false;
-  token = this._usuarioService.token;  
-  fecha: any ;
-  formData = new FormData(); 
-  progressRef: NgProgressRef;
+@ViewChild('inputArchivo') inputArchivo: any;
+valorInputFile: any;
+nombres: any [] = [];
+nuevoParticipantes = {};
+archivoTemp: string;
+id :string;
+comentario: string;
+nombreArchivo: string;
+dataLista:boolean = false;
+cargando: boolean = true;
+inputVacio: boolean = false;
+token = this._usuarioService.token;  
+fecha: any ;
+formData = new FormData(); 
+progressRef: NgProgressRef;
 
   
   @ViewChild(DatepickerComponent) date;
@@ -81,9 +82,9 @@ todosUsuarios:Usuario[] = [];
     private progress: NgProgress) {
 
       this.id =this.rutaActiva.snapshot.paramMap.get('id');
-  }
- 
+    }
   async ngOnInit() {
+    
     
     this.cargarProyecto(this.id);
     this.progressRef = this.progress.ref('progreso');
@@ -139,7 +140,11 @@ todosUsuarios:Usuario[] = [];
   descargarArchivo(archivo: any){      
     console.log(archivo);
     this.cargar();
-   
+    if(res.value == true){
+      this.terminado();
+      return;
+     }
+      
     this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{   
       console.log(res);
       this.terminado();
@@ -184,7 +189,7 @@ todosUsuarios:Usuario[] = [];
    this.proyecto.ultimoEditor = this._usuarioService.usuario._id;    
    this.proyecto.fechaProyectada = this.fecha.toString();  
    
-  if (this.file != null ){
+  if (this.file != null || this.file){
     if(this.comentario == '' || this.comentario == null){
       Swal.fire({
         title: 'Introduce una descripción',
@@ -217,6 +222,17 @@ todosUsuarios:Usuario[] = [];
 
   } 
   
+ }
+ subirArchivo(){
+  this.archivo =  {
+    nombre: this.file.name.trim(),
+    comentario: this.comentario,
+    responsable: this._usuarioService.usuario._id,
+  };
+ 
+  this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
+    this.terminado();
+  });
  }
 
  archivoInput(archivo){
@@ -310,8 +326,13 @@ irTareas(){
   this.router.navigate(['todas-tareas',this.id]);
 }
 quitarArchivo(){
-  this.inputArchivo.nativeElement.value = "";
+  this.valorInputFile = this.inputArchivo.nativeElement.value;
+  console.log(this.inputArchivo);
+  this.valorInputFile = "";
   this.inputVacio = false;
+  this.comentario = "";
+  this.file = null;
+  console.log(this.valorInputFile )
 
 }
 }

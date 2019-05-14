@@ -6,7 +6,7 @@ import { ProyectoService, UsuarioService } from 'src/app/services/service.index'
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { Location } from '@angular/common';
-import { TagInputModule } from 'ngx-chips';
+import Swal from 'sweetalert2'
 import { DomSanitizer } from '@angular/platform-browser';
 import {saveAs}  from 'file-saver';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
@@ -109,7 +109,10 @@ public labels: any = {
    
     this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{   
       console.log(res);
-     
+     if(res.value == true){
+      this.terminado();
+      return;
+     }
       
       this.archivoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.location.protocol + '//' + window.location.host + "/descarga.rar"); 
       console.log(this.archivoUrl);

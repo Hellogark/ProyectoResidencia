@@ -122,15 +122,15 @@
                       <div class="row no-gutters">
                         <div class="col-12">
                           
-                          <div class="custom-file">
-                            <input type="file" #inputArchivo name="inputArchivo" id="customFile"
+                          <div class="custom-file stretched-link">
+                            <input type="file"#inputArchivo name="inputArchivo" id="customFile"
                             (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
-                            placeholder="Elegir archivo" class="custom-file-input" aria-describedby="fileHelpId">
+                            placeholder="Elegir archivo" class="custom-file-input pointer" aria-describedby="fileHelpId">
                             <label for="customFile"class="custom-file-label">Elegir archivo</label>                        
                           </div>
                         </div>
                         <div class="col-12">
-                          <div *ngIf="inputVacio">
+                          <div *ngIf="inputVacio" >
                             <span>{{nombreArchivo}}</span>
                             <button type="button" class="close" aria-label="Close" (click)="quitarArchivo()">
                                 <span aria-hidden="true">&times;</span>

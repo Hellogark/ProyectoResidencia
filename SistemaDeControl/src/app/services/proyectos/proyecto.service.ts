@@ -139,15 +139,11 @@ export class ProyectoService {
     return this.http.get(url,{responseType: 'blob'}).pipe( map( (res:any) =>{      
       return res;
     } ),catchError((err:any) =>{
-     
-     return Swal.fire({
+      return  Swal.fire({
         title: 'Ah ocurrido un error al descargar el archivo, el archivo no existe o no se encuentra disponible',       
         type: 'error',        
         timer: 3500
-
-
       });
-      //return throwError(err);
     } ));  
 
   }
