@@ -52,26 +52,26 @@ public labels: any = {
   screenReaderCurrentLabel: `You're on page`
 };
 
-  id :string;
-  cargando: boolean = true;
-  proyecto:Proyecto;
-  dataLista:boolean = false;
-  archivo:Archivos;
-  descripcion: string;
-  file:File;
-  archivosMostrar: Archivos [] = [];  
-  participantes:Usuario[] = [];
-  todosUsuarios:Usuario[] = [];
+proyecto:Proyecto;
+archivo:Archivos;
+file:File;
+descripcion: string;
+archivosMostrar: Archivos [] = [];  
+participantes:Usuario[] = [];
+todosUsuarios:Usuario[] = [];
+@ViewChild ('inputArchivo')  inputArchivo: any;
   nombres: any [] = [];
   nuevoParticipantes = {};
   archivoTemp: string;
-  inputVacio: boolean = false;
-  nombreArchivo: string;
-  fecha: any ;
-  token = this._usuarioService.token;
-  inputArchivo: any;
-  formData = new FormData(); 
+  id :string;
   comentario: string;
+  nombreArchivo: string;
+  dataLista:boolean = false;
+  cargando: boolean = true;
+  inputVacio: boolean = false;
+  token = this._usuarioService.token;  
+  fecha: any ;
+  formData = new FormData(); 
   progressRef: NgProgressRef;
 
   
@@ -127,7 +127,8 @@ public labels: any = {
         console.log(this.archivosMostrar);
         this.obtenerUsuarios();
         console.log(this.proyecto);
-       
+      
+      
         this.dataLista=true;
         this.cargando = false;
     }, (err) =>{
@@ -191,6 +192,7 @@ public labels: any = {
         timer:3500
 
       });
+      this.terminado();
       return;
     }
     this.archivo =  {
@@ -207,9 +209,7 @@ public labels: any = {
       });
     });
    this.cargarProyecto(this.id);
- /*  this._proyectoService.subirArchivo(this.archivo,this.formData,this.proyecto).subscribe(res =>{
-    console.log(res);
-  }); */}else{
+ }else{
     this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
       console.log(res);
       this.terminado();
@@ -308,6 +308,11 @@ terminado() {
 irTareas(){
 
   this.router.navigate(['todas-tareas',this.id]);
+}
+quitarArchivo(){
+  this.inputArchivo.nativeElement.value = "";
+  this.inputVacio = false;
+
 }
 }
    

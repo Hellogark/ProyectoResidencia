@@ -119,14 +119,27 @@
                 <div class="form-group ">
                   <div class="col-12 ">
                     <div class="form-group">
-                      <label class="custom-file">
-                        <input type="file" [ngModel]="inputArchivo" name="inputArchivo" id=""
-                          (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
-                          placeholder="Elegir archivo" class="custom-file-input" aria-describedby="fileHelpId">
-                        <span class="custom-file-control"></span>
-                      </label>
-                      <div *ngIf="inputVacio"><span>{{nombreArchivo}}</span></div>
-                      <small id="fileHelpId" class="form-text text-muted">Solo se acepta un archivo .rar o .zip</small>
+                      <div class="row no-gutters">
+                        <div class="col-12">
+                          
+                          <div class="custom-file">
+                            <input type="file" #inputArchivo name="inputArchivo" id="customFile"
+                            (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
+                            placeholder="Elegir archivo" class="custom-file-input" aria-describedby="fileHelpId">
+                            <label for="customFile"class="custom-file-label">Elegir archivo</label>                        
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div *ngIf="inputVacio">
+                            <span>{{nombreArchivo}}</span>
+                            <button type="button" class="close" aria-label="Close" (click)="quitarArchivo()">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+
+                        </div>
+                        <small id="fileHelpId" class="form-text text-muted">Solo se acepta un archivo .rar o .zip</small>
+                      </div>                      
                     </div>
                   </div>
                 </div>
