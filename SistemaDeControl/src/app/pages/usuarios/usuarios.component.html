@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-              <input #input autofocus (keyup)="buscarUsuario(input.value)" (blur)="buscarUsuario(input.value)"  [(ngModel)]="termino" type="text"  class="form-control" placeholder="Buscar usuario...">
+              <input #input  (keyup)="buscarUsuario(input.value)"   [(ngModel)]="termino" type="text"  class="form-control" placeholder="Buscar usuario...">
           </div>
           <div class="col-12" *ngIf="encontrado" >
             <p>
@@ -41,16 +41,26 @@
                 <h3 class="carad-title">Usuarios registrados ( <small>{{this.totalRegistros}} </small>)</h3>
             </div>
             <div class="col-12  d-flex justify-content-center text-center">
-               <div class="table-responsive">
+            
+                <div class="table-responsive">
 
                 
-                  <table class="table table-striped table-hover">
+                  <table class="table table-striped table-hover" [mfData]="dataUsuarios" #mf="mfDataTable">
                     <thead class="thead-dark ">
                       <tr class="text-center">
-                        <th>Imagen</th>
-                        <th>Correo</th>
-                        <th>Nombre de usuario</th>
-                        <th class="resizeSelect">Empresa</th>
+                                                                                                          
+                        <th>
+                         Imagen
+                        </th>
+                        <th>
+                           <mfDefaultSorter by="correo">Correo</mfDefaultSorter>
+                        </th>
+                        <th>
+                         <mfDefaultSorter by="nombre">Nombre de usuario</mfDefaultSorter>
+                        </th>
+                        <th class="resizeSelect">
+                          <mfDefaultSorter by="empresa">Empresa</mfDefaultSorter>
+                        </th>
                         <th class="resizeSelect">Role</th> 
                         <th>Estado</th>
 
@@ -58,7 +68,7 @@
                       </tr>
                       </thead>
                       <tbody class="">
-                        <tr *ngFor="let usuario of usuarios | paginate: config" class=" fila">
+                        <tr *ngFor="let usuario of mf.data | paginate: config" class=" fila">
                           <td class="resizeDiv">
                             <div class="" >
                               <img  [src]="usuario.img | archivo:usuario._id:'usuarios'" (click)="mostrarModal(usuario)"  class="resizeImg rounded-circle pointer" alt="">
@@ -94,8 +104,8 @@
                         
                         
                       </tbody>
-                  </table>                                 
-                </div>  
+                  </table>                               
+                </div>     
                
               </div>
               <div class="text-center mt-3 col-12">

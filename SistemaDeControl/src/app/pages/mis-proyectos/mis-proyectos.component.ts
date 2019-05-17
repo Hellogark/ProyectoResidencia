@@ -4,6 +4,7 @@ import { Proyecto } from 'src/app/models/proyectos.model';
 import { UsuarioService, ProyectoService } from 'src/app/services/service.index';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
+import {DataTableModule} from "angular-6-datatable-cc";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class MisProyectosComponent implements OnInit {
   constructor( public _usuarioService:UsuarioService, public _proyectoService:ProyectoService) { }
   proyectos: Proyecto[];
   participantes:Usuario[];
+  data: any;
+  dataProyectos: any [] = [];
   public maxSize: number = 6;
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
@@ -52,7 +55,18 @@ export class MisProyectosComponent implements OnInit {
     this._proyectoService.misProyectos(this.idUsuario)
     .subscribe(( res:any) =>{
       this.proyectos = res.proyectos;
-      this.participantes = res.proyectos.participantes;
+      this.proyectos.forEach(proyecto => {
+        this.data = {
+          _id: proyecto._id,
+          nombre: proyecto.nombre,
+          nombreEmpresa:proyecto.nombreEmpresa,
+          fechaCreacion:proyecto.fechaCreacion,
+          fechaProyectada: proyecto.fechaProyectada, 
+          participantes:   proyecto.participantes      
+        }
+          
+        this.dataProyectos.push(this.data);
+      });      
       console.log(res);
       this.cargando=false;
     });

@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@ngx-progressbar/core": "^5.3.2",
+    "angular-6-datatable-cc": "^0.8.1",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.1",
     "moment": "^2.24.0",

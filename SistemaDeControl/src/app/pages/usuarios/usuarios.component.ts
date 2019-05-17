@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { PaginationInstance } from 'ngx-pagination';
 import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload.service';
+import {DataTableModule} from "angular-6-datatable-cc";
 
 
 
@@ -16,6 +17,8 @@ import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload
 })
 export class UsuariosComponent implements OnInit {
   usuarios:Usuario[] = [];
+  data: any;
+  dataUsuarios: any [] = [];
   desde: number = 0;
   totalRegistros: number = 0;
   cargando: boolean = true;
@@ -24,7 +27,7 @@ export class UsuariosComponent implements OnInit {
   public maxSize: number = 6;
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
-  public responsive: boolean = true;
+  public responsive: boolean = true;  
   public config: PaginationInstance = {
    
     itemsPerPage: 10,
@@ -53,7 +56,7 @@ onPageChange(number: number) {
       activatedRoute.params.subscribe( params =>{
         if(params['termino'] == '' || params['termino'] <0){return;}
         this.termino = params['termino'];
-        if(this.termino != undefined){
+        if(this.termino != ''){
            window.onload = () =>this.buscarUsuario(this.termino);
         }
        
@@ -63,6 +66,8 @@ onPageChange(number: number) {
 
   ngOnInit() {         
     this.cargarUsuario();
+    
+  
     this._modalUploadService.notificacion.subscribe( res =>{
       console.log(res);
       this.cargarUsuario();
@@ -74,10 +79,30 @@ onPageChange(number: number) {
   cargarUsuario(){
    
     this.cargando = true;
+    console.log(this.cargando+'cargando')
     this._usuarioService.cargarUsuarios(this.desde,this._usuarioService.token)
     .subscribe( (res:any) =>{
       this.totalRegistros = res.total;
       this.usuarios = res.usuarios;
+      
+      this.usuarios.forEach(usuario => {
+        this.data = {
+          _id: usuario._id,
+          img: usuario.img,
+          correo:usuario.correo,
+          nombre: usuario.nombre,
+          empresa:usuario.empresa,
+          role: usuario.role,
+          activo: usuario.activo,
+        }
+          
+        this.dataUsuarios.push(this.data);
+      });
+         
+      console.log(this.dataUsuarios)
+      
+     
+    
       this.cargando = false;
      
        

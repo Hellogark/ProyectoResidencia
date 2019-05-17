@@ -104,7 +104,7 @@
                     <span>
 
                     </span>
-                    <tag-input theme='minimal' [onlyFromAutocomplete]="true" [(ngModel)]="participantes"
+                    <tag-input theme='minimal'  [onlyFromAutocomplete]="true" [secondaryPlaceholder]="'Elige participantes'" [(ngModel)]="participantes"
                       name="participantes" class="form-control" [identifyBy]="'_id'" [displayBy]="'nombre'">
                       <tag-input-dropdown [showDropdownIfEmpty]="false" [autocompleteItems]="nombres">
                       </tag-input-dropdown>

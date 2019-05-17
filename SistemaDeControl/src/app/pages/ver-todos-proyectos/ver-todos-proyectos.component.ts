@@ -6,6 +6,7 @@ import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import  Swal  from 'sweetalert2';
 import { PaginationInstance } from 'ngx-pagination';
+import {DataTableModule} from "angular-6-datatable-cc";
 @Component({
   selector: 'app-ver-todos-proyectos',
   templateUrl: './ver-todos-proyectos.component.html',
@@ -21,6 +22,8 @@ export class VerTodosProyectosComponent implements OnInit {
   desde: number = 0;
   encontrado:boolean;
   cargando:boolean = true;
+  data: any;
+  dataProyectos: any [] = [];
   public config: PaginationInstance = {
    
     itemsPerPage: 10,
@@ -44,14 +47,27 @@ export class VerTodosProyectosComponent implements OnInit {
   ngOnInit() {
     this.cargarProyectos();
    
+   
   }
   cargarProyectos(){
     this._proyectoService.cargarProyectos()
     .subscribe( (res:any) =>{
      
      this.proyectos = res.proyectos;
-     this.participantes = res.proyectos.participantes;
-     console.log(this.proyectos);
+     //this.participantes = res.proyectos.participantes;
+     this.proyectos.forEach(proyecto => {
+        this.data = {
+          _id: proyecto._id,
+          nombre: proyecto.nombre,
+          nombreEmpresa:proyecto.nombreEmpresa,
+          fechaCreacion:proyecto.fechaCreacion,
+          fechaProyectada: proyecto.fechaProyectada, 
+          participantes:   proyecto.participantes      
+        }
+          
+        this.dataProyectos.push(this.data);
+      });
+     console.log(this.data);
      this.cargando=false;
  });
  }

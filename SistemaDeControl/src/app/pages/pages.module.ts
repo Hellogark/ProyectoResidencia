@@ -34,6 +34,7 @@ import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component';
 import { FileUploadModule } from "ng2-file-upload";
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { DataTableModule } from "angular-6-datatable-cc";
 
 
 @NgModule({
@@ -70,8 +71,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         TagInputModule, 
         FileUploadModule,
         NgProgressModule,
-        ImageCropperModule
-        
+        ImageCropperModule,
+        DataTableModule,
+      
         
         
     ]

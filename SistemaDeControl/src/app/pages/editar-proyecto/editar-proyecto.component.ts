@@ -187,7 +187,7 @@ this.proyecto.descripcion = proyecto.descripcion;
 this.proyecto.nombreEmpresa = proyecto.nombreEmpresa;
 this.proyecto.participantes = proyecto.participantes;
 this.proyecto.ultimoEditor = this._usuarioService.usuario._id;
-this.proyecto.fechaProyectada = this.fecha.toString();
+this.proyecto.fechaProyectada  = this.fecha != undefined ? this.fecha.toString():'';
 
 if (this.file != null || this.file){
 if(this.comentario == '' || this.comentario == null){
