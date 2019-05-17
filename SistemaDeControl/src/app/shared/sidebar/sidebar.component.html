@@ -14,14 +14,11 @@
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a routerLinkActive="active" routerLink="/perfil">Mi Perfil </a></li>
-                        <li><a routerLinkActive="active" routerLink="/misproyectos">Proyectos en los que participo</a></li>
                         <li><a routerLinkActive="active" routerLink="/account-settings">Configuración de la interfaz</a></li>
-                        <li><a (click)="_usuarioService.logout()" class="pointer">Log-out</a></li>
+                        <li><a (click)="_usuarioService.logout()" class="pointer">Cerrar Sesión</a></li>
                     </ul>
                 </li>
-                <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
-
+                <li class="nav-devider"></li>                
 
                 <li *ngFor="let menu of _sidebar.menu">
                     <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i [class]="menu.icono"></i><span class="hide-menu"> {{ menu.titulo }} <span class="label label-rouded label-themecolor pull-right"> {{ menu.submenu.length }} </span></span></a>
@@ -29,11 +26,7 @@
 
                         <li *ngFor="let submenu of menu.submenu">
                             <a routerLinkActive="active" [routerLink]="[ submenu.url ]"> {{ submenu.titulo }} </a>
-                        </li>
-
-                        <!-- <li><a href="index2.html">Analytical</a></li>
-                        <li><a href="index3.html">Demographical</a></li>
-                        <li><a href="index4.html">Modern</a></li> -->
+                        </li>                    
                     </ul>
                 </li>
 

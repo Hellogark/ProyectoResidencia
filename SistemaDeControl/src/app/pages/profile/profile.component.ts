@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;
-    console.log(this.usuario.nombre)
+    console.log(this.usuario)
   }
 
   guardar(usuario:Usuario){

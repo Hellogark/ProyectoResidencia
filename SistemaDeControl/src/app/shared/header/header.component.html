@@ -65,15 +65,12 @@
                                     <div class="u-img"><img [src]="usuario.img | archivo:usuario._id:'usuarios'" alt="user"></div>
                                     <div class="u-text">                                           
                                         <h4>{{ usuario.nombre }}</h4>
-                                        <p class="text-muted">{{usuario.correo}}</p><a routerLink="/perfil"  class="btn btn-rounded btn-danger btn-sm">Mi perfil</a>
+                                        <p class="text-muted">{{usuario.correo}}</p><a routerLink="/perfil"  class="btn btn-rounded btn-themecolor btn-sm">Mi perfil</a>
                                     </div>
                                 </div>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a routerLink="/perfil"><i class="ti-user"></i> Mi Perfil</a></li>
-                            <li><a routerLink="/misproyectos"><i class="ti-blackboard"></i> Proyectos en los que participo</a></li>
+                            </li>                             
                             <li role="separator" class="divider"></li>                           
-                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Log-out</a></li>
+                            <li><a (click)="_usuarioService.logout()" class="pointer"><i class="fa fa-power-off"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </li>
