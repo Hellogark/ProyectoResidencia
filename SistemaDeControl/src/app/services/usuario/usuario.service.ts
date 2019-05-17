@@ -229,6 +229,7 @@ export class UsuarioService {
     buscarUsuarios(termino: string){
     let url = URL_SERVICIOS + 'busqueda/info/usuarios/'+termino+'?token='+this.token;
     return this.http.get(url).pipe(map((res:any)=>{
+      console.log(res)
       return res.usuarios;
     }));
 

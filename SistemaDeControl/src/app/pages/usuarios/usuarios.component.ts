@@ -54,9 +54,9 @@ onPageChange(number: number) {
   constructor(public  _usuarioService:UsuarioService, public _modalUploadService: ModalUploadService,
     public activatedRoute: ActivatedRoute) { 
       activatedRoute.params.subscribe( params =>{
-        if(params['termino'] == '' || params['termino'] <0){return;}
+        if(params['termino'] == '' || params['termino'] <0 || params['termino'] == undefined){return;}
         this.termino = params['termino'];
-        if(this.termino != ''){
+        if(this.termino != '' || this.termino != undefined){
            window.onload = () =>this.buscarUsuario(this.termino);
         }
        
@@ -85,19 +85,7 @@ onPageChange(number: number) {
       this.totalRegistros = res.total;
       this.usuarios = res.usuarios;
       
-      this.usuarios.forEach(usuario => {
-        this.data = {
-          _id: usuario._id,
-          img: usuario.img,
-          correo:usuario.correo,
-          nombre: usuario.nombre,
-          empresa:usuario.empresa,
-          role: usuario.role,
-          activo: usuario.activo,
-        }
-          
-        this.dataUsuarios.push(this.data);
-      });
+      this.cargarDataUsuarios(this.usuarios);
          
       console.log(this.dataUsuarios)
       
@@ -112,17 +100,24 @@ onPageChange(number: number) {
 
   buscarUsuario(termino: string){
     console.log(termino);
-    if(termino == ''){this.cargarUsuario(); return;}
-  
-    this.encontrado = true;
-    this._usuarioService.buscarUsuarios(termino)
-    .subscribe((usuarios:Usuario[]) =>{
-      console.log(usuarios);
+    if(this.termino ==='' || termino.length <=0){ 
+      this.usuarios = [];
+      this.dataUsuarios = [];
+      this.encontrado = false;
+        this.cargarUsuario();
+      return;}
       
-      this.usuarios = usuarios;
-     
-      if(termino =='' || this.usuarios.length<=0){this.encontrado = false; 
-        }
+      
+      this._usuarioService.buscarUsuarios(termino)
+      .subscribe((usuarios:Usuario[]) =>{
+        console.log(usuarios);
+        
+        this.usuarios = usuarios;
+        this.cargarDataUsuarios(this.usuarios);
+        this.encontrado = true;
+        
+        if(termino =='' || this.usuarios.length<=0){this.encontrado = false; 
+          }
       
     });
   }
@@ -167,6 +162,22 @@ onPageChange(number: number) {
   mostrarModal(usuario:Usuario){
     this._modalUploadService.mostrarModal('usuarios',usuario);
 
+  }
+  cargarDataUsuarios(usuarios: Usuario[]){
+    this.dataUsuarios = [];
+    usuarios.forEach(usuario => {
+      this.data = {
+        _id: usuario._id,
+        img: usuario.img,
+        correo:usuario.correo,
+        nombre: usuario.nombre,
+        empresa:usuario.empresa,
+        role: usuario.role,
+        activo: usuario.activo,
+      }
+        
+      this.dataUsuarios.push(this.data);
+    });
   }
 
 

@@ -54,19 +54,9 @@ export class VerTodosProyectosComponent implements OnInit {
     .subscribe( (res:any) =>{
      
      this.proyectos = res.proyectos;
+     this.cargarDataProyectos(this.proyectos);
      //this.participantes = res.proyectos.participantes;
-     this.proyectos.forEach(proyecto => {
-        this.data = {
-          _id: proyecto._id,
-          nombre: proyecto.nombre,
-          nombreEmpresa:proyecto.nombreEmpresa,
-          fechaCreacion:proyecto.fechaCreacion,
-          fechaProyectada: proyecto.fechaProyectada, 
-          participantes:   proyecto.participantes      
-        }
-          
-        this.dataProyectos.push(this.data);
-      });
+    
      console.log(this.data);
      this.cargando=false;
  });
@@ -92,19 +82,41 @@ export class VerTodosProyectosComponent implements OnInit {
 
   }
   buscarProyecto(termino: string){
-    console.log(termino);
-    if(termino ==''){this.cargarProyectos(); return;}
-    this.encontrado = true;
-    this._proyectoService.buscarProyectos(termino)
-    .subscribe((proyectos:Proyecto[]) =>{
-      console.log(proyectos);
-      
-      this.proyectos = proyectos;
+    console.log(termino);   
+      if(termino ==='' || termino.length <=0){ 
+        this.proyectos = [];
+        this.dataProyectos = [];
+        this.encontrado = false;
+          this.cargarProyectos();
+        return;}
+        this._proyectoService.buscarProyectos(termino)
+        .subscribe((proyectos:Proyecto[]) =>{
+          console.log(proyectos);
+          
+          this.proyectos = proyectos;
+          this.cargarDataProyectos(this.proyectos);
+          this.encontrado = true;
      
       if(termino =='' || this.proyectos.length<=0){this.encontrado = false; 
         }
       
     });
+  }
+  cargarDataProyectos(proyectos: Proyecto[]){
+    this.dataProyectos = [];
+    proyectos.forEach(proyecto => {
+      this.data = {
+        _id: proyecto._id,
+        nombre: proyecto.nombre,
+        nombreEmpresa:proyecto.nombreEmpresa,
+        fechaCreacion:proyecto.fechaCreacion,
+        fechaProyectada: proyecto.fechaProyectada, 
+        participantes:   proyecto.participantes      
+      }
+        
+      this.dataProyectos.push(this.data);
+    });
+
   }
   }
 
