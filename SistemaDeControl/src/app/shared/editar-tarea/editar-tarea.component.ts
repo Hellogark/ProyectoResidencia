@@ -121,7 +121,8 @@ export class EditarTareaComponent implements OnInit {
     this._tareasService.obtenerTarea(this.idTarea).subscribe( (res:any)=>{
       this.datos = false;
       this.idProyecto = res.tarea.proyecto._id;
-      this.fecha = this._tareasService.fecha;    
+      let fecha = this.fecha != '' ? res.tarea.fechaLimite:'';
+      this.fecha = fecha;    
       if(res.tarea == null){return;}
       this.tarea = res.tarea != null ? res.tarea: {};
       this.inicializarTags();
@@ -129,11 +130,7 @@ export class EditarTareaComponent implements OnInit {
       
       this.datos=true;
       
-      this._tareasService.enviarFechaObservable.subscribe( res =>{
-       this.fecha = '';
-       this.fecha = res;
-       console.log(res);
-     });
+    
       
        
        
@@ -175,9 +172,7 @@ export class EditarTareaComponent implements OnInit {
 
     inicializarTags(){
       this.arregloParticipante = [];
-      this.participante = {};
-      this.fecha = '';         
-        console.log(this.tarea);
+      this.participante = {};   
         this.mostrar = this._tareasService.mostrar;
         this.crear = this._tareasService.crear;
          

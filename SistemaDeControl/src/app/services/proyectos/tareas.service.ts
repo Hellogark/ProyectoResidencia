@@ -74,8 +74,8 @@ export class TareasService {
 
   obtenerMisTareas(id:string){
     let url = URL_SERVICIOS +'tareas/'+id+'/mistareas?token='+this.token;
-    return this.http.get(url).pipe( map( (res:any) =>{
-      console.log(res);
+    return this.http.get(url).pipe( map( (res:any) =>{  
+      this.obtenerUsuarios();
       return res;
       
     }));
