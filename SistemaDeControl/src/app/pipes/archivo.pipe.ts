@@ -14,7 +14,7 @@ export class ArchivoPipe implements PipeTransform {
     if(!id){
       return;
     }
-    let url = URL_SERVICIOS + 'descarga';
+    let url = URL_SERVICIOS + 'imgPerfil';
     if(!archivo){
       return url + '/'+tipo+'/'+id+'/noImagenExistente';
     }
@@ -30,8 +30,6 @@ export class ArchivoPipe implements PipeTransform {
       default: 
       console.log('Imagen de usuario no existe');
       url +=  '/'+tipo+'/'+id+'/xxdx';
-
-
     }
     return url;
   }
