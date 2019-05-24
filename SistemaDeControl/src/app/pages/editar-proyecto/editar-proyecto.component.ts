@@ -155,7 +155,7 @@ saveAs(res,'Recursos.rar');
 }
 eliminarArchivo(archivo: Archivos){
 Swal.fire({
-title: '¿Estás seguro que deseas eliminar el archivo?:',
+title: '¿Estás seguro que deseas eliminar el archivo?',
 type: 'warning',
 showCancelButton: true,
 confirmButtonColor: '#3085d6',
@@ -209,14 +209,14 @@ responsable: this._usuarioService.usuario._id,
 this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
 
 this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
-console.log(res);
+    this.cargarProyecto(this.id);
 this.terminado();
 });
 });
-this.cargarProyecto(this.id);
+
 }else{
 this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
-console.log(res);
+    this.cargarProyecto(this.id);
 this.terminado();
 });
 

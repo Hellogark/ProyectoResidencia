@@ -39,6 +39,7 @@ export class UsuarioService {
       console.log('Token renovado');
     })
     ,catchError((err) =>{
+      console.log(err);
      this.logout();
       return throwError(err);
 

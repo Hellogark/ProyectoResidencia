@@ -120,12 +120,12 @@
                   <div class="col-12 ">
                     <div class="form-group">
                       <div class="row no-gutters">
-                        <div class="col-12">
+                        <div class="col-12 ">
                           
-                          <div class="custom-file stretched-link">
+                          <div class="custom-file ">
                             <input type="file"#inputArchivo name="inputArchivo" id="customFile"
                             (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
-                            placeholder="Elegir archivo" class="custom-file-input pointer" aria-describedby="fileHelpId">
+                            placeholder="Elegir archivo" class="custom-file-input w-100 " aria-describedby="fileHelpId">
                             <label for="customFile"class="custom-file-label">Elegir archivo</label>                        
                           </div>
                         </div>
@@ -213,7 +213,7 @@
               <div class="col-12">
                 <button class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light"
                   type="submit">Guardar cambios</button>
-                  <button class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light"  type="button" (click)="volver()">Volver</button>
+                  <button class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light" [routerLink]="['/ver-proyectos']"  type="button" >Volver</button>
 
               </div>
             </div>
