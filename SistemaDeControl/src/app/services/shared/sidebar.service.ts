@@ -4,7 +4,7 @@ import { UsuarioService } from '../usuario/usuario.service';
 @Injectable()
 export class SidebarService {
   menu: any =[];
-ñ
+
   constructor(public _usuarioService: UsuarioService) { 
 
   }

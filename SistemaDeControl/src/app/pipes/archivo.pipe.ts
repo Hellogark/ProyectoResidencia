@@ -29,8 +29,6 @@ export class ArchivoPipe implements PipeTransform {
       default: 
       
       url +=  '/'+tipo+'/'+id+'/xxdx';
-
-
     }
     return url;
   }
