@@ -35,10 +35,10 @@ export class VerificaTokenGuard implements CanActivate {
   verificaRenueva(fechaExp: number): Promise<boolean>{
     return new Promise ((resolve , reject )=>{
       let tokenExp = new Date( fechaExp * 1000);
-      console.log(tokenExp);
+      
       let ahora = new Date();
       ahora.setTime( ahora.getTime() + (1 * 60 * 60 * 1000));
-      console.log(ahora);
+      
         if(tokenExp.getTime() > ahora.getTime()){
           resolve(true);
 
@@ -58,7 +58,7 @@ export class VerificaTokenGuard implements CanActivate {
 
   expirado(fechaExp:number){
     let ahora = new Date().getTime() / 1000;
-    console.log(ahora)
+    
     if(fechaExp < ahora){
 
       return true;

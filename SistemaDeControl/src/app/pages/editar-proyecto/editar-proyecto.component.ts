@@ -106,7 +106,7 @@ nombre:res.nombre.toString() }
 this.nombres.push(this.nuevoParticipantes);
 
 });
-console.log(this.nombres);
+
 
 
 });
@@ -119,26 +119,21 @@ this.dataLista = false;
 this._proyectoService.obtenerProyecto(id).subscribe( (res:any) => {
 this.proyecto = res.proyecto;
 this.participantes = res.proyecto.participantes;
-console.log(res.proyecto.fechaProyectada);
 let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';
 this.fecha = fecha;
 this.archivosMostrar = res.proyecto.archivos;
 this.descripcion = this.proyecto.descripcion;
 
-console.log(this.archivosMostrar);
 this.obtenerUsuarios();
-console.log(this.proyecto);
 
 
 this.dataLista=true;
 this.cargando = false;
 }, (err) =>{
-console.log(err);
 });
 
 }
 descargarArchivo(archivo: any){
-console.log(archivo);
 this.cargar();
 
 this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{
@@ -146,7 +141,6 @@ if(res.value == true){
 this.terminado();
 return;
 }
-console.log(res);
 this.terminado();
 
 
@@ -247,13 +241,11 @@ return;
 }
 if(archivo === undefined || archivo === ''){return;}
 
-console.log(archivo);
 this.nombreArchivo = archivo.name.trim();
 this.verificarArchivo(archivo);
 this.file = archivo;
 this.formData.append('archivo', this.file, this.file.name);
 
-console.log(this.file);
 }
 
 
@@ -310,7 +302,6 @@ return true;}
 }
 }
 onPageChange(number: number) {
-console.log('change to page', number);
 this.config.currentPage = number;
 }
 
@@ -327,12 +318,10 @@ this.router.navigate(['todas-tareas',this.id]);
 }
 quitarArchivo(){
 this.valorInputFile = this.inputArchivo.nativeElement.value;
-console.log(this.inputArchivo);
 this.valorInputFile = "";
 this.inputVacio = false;
 this.comentario = "";
 this.file = null;
-console.log(this.valorInputFile )
 
 }
 }

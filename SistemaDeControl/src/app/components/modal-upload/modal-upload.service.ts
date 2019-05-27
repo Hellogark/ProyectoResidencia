@@ -5,7 +5,6 @@ import { Usuario } from '../../models/usuario.model';
   providedIn: 'root'
 })
 export class ModalUploadService {
-  public tipo:string;
   public id: string;
   public invisible: boolean = false;
   public usuario:Usuario;
@@ -13,14 +12,12 @@ export class ModalUploadService {
   constructor() { }
   ocultarModal(){
     this.invisible = false;
-    this.tipo = null;
     this.id = null;
     this.usuario = null;
   }
-  mostrarModal(tipo:string, usuario:Usuario){   
+  mostrarModal(usuario:Usuario){   
     this.invisible = true;
     this.id = usuario._id;
-    this.tipo = tipo;
     this.usuario = usuario;
 
   }

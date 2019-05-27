@@ -39,7 +39,7 @@ export class VerTodosProyectosComponent implements OnInit {
   };
   
   onPageChange(number: number) {
-    console.log('change to page', number);
+    
     this.config.currentPage = number;
   }
   constructor(public _proyectoService:ProyectoService, public _usuarioService:UsuarioService, public router:Router) { }
@@ -57,7 +57,7 @@ export class VerTodosProyectosComponent implements OnInit {
      this.cargarDataProyectos(this.proyectos);
      //this.participantes = res.proyectos.participantes;
     
-     console.log(this.data);
+     
      this.cargando=false;
  });
  }
@@ -82,7 +82,7 @@ export class VerTodosProyectosComponent implements OnInit {
 
   }
   buscarProyecto(termino: string){
-    console.log(termino);   
+    
       if(termino ==='' || termino.length <=0){ 
         this.proyectos = [];
         this.dataProyectos = [];
@@ -91,7 +91,7 @@ export class VerTodosProyectosComponent implements OnInit {
         return;}
         this._proyectoService.buscarProyectos(termino)
         .subscribe((proyectos:Proyecto[]) =>{
-          console.log(proyectos);
+          
           
           this.proyectos = proyectos;
           this.cargarDataProyectos(this.proyectos);

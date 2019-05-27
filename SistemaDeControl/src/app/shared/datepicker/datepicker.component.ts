@@ -41,7 +41,7 @@ private inputText: string = "";
       this._tareasService.enviarFechaObservable.subscribe( res =>{  
         this.clearDate();
         this.iniciarFecha(res); 
-        console.log(res);         
+        
         
       });
     }
@@ -58,7 +58,7 @@ private inputText: string = "";
 
   iniciarFecha( fecha: any){
     this.disableUntil();
-    if(fecha == '' || fecha == undefined|| fecha == null){console.log(fecha);return;   }
+    if(fecha == '' || fecha == undefined|| fecha == null)return;
     let dia = fecha.split('/')[0];
   
     let mes = fecha.split('/')[1];
@@ -69,7 +69,7 @@ private inputText: string = "";
     this.ngxdp.clearDate();
 }
 onDateChanged(event: IMyDateModel): void {
-  console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+ 
   if(event.formatted !== '') {
       this.validDate = true;
       this.inputText = event.formatted;
@@ -79,7 +79,7 @@ onDateChanged(event: IMyDateModel): void {
 }
 
 onInputFieldChanged(event: IMyInputFieldChanged): void {
-  console.log('onInputFieldChanged(): Value: ', event.value, ' - dateFormat: ', event.dateFormat, ' - valid: ', event.valid);
+  
   this.validDate = event.valid;
   this.inputText = event.value;
   this.fechaSeleccion.emit(event.value.toString());

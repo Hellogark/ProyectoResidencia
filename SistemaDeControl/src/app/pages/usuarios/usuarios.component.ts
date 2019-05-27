@@ -44,7 +44,7 @@ public labels: any = {
 };
 
 onPageChange(number: number) {
-  console.log('change to page', number);
+  
   this.config.currentPage = number;
 }
 
@@ -69,7 +69,6 @@ onPageChange(number: number) {
     
   
     this._modalUploadService.notificacion.subscribe( res =>{
-      console.log(res);
       this.cargarUsuario();
     });
    
@@ -78,8 +77,8 @@ onPageChange(number: number) {
   }
   cargarUsuario(){
    
+    
     this.cargando = true;
-    console.log(this.cargando+'cargando')
     this._usuarioService.cargarUsuarios(this.desde,this._usuarioService.token)
     .subscribe( (res:any) =>{
       this.totalRegistros = res.total;
@@ -87,7 +86,7 @@ onPageChange(number: number) {
       
       this.cargarDataUsuarios(this.usuarios);
          
-      console.log(this.dataUsuarios)
+      
       
      
     
@@ -99,7 +98,7 @@ onPageChange(number: number) {
   }
 
   buscarUsuario(termino: string){
-    console.log(termino);
+    
     if(this.termino ==='' || termino.length <=0){ 
       this.usuarios = [];
       this.dataUsuarios = [];
@@ -110,7 +109,7 @@ onPageChange(number: number) {
       
       this._usuarioService.buscarUsuarios(termino)
       .subscribe((usuarios:Usuario[]) =>{
-        console.log(usuarios);
+       
         
         this.usuarios = usuarios;
         this.cargarDataUsuarios(this.usuarios);
@@ -123,7 +122,7 @@ onPageChange(number: number) {
   }
 
   borrarUsuario(usuarioBorrar:Usuario){
-    console.log(usuarioBorrar);
+    
     if(usuarioBorrar._id === this._usuarioService.usuario._id){
       Swal.fire(
         'No puedes borrar este usuario',
@@ -152,15 +151,15 @@ onPageChange(number: number) {
 
   }
   guardarUsuario(usuario:Usuario){
-    console.log(usuario)
+   
     this._usuarioService.actualizarUsuarios(usuario)
     .subscribe(res =>{
-      console.log(res);
+   
     });
 
   }
   mostrarModal(usuario:Usuario){
-    this._modalUploadService.mostrarModal('usuarios',usuario);
+    this._modalUploadService.mostrarModal(usuario);
 
   }
   cargarDataUsuarios(usuarios: Usuario[]){

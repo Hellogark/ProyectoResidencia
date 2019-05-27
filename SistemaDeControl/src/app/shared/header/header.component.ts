@@ -20,8 +20,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     //Usar la data del usuario donde se ocupe
-    this.usuario = this._usuarioService.usuario;
-    console.log(this.usuario._id);
+    this.usuario = this._usuarioService.usuario;    
     this.role = this.usuario.role;
     this._modalUploadService.notificacion.subscribe(res => {
 

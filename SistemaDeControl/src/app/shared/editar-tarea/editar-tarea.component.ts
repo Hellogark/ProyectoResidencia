@@ -53,7 +53,7 @@ export class EditarTareaComponent implements OnInit {
          this.cerrarTarea();
         });
       }
-      console.log(this.mostrar +' | '+this.crear)
+      
       if(this.tarea == undefined && !this.crear){
         this.datos = false; 
         this.obtenerTarea();
@@ -74,7 +74,7 @@ export class EditarTareaComponent implements OnInit {
     ngOnChanges(){       
       
         if(this.crear){ 
-          console.log('entrea');
+          
           this.crearTareaVacia();    
           this.inicializarTags();     
         }else{
@@ -116,7 +116,7 @@ export class EditarTareaComponent implements OnInit {
     
   }
   obtenerTarea(){
-      console.log(this.idTarea);
+      
         //Se itera el objeto del participante para extraer después el nombre     
     this._tareasService.obtenerTarea(this.idTarea).subscribe( (res:any)=>{
       this.datos = false;
@@ -148,7 +148,7 @@ export class EditarTareaComponent implements OnInit {
       this.tarea.ultimoEditor = this._usuarioService.usuario._id;
       this.tarea.participante = tarea.participante;
 
-        console.log(tarea.participante);
+        
 
         if(this.crear){
         this._tareasService.crearTarea(this.tarea,this.proyecto._id).                  
@@ -159,7 +159,7 @@ export class EditarTareaComponent implements OnInit {
 
         }else{
           this._tareasService.editarTarea(this.tarea).subscribe( res =>{
-            console.log(res);
+            
             this._tareasService.recargarTarea();
 
           });
@@ -184,7 +184,7 @@ export class EditarTareaComponent implements OnInit {
             
             this.participante = this.tarea.participante;              
             this.arregloParticipante.push(this.participante);
-            console.log(this.arregloParticipante);
+           
 
           }
         }
