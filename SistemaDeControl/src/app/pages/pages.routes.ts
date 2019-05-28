@@ -38,7 +38,7 @@ const pagesRoutes: Routes = [
             {path: 'ver-proyectos', component: VerTodosProyectosComponent, data:{titulo: 'Ver todos los proyectos'},
              canActivate:[AdminGuard,VerificaTokenGuard],
             
-        },,
+        },
             {path: 'editarProyecto/:id', component: EditarProyectoComponent, data:{titulo: 'Editar Proyecto'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
             { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' }, canActivate: [VerificaTokenGuard]},     
