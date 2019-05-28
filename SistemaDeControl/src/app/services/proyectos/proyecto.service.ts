@@ -80,14 +80,14 @@ export class ProyectoService {
   }
 
   editarProyecto(proyecto:Proyecto){
-    console.log(proyecto._id);
+    
     let url = URL_SERVICIOS + 'proyectos/editarProyecto/'+proyecto._id+'?token='+this.token;
     return this.http.put(url,proyecto).pipe( map( (res:any) => {
       Swal.fire({
         title: 'Proyecto actualizado con éxito',
         type: 'success'       
       });
-      console.log(res);
+      
       return res;
     }));
 
@@ -111,7 +111,7 @@ export class ProyectoService {
 
     let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivos?token='+this.token;
     return this.http.put(url,formData,{reportProgress:true}).pipe( map( (res:any) => {
-     console.log(res);
+     
        Swal.fire({
         title: res.mensaje,       
         type: 'success',        
@@ -120,7 +120,7 @@ export class ProyectoService {
 
       });  
     }),catchError((err) =>{
-      console.log(err);
+     
       Swal.fire({
         title: err.error.errors.message,       
         type: 'error',        

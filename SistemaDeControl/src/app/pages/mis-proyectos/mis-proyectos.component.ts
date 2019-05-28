@@ -43,7 +43,7 @@ export class MisProyectosComponent implements OnInit {
   };
   
   onPageChange(number: number) {
-    console.log('change to page', number);
+  
     this.config.currentPage = number;
   }
   ngOnInit() {
@@ -67,17 +67,17 @@ export class MisProyectosComponent implements OnInit {
           
         this.dataProyectos.push(this.data);
       });      
-      console.log(res);
+   
       this.cargando=false;
     });
   }
   buscarProyecto(termino: string){
-    console.log(termino);
+ 
     if(termino ==''){return;}
     this.encontrado = true;
     this._proyectoService.buscarProyectos(termino)
     .subscribe((proyectos:Proyecto[]) =>{
-      console.log(proyectos);
+     
       
       this.proyectos = proyectos;
      

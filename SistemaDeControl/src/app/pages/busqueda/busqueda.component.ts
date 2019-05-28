@@ -31,17 +31,14 @@ export class BusquedaComponent implements OnInit {
   ngOnInit() {
   }
   buscar(termino: string){
-    console.log(termino)
     if(this.termino == ''){
       this.router.navigate(['/dashboard'])
       return;
     }
    let url = URL_SERVICIOS+'busqueda/todo/'+termino+'?token='+this.token;
     this.http.get(url).subscribe( (res:any) =>{
-      console.log(res);
       this.usuarios = res.usuarios;
       this.proyectos = res.proyectos;
-      console.log(this.proyectos);
     });
 
   }

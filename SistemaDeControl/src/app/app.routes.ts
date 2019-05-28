@@ -12,7 +12,8 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     {path: '',component: PagesComponent, canActivate: [LoginGuardGuard],
-    loadChildren: './pages/pages.module#PagesModule'},{ path: '**', component: NopagefoundComponent }
+    loadChildren: './pages/pages.module#PagesModule'},
+    { path: '**', component: NopagefoundComponent }
 ];
 
 

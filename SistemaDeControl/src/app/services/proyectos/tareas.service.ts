@@ -62,7 +62,7 @@ export class TareasService {
     let url = URL_SERVICIOS +'tareas/'+id+'/tareas?token='+this.token;
     return this.http.get(url).pipe( map((res:any)=>{
      
-       res.proyectos.forEach(element => {
+       res.tareas.forEach(element => {
         this.proyecto = element;
       });
       
@@ -96,7 +96,7 @@ export class TareasService {
   }
 
   editarTarea(tarea:Tareas){
-    console.log(tarea);
+    
     let url = URL_SERVICIOS + 'tareas/actualizar/'+tarea._id+'?token='+this.token;
     return this.http.put(url,tarea).pipe( map(  (res:any) =>{
       Swal.fire({
@@ -112,7 +112,7 @@ export class TareasService {
 
   }
   eliminarTarea(idProyecto:string,idTarea:string){
-    console.log(idProyecto)
+    
     let url = URL_SERVICIOS + 'tareas/eliminarTarea/'+idTarea;
     url+='?token='+this.token;
     return this.http.put(url,{idProyecto}).pipe( map( (res:any) =>{
@@ -124,7 +124,7 @@ export class TareasService {
      })
       return res;
     }),catchError((err) =>{
-      console.log(err);
+      
       Swal.fire({
         title: err.error.errors.message,       
         type: 'error',        

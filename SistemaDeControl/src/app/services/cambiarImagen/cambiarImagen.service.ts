@@ -12,8 +12,8 @@ export class CambiarImagenService {
 
   constructor() { }
 
-  subirImagen(archivo:File, tipo:string, id:string,token:string){
-    let url = URL_SERVICIOS + 'upload/' + tipo + '/'+id ;
+  subirImagen(archivo:File, id:string,token:string){
+    let url = URL_SERVICIOS + 'upload/'+id ;
     url+='?token='+token;
     return new Promise( (resolve, reject) =>{
       let formData: FormData = new FormData();
@@ -22,10 +22,10 @@ export class CambiarImagenService {
       xhr.onreadystatechange = function(){
         if(xhr.readyState ===4){
           if(xhr.status === 200){
-            console.log('imagen subida');
+            
             resolve(JSON.parse(xhr.response));
           }else{
-            console.log('Falló la subida de la iamgen');
+           
             reject(JSON.parse(xhr.response));
           }
 
@@ -47,12 +47,12 @@ export class CambiarImagenService {
       
       formData.append('archivoObj',JSON.stringify(archivoObj));
     
-      console.log(JSON.stringify(archivoObj));
+     
      
       xhr.onreadystatechange = function(){
         if(xhr.readyState ===4){
           if(xhr.status === 200){
-            console.log('archivo subido');
+         
             resolve(JSON.parse(xhr.response));
           }else{
             if(xhr.status === 409){
@@ -61,7 +61,7 @@ export class CambiarImagenService {
                 type: 'error'
     
                 });
-            console.log('Falló la subida del archivo');
+           
             //reject();
             }
          

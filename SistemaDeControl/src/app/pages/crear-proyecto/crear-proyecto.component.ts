@@ -39,7 +39,6 @@ import { Router } from '@angular/router';
         '',
       );
         this._proyectoService.crearProyecto(this.proyecto, this.usuario._id).subscribe(res =>{
-          console.log(res);
         });
     }
 

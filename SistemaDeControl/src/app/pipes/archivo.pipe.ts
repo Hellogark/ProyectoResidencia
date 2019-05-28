@@ -9,8 +9,7 @@ import { UsuarioService } from '../services/service.index';
 export class ArchivoPipe implements PipeTransform {
   id: string; 
   transform(archivo: string,id:string ,tipo: string,_usuarioService:UsuarioService  ): any {
-  
-    //this.id = localStorage.getItem('id');
+      
     if(!id){
       return;
     }
@@ -28,7 +27,7 @@ export class ArchivoPipe implements PipeTransform {
       break;
 
       default: 
-      console.log('Imagen de usuario no existe');
+      
       url +=  '/'+tipo+'/'+id+'/xxdx';
     }
     return url;

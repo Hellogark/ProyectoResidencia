@@ -1,15 +1,10 @@
 
 import { CommonModule } from '@angular/common';
 import { PipesModule } from './../pipes/pipes.module';
-
 import { NgModule } from '@angular/core';
 import { PAGES_ROUTES } from './pages.routes';
-
 import { SharedModule} from '../shared/shared.module';
-
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-// ng2-charts
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 

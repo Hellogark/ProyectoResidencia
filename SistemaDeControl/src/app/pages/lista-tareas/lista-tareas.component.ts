@@ -56,15 +56,15 @@ export class ListaTareasComponent implements OnInit {
     this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
       this.mostrar = this._tareasService.mostrar;
       this.crear = this._tareasService.crear;
-      console.log("mostrar "+this.mostrar+" |crear " +this.crear);
+     
       
     });    
     this.dataLista = true;
-    console.log("Datos Listos");
+   
   }
 
     ngOnChanges(){
-      console.log(this.terminado);
+    
 
 
     }
@@ -79,7 +79,7 @@ export class ListaTareasComponent implements OnInit {
     } 
     obtenerProyecto(){
       this._proyectoService.obtenerProyecto(this.id).subscribe( res =>{
-        console.log(res);
+   
         this.proyecto = res.proyecto;
       });
 

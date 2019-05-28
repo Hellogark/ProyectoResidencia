@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = this._usuarioService.usuario;
-    console.log(this.usuario)
   }
 
   guardar(usuario:Usuario){
@@ -77,11 +76,9 @@ export class ProfileComponent implements OnInit {
     let urlImagenTemp = reader.readAsDataURL(this.archivoEnviar);
     reader.onloadend = () =>{
       this.imagenTemp = reader.result.toString();
-      return console.log(this.imagenSubir);
     }
   }
   cambiarImagen(){
-    console.log(this.imagenSubir);
     this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id)
     this.croppedImage = '';
     this.imageChangedEvent = '';

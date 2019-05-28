@@ -58,17 +58,15 @@ export class ModalUploadComponent implements OnInit {
 
     reader.onloadend = () =>{
       this.imagenTemp = reader.result.toString();
-      return console.log(this.imagenSubir);
     }
   }
  
   
   subirImagen(){
     this.cargar();
-    this._cambiarImageService.subirImagen(this.imagenSubir, this._modalUploadService.tipo, 
+    this._cambiarImageService.subirImagen(this.imagenSubir, 
       this._modalUploadService.id, this._usuarioService.token)
     .then( res =>{
-      console.log(res);
       this.terminado();
       this._modalUploadService.notificacion.emit(res);
       
@@ -79,7 +77,6 @@ export class ModalUploadComponent implements OnInit {
       });
       this.clearForm();
     }).catch(err =>{
-      console.log('error en la carga de imagen');
       
 
     });

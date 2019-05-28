@@ -83,7 +83,7 @@ public labels: any = {
           this.nombres.push(this.nuevoParticipantes);
         });
         
-        console.log(this.nombres);
+        
     });
    }
      cargarProyecto(id){
@@ -95,27 +95,27 @@ public labels: any = {
         this.archivosMostrar= res.proyecto.archivos;
     
         this.obtenerUsuarios();
-        console.log(this.proyecto);
+        
         this.dataLista=true;
         this.cargando = false;
     }, (err) =>{
-     console.log(err);
+     
     });
   
   }
   descargarArchivo(archivo: any){      
-    console.log(archivo);
+    
     this.cargar();
    
     this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{   
-      console.log(res);
+      
      if(res.value == true){
       this.terminado();
       return;
      }
       
       this.archivoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.location.protocol + '//' + window.location.host + "/descarga.rar"); 
-      console.log(this.archivoUrl);
+      
       this.terminado();
       saveAs(res,'Recursos.rar');
 });
@@ -135,7 +135,7 @@ public labels: any = {
     this.progressRef.complete();
   }
   onPageChange(number: number) {
-    console.log('change to page', number);
+    
     this.config.currentPage = number;
   }
 }

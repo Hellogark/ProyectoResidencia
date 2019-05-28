@@ -38,19 +38,16 @@ const pagesRoutes: Routes = [
             {path: 'ver-proyectos', component: VerTodosProyectosComponent, data:{titulo: 'Ver todos los proyectos'},
              canActivate:[AdminGuard,VerificaTokenGuard],
             
-        },{path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
-            canActivate: [AdminGuard,VerificaTokenGuard]},
+        },,
             {path: 'editarProyecto/:id', component: EditarProyectoComponent, data:{titulo: 'Editar Proyecto'},
-            canActivate:[AdminGuard,VerificaTokenGuard],
-            
-            },
-            { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' },
-                
-        }, { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '} },
-
+            canActivate:[AdminGuard,VerificaTokenGuard]},
+            { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' }, canActivate: [VerificaTokenGuard]},     
             { path: 'nuevoProyecto', component: CrearProyectoComponent, data: { titulo: 'Crear Nuevo Proyecto' }, 
             canActivate:[AdminGuard,VerificaTokenGuard] },
-            
+            //Tareas
+            { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '}, canActivate: [VerificaTokenGuard] },
+            {path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
+            canActivate: [AdminGuard,VerificaTokenGuard]}
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
             
         ];
