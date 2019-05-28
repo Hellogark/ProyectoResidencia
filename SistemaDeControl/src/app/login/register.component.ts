@@ -75,14 +75,10 @@ export class RegisterComponent implements OnInit {
     return ( group: FormGroup ) => {
     let pass1 = group.controls[campo1].value;
     let pass2 = group.controls[campo2].value;
-    if ( pass1 === pass2 ) {
-    return null;
-    }
-    return {
-    sonIguales: true
+    if ( pass1 === pass2 )  return null;
+    return {sonIguales: true};
     };
-    };
-    }
-    }
+  }
+}
   
    

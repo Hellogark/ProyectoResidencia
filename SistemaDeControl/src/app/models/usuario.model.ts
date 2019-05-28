@@ -12,8 +12,6 @@ export class Usuario {
         public proyectos?: string[],
         public passwordAnterior?: string,
         public _id?: string
-        ){
-
-    }
+        ){}
 
 }

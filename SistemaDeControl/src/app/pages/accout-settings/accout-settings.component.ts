@@ -23,7 +23,7 @@ export class AccoutSettingsComponent implements OnInit {
     this._ajustes.aplicarTema( tema );
 
   }
-
+  //Colocar check al dar clic en el tema
   aplicarCheck( link: any ) {
 
     let selectores: any = document.getElementsByClassName('selector');
@@ -36,6 +36,7 @@ export class AccoutSettingsComponent implements OnInit {
 
   }
 
+  //Colocar check al entrar en la página
   colocarCheck() {
 
     let selectores: any = document.getElementsByClassName('selector');

@@ -16,7 +16,5 @@ export class Proyecto {
                 public tareas?: Tareas[],
                 public _id?: string
 
-            ){
-
-            }
+            ){}
 }

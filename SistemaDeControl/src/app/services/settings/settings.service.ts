@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class SettingsService {
@@ -8,13 +8,13 @@ export class SettingsService {
     temaUrl: 'assets/css/colors/default.css',
     tema: 'default'
   };
-
+  //@inject(DOCUMENT) sirve para obtener todo el DOM del index
   constructor( @Inject(DOCUMENT) private _document ) {
     this.cargarAjustes();
   }
 
   guardarAjustes() {
-    // console.log('Guardado en el localStorage');
+    // Guardad ajustes en localStorage
     localStorage.setItem('ajustes', JSON.stringify( this.ajustes )  );
   }
 
@@ -22,12 +22,12 @@ export class SettingsService {
 
     if ( localStorage.getItem('ajustes') ) {
       this.ajustes = JSON.parse( localStorage.getItem('ajustes') );
-      // console.log( 'Cargando del localstorage' );
+      //Cargando del localstorage
 
       this.aplicarTema( this.ajustes.tema );
 
     } else {
-      // console.log( 'Usando valores por defecto' );
+      //Usando valores por defecto
       this.aplicarTema( this.ajustes.tema );
     }
 

@@ -7,8 +7,5 @@ export class Archivos {
             public fechaCreacion?: string ,
             public fechaModificado? :string,
             public _id?: string 
-           
-
-
         ){}
 }
