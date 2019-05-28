@@ -16,32 +16,31 @@ import { MisTareasComponent } from "./mis-tareas/mis-tareas.component";
 
 
 
-const pagesRoutes: Routes = [
-   
+const PAGESROUTES: Routes = [
+    //Nota: Rutas que tengan AdminGuard, solo podrán ser accesadas por los administradores
+            //Rutas generales
             { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' }, 
-                canActivate: [VerificaTokenGuard]
-                },
-            {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'},canActivate: [VerificaTokenGuard]},
-            
-            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' },canActivate: [VerificaTokenGuard] },            
-            { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'},canActivate: [VerificaTokenGuard]},
+                canActivate: [VerificaTokenGuard]},
+            { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' },
+                canActivate: [VerificaTokenGuard] },            
+            { path: 'perfil', component: ProfileComponent, data: {titulo: 'Perfil de usuario'},
+            canActivate: [VerificaTokenGuard]},
             { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo: 'Buscador'},           
             canActivate:[AdminGuard,VerificaTokenGuard]},
             
-            //Mantenimientos
+            //Usuarios
             {path: 'ver-usuarios', component: UsuariosComponent, data:{titulo: 'Ver todos los usuarios'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
             {path: 'ver-usuarios/:termino', component: UsuariosComponent, data:{titulo: 'Usuario Seleccionado'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
-            //Proyecto
-            
+            //Proyecto            
+            {path: 'verProyecto/:id', component:VerProyectoComponent,data:{titulo: 'Ver proyecto'},canActivate: [VerificaTokenGuard]},
             {path: 'ver-proyectos', component: VerTodosProyectosComponent, data:{titulo: 'Ver todos los proyectos'},
-             canActivate:[AdminGuard,VerificaTokenGuard],
-            
-        },
+             canActivate:[AdminGuard,VerificaTokenGuard]},
             {path: 'editarProyecto/:id', component: EditarProyectoComponent, data:{titulo: 'Editar Proyecto'},
             canActivate:[AdminGuard,VerificaTokenGuard]},
-            { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' }, canActivate: [VerificaTokenGuard]},     
+            { path: 'misproyectos', component: MisProyectosComponent, data: { titulo: 'Proyectos en los que participo' }, 
+            canActivate: [VerificaTokenGuard]},     
             { path: 'nuevoProyecto', component: CrearProyectoComponent, data: { titulo: 'Crear Nuevo Proyecto' }, 
             canActivate:[AdminGuard,VerificaTokenGuard] },
             //Tareas
@@ -53,4 +52,4 @@ const pagesRoutes: Routes = [
         ];
 
 
-export const PAGES_ROUTES = RouterModule.forChild( pagesRoutes );
+export const PAGES_ROUTES = RouterModule.forChild( PAGESROUTES );

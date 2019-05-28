@@ -8,7 +8,7 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 import { LoginGuardGuard } from './services/service.index';
 
 
-const appRoutes: Routes = [
+const APPROUTES: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     {path: '',component: PagesComponent, canActivate: [LoginGuardGuard],
@@ -17,4 +17,4 @@ const appRoutes: Routes = [
 ];
 
 
-export const APP_ROUTES = RouterModule.forRoot( appRoutes, { useHash: true } );
+export const APP_ROUTES = RouterModule.forRoot( APPROUTES, { useHash: true } );

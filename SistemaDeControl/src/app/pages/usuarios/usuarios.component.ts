@@ -76,24 +76,13 @@ onPageChange(number: number) {
    
   }
   cargarUsuario(){
-   
-    
     this.cargando = true;
     this._usuarioService.cargarUsuarios(this.desde,this._usuarioService.token)
     .subscribe( (res:any) =>{
       this.totalRegistros = res.total;
       this.usuarios = res.usuarios;
-      
       this.cargarDataUsuarios(this.usuarios);
-         
-      
-      
-     
-    
       this.cargando = false;
-     
-       
-
     });
   }
 

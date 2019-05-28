@@ -56,21 +56,11 @@ export class ListaTareasComponent implements OnInit {
     this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
       this.mostrar = this._tareasService.mostrar;
       this.crear = this._tareasService.crear;
-     
-      
     });    
     this.dataLista = true;
    
   }
 
-    ngOnChanges(){
-    
-
-
-    }
-
-
- 
     obtenerTareas(){
       this._tareasService.obtenerTodasTareas(this.id).subscribe( res =>{
         

@@ -34,11 +34,11 @@ export class SettingsService {
   aplicarTema( tema: string ) {
 
 
-    const url = `assets/css/colors/${ tema }.css`;
-    this._document.getElementById('tema').setAttribute('href', url );
+    const URL = `assets/css/colors/${ tema }.css`;
+    this._document.getElementById('tema').setAttribute('href', URL );
 
     this.ajustes.tema = tema;
-    this.ajustes.temaUrl = url;
+    this.ajustes.temaUrl = URL;
 
     this.guardarAjustes();
 

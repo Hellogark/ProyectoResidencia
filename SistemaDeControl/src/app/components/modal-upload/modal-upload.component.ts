@@ -97,9 +97,9 @@ export class ModalUploadComponent implements OnInit {
     //preview
     this.croppedImage = event.base64;
     //Convertir para subir
-    const archivoSeleccionado = this.archivoEnviar;
-    this.imagenSubir = new File([event.file], archivoSeleccionado.name,
-      {type: archivoSeleccionado.type});
+    const ARCHIVO_SELECCIONADO = this.archivoEnviar;
+    this.imagenSubir = new File([event.file], ARCHIVO_SELECCIONADO.name,
+      {type: ARCHIVO_SELECCIONADO.type});
 }
 
 loadImageFailed() {

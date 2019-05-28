@@ -115,213 +115,201 @@ this.nombres.push(this.nuevoParticipantes);
 
 //Obtener proyecto de la bd
 cargarProyecto(id){
-this.dataLista = false;
-this._proyectoService.obtenerProyecto(id).subscribe( (res:any) => {
-this.proyecto = res.proyecto;
-this.participantes = res.proyecto.participantes;
-let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';
-this.fecha = fecha;
-this.archivosMostrar = res.proyecto.archivos;
-this.descripcion = this.proyecto.descripcion;
+    this.dataLista = false;
+    this._proyectoService.obtenerProyecto(id).subscribe( (res:any) => {
+    this.proyecto = res.proyecto;
+    this.participantes = res.proyecto.participantes;
+    let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';
+    this.fecha = fecha;
+    this.archivosMostrar = res.proyecto.archivos;
+    this.descripcion = this.proyecto.descripcion;
 
-this.obtenerUsuarios();
+    this.obtenerUsuarios();
 
 
-this.dataLista=true;
-this.cargando = false;
-}, (err) =>{
-});
+    this.dataLista=true;
+    this.cargando = false;
+    }, (err) =>{});
 
 }
 descargarArchivo(archivo: any){
-this.cargar();
+        this.cargar();
 
-this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{
-if(res.value == true){
-this.terminado();
-return;
-}
-this.terminado();
-
-
-saveAs(res,'Recursos.rar');
-});
+        this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre)
+        .subscribe( (res:any) =>{
+             if(res.value == true){
+              this.terminado();
+              return;
+             }
+             this.terminado();
+         
+         
+             saveAs(res,'Recursos.rar');
+        });
 }
 eliminarArchivo(archivo: Archivos){
-Swal.fire({
-title: '¿Estás seguro que deseas eliminar el archivo?',
-type: 'warning',
-showCancelButton: true,
-confirmButtonColor: '#3085d6',
-cancelButtonColor: '#d33',
-confirmButtonText: 'Eliminar!',
-cancelButtonText: 'Cancelar'
-}).then((result) => {
-if (result.value) {
-this._proyectoService.eliminarArchivo(archivo._id,this.proyecto)
-.subscribe(res =>{
-Swal.fire({
-title: 'Archivo eliminado con éxito',
-type: 'success'
+        Swal.fire({
+        title: '¿Estás seguro que deseas eliminar el archivo?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar!',
+        cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                this._proyectoService.eliminarArchivo(archivo._id,this.proyecto)
+                .subscribe(res =>{
+                    Swal.fire({
+                    title: 'Archivo eliminado con éxito',
+                    type: 'success'
 
-});
-this.cargarProyecto(this.id);
+                    });
+                 this.cargarProyecto(this.id);
+                 });
 
-});
-
-}
-});
+            }
+        });
 }
 obtenerFecha = (fecha) =>this.fecha = fecha;
 //Guardar Proyecto
 editarProyecto(proyecto:Proyecto){
-this.cargar();
-this.proyecto.nombre = proyecto.nombre;
-this.proyecto.descripcion = proyecto.descripcion;
-this.proyecto.nombreEmpresa = proyecto.nombreEmpresa;
-this.proyecto.participantes = proyecto.participantes;
-this.proyecto.ultimoEditor = this._usuarioService.usuario._id;
-this.proyecto.fechaProyectada  = this.fecha != undefined ? this.fecha.toString():'';
+        this.cargar();
+        this.proyecto.nombre = proyecto.nombre;
+        this.proyecto.descripcion = proyecto.descripcion;
+        this.proyecto.nombreEmpresa = proyecto.nombreEmpresa;
+        this.proyecto.participantes = proyecto.participantes;
+        this.proyecto.ultimoEditor = this._usuarioService.usuario._id;
+        this.proyecto.fechaProyectada  = this.fecha != undefined ? this.fecha.toString():'';
 
-if (this.file != null || this.file){
-if(this.comentario == '' || this.comentario == null){
-Swal.fire({
-title: 'Introduce una descripción',
-type:'error',
-timer:3500
+        if (this.file != null || this.file){
+            if(this.comentario == '' || this.comentario == null){
+                Swal.fire({
+                title: 'Introduce una descripción',
+                type:'error',
+                timer:3500
+                });
+                this.terminado();
+                return;
+            }
+            this.archivo = {
+                nombre: this.file.name.trim(),
+                comentario: this.comentario,
+                responsable: this._usuarioService.usuario._id,
+            };
 
-});
-this.terminado();
-return;
-}
-this.archivo = {
-nombre: this.file.name.trim(),
-comentario: this.comentario,
-responsable: this._usuarioService.usuario._id,
-};
+            this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).
+            subscribe( (res:any) =>{            
+                this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
+                    this.cargarProyecto(this.id);
+                this.terminado();
+                });
+            });
 
-this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
-
-this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
-    this.cargarProyecto(this.id);
-this.terminado();
-});
-});
-
-}else{
-this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
-    this.cargarProyecto(this.id);
-this.terminado();
-});
-
-}
-
+        }else{
+            this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
+                this.cargarProyecto(this.id);
+                this.terminado();});
+            }
 }
 subirArchivo(){
-this.archivo = {
-nombre: this.file.name.trim(),
-comentario: this.comentario,
-responsable: this._usuarioService.usuario._id,
-};
+    this.archivo = {
+        nombre: this.file.name.trim(),
+        comentario: this.comentario,
+        responsable: this._usuarioService.usuario._id,
+    };
 
-this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
-this.terminado();
-});
+    this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
+        this.terminado();
+    });
 }
+archivoInput(archivo) {
+    let size = Math.round(((archivo.size / 1024) / 1024) * 100) / 100;
+    if (size > 10) {
+        Swal.fire(
+            {text: 'El tamaño del archivo es muy grande, max: 10MB', toast: true, type: 'error'}
+        );
+        return;
+    }
+    if (archivo === undefined || archivo === '') return;
 
-archivoInput(archivo){
-let size = Math.round(((archivo.size / 1024)/1024)*100)/100;
-if(size > 10){
-Swal.fire({
-text: 'El tamaño del archivo es muy grande, max: 10MB',
-toast:true,
-type:'error'
-});
-return;
-}
-if(archivo === undefined || archivo === ''){return;}
-
-this.nombreArchivo = archivo.name.trim();
-this.verificarArchivo(archivo);
-this.file = archivo;
-this.formData.append('archivo', this.file, this.file.name);
+    this.nombreArchivo = archivo
+        .name
+        .trim();
+    this.verificarArchivo(archivo);
+    this.file = archivo;
+    this
+        .formData
+        .append('archivo', this.file, this.file.name);
 
 }
 
 
 //Verificar archvio
-verificarArchivo(archivo){
-let nombreA = archivo.name;
+verificarArchivo(archivo) {
+    let nombreA = archivo.name;
 
-if(nombreA != ""){
-let ext = nombreA.split('.');
+    if (nombreA != "") {
+        let ext = nombreA.split('.');
 
-if(ext.length > 2) {
-Swal.fire({
-title: 'Error al cargar archivo, solo se permiten archivos zip y/o rar',
-type: 'error',
-toast: true,
-timer: 3500
-})
-nombreA="";
-this.inputArchivo = null;
-this.inputVacio = false;
+        if (ext.length > 2) {
+            Swal.fire(
+                {title: 'Error al cargar archivo, solo se permiten archivos zip y/o rar', type: 'error', toast: true, timer: 3500}
+            )
+            nombreA = "";
+            this.inputArchivo = null;
+            this.inputVacio = false;
 
-return false;
-}
+            return false;
+        }
 
-let arr1 = new Array;
-arr1 = nombreA.split("\\");
-let len = arr1.length;
-let img1 = arr1[len-1];
-let filext = img1.substring(img1.lastIndexOf(".")+1);
+        let arr1 = new Array;
+        arr1 = nombreA.split("\\");
+        let len = arr1.length;
+        let img1 = arr1[len - 1];
+        let filext = img1.substring(img1.lastIndexOf(".") + 1);
 
-// Checking Extension
+        // Checking Extension
 
-if(!(filext == "rar" || filext == "zip" )){
+        if (!(filext == "rar" || filext == "zip")) {
 
+            Swal.fire(
+                {title: 'Error al cargar archivo, solo se permiten archivos zip y/o rar', type: 'error', toast: true, timer: 3500}
+            )
+            nombreA = "";
+            this.inputArchivo = '';
+            this.inputVacio = false;
 
-Swal.fire({
-title: 'Error al cargar archivo, solo se permiten archivos zip y/o rar',
-type: 'error',
-toast: true,
-timer: 3500
-})
-nombreA= "";
-this.inputArchivo = '';
-this.inputVacio = false;
+            return false;
+        } else {
+            this.inputVacio = true;
+            return true;
+        }
 
-
-return false;
-} else
-{
-this.inputVacio = true;
-
-return true;}
-
-}
+    }
 }
 onPageChange(number: number) {
-this.config.currentPage = number;
+    this.config.currentPage = number;
 }
 
 cargar() {
-this.progressRef.start();
+    this.progressRef.start();
 }
 
 terminado() {
-this.progressRef.complete();
+    this.progressRef.complete();
 }
-irTareas(){
+irTareas() {
 
-this.router.navigate(['todas-tareas',this.id]);
+    this.router.navigate([ 'todas-tareas',this.id]);
 }
-quitarArchivo(){
-this.valorInputFile = this.inputArchivo.nativeElement.value;
-this.valorInputFile = "";
-this.inputVacio = false;
-this.comentario = "";
-this.file = null;
+quitarArchivo() {
+    this.valorInputFile = this.inputArchivo.nativeElement.value;
+    this.valorInputFile =  "";
+    this.inputVacio = false;
+    this.comentario =  "";
+    this.file = null;
 
 }
+
 }

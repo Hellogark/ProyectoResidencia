@@ -1,9 +1,10 @@
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from './../../services/usuario/usuario.service';
 import { ProyectoService } from './../../services/proyectos/proyecto.service';
-import { Component, OnInit, Input } from '@angular/core';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
+
 import  Swal  from 'sweetalert2';
 import { PaginationInstance } from 'ngx-pagination';
 import {DataTableModule} from "angular-6-datatable-cc";
@@ -46,18 +47,12 @@ export class VerTodosProyectosComponent implements OnInit {
 
   ngOnInit() {
     this.cargarProyectos();
-   
-   
   }
   cargarProyectos(){
     this._proyectoService.cargarProyectos()
     .subscribe( (res:any) =>{
-     
      this.proyectos = res.proyectos;
      this.cargarDataProyectos(this.proyectos);
-     //this.participantes = res.proyectos.participantes;
-    
-     
      this.cargando=false;
  });
  }

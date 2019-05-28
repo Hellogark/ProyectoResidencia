@@ -31,76 +31,82 @@ export class ProfileComponent implements OnInit {
     this.usuario = this._usuarioService.usuario;
   }
 
-  guardar(usuario:Usuario){
-      this.usuario.nombre = usuario.nombre;
-      this.usuario.correo = usuario.correo;
-      //Añadir al schema el password viejo y realizar esto
-      this._usuarioService.actualizarUsuario(this.usuario).subscribe((res)=>{
-             });
-  }
-  cambiarPass(passAnt:any,pass1:any,pass2:any){
+  guardar(usuario : Usuario) {
+    this.usuario.nombre = usuario.nombre;
+    this.usuario.correo = usuario.correo;
+    //Añadir al schema el password viejo y realizar esto
+    this
+        ._usuarioService
+        .actualizarUsuario(this.usuario)
+        .subscribe((res) => {});
+}
+cambiarPass(passAnt : any, pass1 : any, pass2 : any) {
     this.passwordNuevo1 = pass1.value;
     this.passwordNuevo2 = pass2.value;
     this.passwordAnterior = passAnt.value;
 
-    
-    if(this.passwordNuevo1 != this.passwordNuevo2){
-   
-      return; 
+    if (this.passwordNuevo1 != this.passwordNuevo2) {
+
+        return;
     }
     this.usuario.password = this.passwordNuevo2;
-    this.usuario.passwordAnterior= this.passwordAnterior;
-    this._usuarioService.actualizarUsuario(this.usuario).subscribe((res)=>{});
-  }
+    this.usuario.passwordAnterior = this.passwordAnterior;
+    this
+        ._usuarioService
+        .actualizarUsuario(this.usuario)
+        .subscribe((res) => {});
+}
 
-  seleccionImagen(archivo){
+seleccionImagen(archivo) {
     this.imageChangedEvent = archivo;
-    this.archivoEnviar = archivo.target.files[0];
-    
-    if(!this.archivoEnviar){
-      this.imagenSubir = null;
-      return;
+    this.archivoEnviar = archivo
+        .target
+        .files[0];
+
+    if (!this.archivoEnviar) {
+        this.imagenSubir = null;
+        return;
     }
-    
-    
-    if(this.archivoEnviar.type.indexOf('image') <0){
-      Swal.fire({
-        title: 'Solo se permiten imágenes',
-        type: 'error'       
-      });
-      this.imagenSubir=null;
-      return;
-      
-    }  
+
+    if (this.archivoEnviar.type.indexOf('image') < 0) {
+        Swal.fire({title: 'Solo se permiten imágenes', type: 'error'});
+        this.imagenSubir = null;
+        return;
+
+    }
     let reader = new FileReader();
     let urlImagenTemp = reader.readAsDataURL(this.archivoEnviar);
-    reader.onloadend = () =>{
-      this.imagenTemp = reader.result.toString();
+    reader.onloadend = () => {
+        this.imagenTemp = reader
+            .result
+            .toString();
     }
-  }
-  cambiarImagen(){
-    this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id)
+}
+cambiarImagen() {
+    this
+        ._usuarioService
+        .cambiarImagen(this.imagenSubir, this.usuario._id)
     this.croppedImage = '';
     this.imageChangedEvent = '';
     this.imagenTemp = '';
     this.inputFile.nativeElement.value = "";
-  }
-  
-  imageCropped(event: ImageCroppedEvent) {
+}
+
+imageCropped(event : ImageCroppedEvent) {
     //preview
     this.croppedImage = event.base64;
     //Convertir para subir
-    const archivoSeleccionado = this.archivoEnviar;
-    this.imagenSubir = new File([event.file], archivoSeleccionado.name,
-      {type: archivoSeleccionado.type});
+    const ARCHIVO_SELECCIONADO = this.archivoEnviar;
+    this.imagenSubir = new File(
+        [event.file],
+        ARCHIVO_SELECCIONADO.name,
+        {type: ARCHIVO_SELECCIONADO.type}
+    );
 }
 loadImageFailed() {
-  Swal.fire({
-    title: 'Hubo un problema al cargar la imagen',
-    type: 'error',
-    timer:3500,
-    toast:true
-  })
+    Swal.fire(
+        {title: 'Hubo un problema al cargar la imagen', type: 'error', timer: 3500, toast: true}
+    )
 }
 
 }

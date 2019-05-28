@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
    
     if(this.forma.invalid){ return;}
  
-    const fecha = new Date().toLocaleDateString('es-ES');
+    const FECHA = new Date().toLocaleDateString('es-ES');
     
     
 
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       this.forma.value.correo,
       this.forma.value.password,
       this.forma.value.empresa,
-      fecha,
+      FECHA,
           
 
     );

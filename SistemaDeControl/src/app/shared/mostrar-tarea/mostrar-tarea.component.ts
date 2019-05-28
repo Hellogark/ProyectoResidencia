@@ -114,8 +114,8 @@ export class MostrarTareaComponent implements OnInit {
     }
     this.mostrar = true;
     this.crear = true;      
-    const tarea = {};
-    this._tareasService.estadoTarea(this.mostrar,this.crear,tarea); 
+    const TAREA = {};
+    this._tareasService.estadoTarea(this.mostrar,this.crear,TAREA); 
   }
 
   editarTareaF(tarea:Tareas){

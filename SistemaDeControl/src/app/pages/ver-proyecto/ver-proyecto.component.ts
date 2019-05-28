@@ -114,8 +114,8 @@ public labels: any = {
       return;
      }
       
-      this.archivoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.location.protocol + '//' + window.location.host + "/descarga.rar"); 
-      
+      this.archivoUrl = this.sanitizer.
+      bypassSecurityTrustResourceUrl(window.location.protocol + '//' + window.location.host + '/descarga.rar'); 
       this.terminado();
       saveAs(res,'Recursos.rar');
 });
