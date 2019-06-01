@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/service.index';
-import { debounceTime} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-busqueda',
