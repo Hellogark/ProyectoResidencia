@@ -17,7 +17,7 @@ export class BreadcrumbsComponent implements OnInit {
                private meta: Meta
               
                ) {
-
+                //Actualizar meta tag para generar el breadcrumb
     this.getDataRoute()
     .subscribe( data => {
       
@@ -38,7 +38,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  //Filtrar los eventos de la página para obtener los datos 
   getDataRoute() {
     return this.router.events.pipe(
 
