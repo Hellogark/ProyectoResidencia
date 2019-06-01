@@ -47,7 +47,7 @@ const PAGESROUTES: Routes = [
             { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '}, canActivate: [VerificaTokenGuard] },
             {path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
             canActivate: [AdminGuard,VerificaTokenGuard]},
-            { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
             
         ];
 
