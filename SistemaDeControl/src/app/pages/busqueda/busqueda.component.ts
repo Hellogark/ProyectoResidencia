@@ -32,7 +32,7 @@ export class BusquedaComponent implements OnInit {
   }
   buscar(termino: string){
     if(this.termino == ''){
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/inicio'])
       return;
     }
    let url = URL_SERVICIOS+'busqueda/todo/'+termino+'?token='+this.token;

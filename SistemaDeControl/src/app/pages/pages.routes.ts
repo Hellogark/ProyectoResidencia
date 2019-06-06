@@ -1,18 +1,18 @@
-import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component';
-import { AdminGuard } from './../services/guards/admin.guard';
-import { BusquedaComponent } from './busqueda/busqueda.component';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
-import { MisProyectosComponent } from './mis-proyectos/mis-proyectos.component';
-import { CrearProyectoComponent } from './crear-proyecto/crear-proyecto.component';
-import { ProfileComponent } from './profile/profile.component';
-import {UsuariosComponent} from './usuarios/usuarios.component';
-import {VerTodosProyectosComponent} from './ver-todos-proyectos/ver-todos-proyectos.component';
-import {EditarProyectoComponent} from './editar-proyecto/editar-proyecto.component';
 import { VerificaTokenGuard } from '../services/service.index';
+import { AdminGuard } from './../services/guards/admin.guard';
+import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+import { CrearProyectoComponent } from './crear-proyecto/crear-proyecto.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EditarProyectoComponent } from './editar-proyecto/editar-proyecto.component';
 import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
+import { MisProyectosComponent } from './mis-proyectos/mis-proyectos.component';
 import { MisTareasComponent } from "./mis-tareas/mis-tareas.component";
+import { ProfileComponent } from './profile/profile.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { VerProyectoComponent } from './ver-proyecto/ver-proyecto.component';
+import { VerTodosProyectosComponent } from './ver-todos-proyectos/ver-todos-proyectos.component';
 import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
 
 
@@ -20,7 +20,7 @@ import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.componen
 const PAGESROUTES: Routes = [
     //Nota: Rutas que tengan AdminGuard, solo podrán ser accesadas por los administradores
             //Rutas generales
-            { path: 'dashboard', component: DashboardComponent, data: { titulo: 'Dashboard' }, 
+            { path: 'inicio', component: DashboardComponent, data: { titulo: 'Inicio' }, 
                 canActivate: [VerificaTokenGuard]},
             { path: 'account-settings', component: AccoutSettingsComponent, data: { titulo: 'Configuración de la interfaz' },
                 canActivate: [VerificaTokenGuard] },            
