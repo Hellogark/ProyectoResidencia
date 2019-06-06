@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
      }
 
      if(this._usuarioService.token){
-       window.location.assign('/dashboard');
+       window.location.assign('/inicio');
      } 
   }
 
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     let usuario = new Usuario(null,forma.value.correo,forma.value.password,null,null);
     this._usuarioService.login(usuario, forma.value.recuerdame)
     .subscribe( resp=>{      
-      window.location.assign('/dashboard');});
+      window.location.assign('/inicio');});
   }
 
 }
