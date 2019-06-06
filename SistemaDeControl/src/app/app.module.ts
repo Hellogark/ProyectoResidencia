@@ -57,7 +57,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     
       
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy} ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

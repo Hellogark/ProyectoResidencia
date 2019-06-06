@@ -17,4 +17,4 @@ const APPROUTES: Routes = [
 ];
 
 
-export const APP_ROUTES = RouterModule.forRoot( APPROUTES, { useHash: false } );
+export const APP_ROUTES = RouterModule.forRoot( APPROUTES, { useHash: true } );
