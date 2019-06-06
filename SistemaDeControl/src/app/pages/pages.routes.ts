@@ -13,6 +13,7 @@ import {EditarProyectoComponent} from './editar-proyecto/editar-proyecto.compone
 import { VerificaTokenGuard } from '../services/service.index';
 import { ListaTareasComponent } from './lista-tareas/lista-tareas.component';
 import { MisTareasComponent } from "./mis-tareas/mis-tareas.component";
+import { NopagefoundComponent } from '../shared/nopagefound/nopagefound.component';
 
 
 
@@ -47,7 +48,8 @@ const PAGESROUTES: Routes = [
             { path:'mistareas', component: MisTareasComponent, data: {titulo: 'Mis tareas '}, canActivate: [VerificaTokenGuard] },
             {path: 'todas-tareas/:id', component: ListaTareasComponent,data:{titulo: 'Tareas del proyecto'},
             canActivate: [AdminGuard,VerificaTokenGuard]},
-            { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: '**', component: NopagefoundComponent}
             
         ];
 

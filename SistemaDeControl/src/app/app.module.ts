@@ -25,6 +25,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 //librerias
 
@@ -56,7 +57,7 @@ import { RegisterComponent } from './login/register.component';
     
       
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
