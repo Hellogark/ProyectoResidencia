@@ -58,7 +58,7 @@ export class VerificaTokenGuard implements CanActivate {
 
   expirado(fechaExp:number){
     let ahora = new Date().getTime() / 1000;
-    
+   
     if(fechaExp < ahora){
 
       return true;

@@ -20,7 +20,7 @@
               <div class=" col-2  col-md-1 col-xl-1 align-self-center"> <i class="fa fa-chevron-left pointer" aria-hidden="true" (click)="regresar()"></i> </div>              
               <div class="col-10 col-sm-6 col-md-6 col-xl-7" *ngIf="dataLista && proyecto != null"> <h3> <b> Tareas de {{proyecto?.nombre}} </b></h3></div>
               <div class="col-10 " *ngIf="dataLista && proyecto == null"> <h3> <b> Mis Tareas </b></h3></div>
-              <div  class="col-12  col-sm-4 col-md-4 col-xl-3 text-right " *ngIf="path != '/mistareas'">  <button type="button" class="btn btn-themecolor btn-block" (click)="nuevaTarea()"><i class="fa  fa-plus mr-2" aria-hidden="true"></i><small> Crear Tarea</small></button> </div>
+              <div  class="col-12  col-sm-4 col-md-4 col-xl-4 text-right " *ngIf="path != '/mistareas'">  <button type="button" class="btn btn-themecolor btn-block" (click)="nuevaTarea()"><i class="fa  fa-plus mr-2" aria-hidden="true"></i><small> Crear Tarea</small></button> </div>
             </div>
             
           </div>
