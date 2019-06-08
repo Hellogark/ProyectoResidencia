@@ -31,9 +31,11 @@ export class MostrarTareaComponent implements OnInit {
   crear: boolean ;
   finalizado:boolean; 
   cambio:boolean = false;
-  eliminar: boolean = false;
+  
   idProyecto: string;
   path: string;
+  totalFinalizadas: number;
+  porcentajeFinalizado: number;
   datosTarea: Object = {};
   progressRef: NgProgressRef;
 
@@ -49,7 +51,8 @@ export class MostrarTareaComponent implements OnInit {
     this.path = this._location.path().toString();
     this.progressRef = this.progress.ref('progreso');
     this.cargar();
-    this.mostrarTipo();    
+    this.mostrarTipo();  
+    
     this.nombres =  this._tareasService.nombres;      
     this._tareasService.mostrarTareaObservable.subscribe( (res:any) =>{
     this.mostrar = this._tareasService.mostrar;
@@ -72,11 +75,13 @@ export class MostrarTareaComponent implements OnInit {
   } 
 
   obtenerTareas(){
-    this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( res =>{
+    this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( (res: Tareas[]) =>{
         
-      this._tareasService.tareas=res;
+      this._tareasService.tareas = res;
         this.tareas = this._tareasService.tareas;
-        this.eliminar = !event;
+        console.log(this.tareas)
+        console.log(this.tareas['length']+2);      
+        this.porcentaje(this.tareas);
         this.dataLista=true;
        
       });
@@ -85,6 +90,7 @@ export class MostrarTareaComponent implements OnInit {
       this._tareasService.obtenerMisTareas(this._usuarioService.usuario._id.toString()).subscribe( res =>{
         this._tareasService.tareas=res.tareas;      
         this.tareas = res.tareas;
+        this.porcentaje(this.tareas);
         this.dataLista = true;
         
       });
@@ -167,15 +173,18 @@ export class MostrarTareaComponent implements OnInit {
       this._location.back();
     }
   }
-  cerrarTarea($event){
-    
-    this.mostrar = false;
-    this.crear = false;
-
-  }
   mostrarTipo(){
     if(this.path == '/mistareas'){this.obtenerMisTareas(); this.proyecto = null}else{this.obtenerTareas();this.obtenerProyecto();}        
 
+  }
+
+  porcentaje(tareas:Tareas[]){       
+      this.totalFinalizadas = this.tareas.filter(( tarea ) => { return tarea.finalizado; } ).length;
+     
+
+        this.porcentajeFinalizado = ( this.totalFinalizadas * 100) / tareas['length'];
+      
+      console.log(this.porcentajeFinalizado);
   }
  
   
