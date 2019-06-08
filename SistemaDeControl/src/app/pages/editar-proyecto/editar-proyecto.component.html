@@ -17,10 +17,10 @@
            </div>       
          </div>
     </div>
-      <div class="card bg-white">
+      <div class="card bg-white animated fadeInDown" *ngIf="dataLista">
         <div class="card-body no-gutters">
 
-          <form ngNativeValidate #f="ngForm" *ngIf="dataLista" (ngSubmit)="editarProyecto(f.value)"
+          <form ngNativeValidate #f="ngForm"  (ngSubmit)="editarProyecto(f.value)"
             class="form-horizontal form-material " id="nProyectoForm" action="index.html" autocomplete="off">
 
             <div class="col-12 mb-5">

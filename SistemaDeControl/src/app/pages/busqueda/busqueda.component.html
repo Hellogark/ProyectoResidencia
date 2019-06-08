@@ -1,7 +1,7 @@
-<div class="row no-gutters">
-  <div class="col-12 col-xl-6" *ngIf="usuarios.length >0">
+<div class="row no-gutters d-flex justify-content-between">
+  <div class="col-12 col-xl-5" *ngIf="usuarios.length >0">
     <h1 class="text-themecolor">Usuarios</h1>
-  <div class="card-columns">
+  <div class="card-columns animated fadeInDown">
     <div class="card mb-0  " *ngFor="let usuario of usuarios">
       <div class="card-body">
           <img class="card-img-top rounded-circle" [src]="usuario.img | archivo:usuario._id:'usuarios'" >
@@ -20,9 +20,9 @@
     <h1 class="text-themecolor mt-3 mt-xl-0">Proyectos</h1>
 
           <div class="card mt-3 mt-xl-0 w-75" *ngFor="let proyecto of proyectos">
-            <div class="card-body">
+            <div class="card-body animated fadeInLeft">
               <div class="col">
-                  <h1 class="card-title text-center m-auto" >Nombre del Proyecto: {{proyecto.nombre}}</h1>                 
+                  <h2 class="card-title text-center m-auto" >Nombre del Proyecto: {{proyecto.nombre}}</h2>                 
               </div>
               <div class="col mt-2">
                   <h3 class="card-text text-center m-auto" >Cliente: {{proyecto.nombreEmpresa}}</h3>     

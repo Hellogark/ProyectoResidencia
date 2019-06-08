@@ -15,7 +15,7 @@
   <ng-progress id="progreso" [spinner]="true"  [thick]="true"></ng-progress>  
   <div class="col-12 col-xl-6 " [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}"  >
       <div class="progress" *ngIf=" this.porcentajeFinalizado > 0" >
-          <div class="progress-bar label-themecolor " role="progressbar" [ngStyle]="{width: this.porcentajeFinalizado+'%'}" [attr.ariaValuenow]="porcentajeFinalizado" aria-valuemin="0" aria-valuemax="100">{{porcentajeFinalizado}}</div>
+          <div class="progress-bar label-themecolor text-secondary " role="progressbar" [ngStyle]="{width: this.porcentajeFinalizado+'%'}" [attr.ariaValuenow]="porcentajeFinalizado" aria-valuemin="0" aria-valuemax="100">{{porcentajeFinalizado}}</div>
       </div>
   <div class="overflowY col-12 col-xl-12 ">
       <div class="card mb-0 ">
