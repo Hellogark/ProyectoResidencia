@@ -14,6 +14,7 @@ declare function init_plugins();
 export class LoginComponent implements OnInit {
   recuerdame:boolean = false;
   correo: string;
+  logueando: boolean = false;
   constructor( public router: Router, public _usuarioService:UsuarioService) { }
 
   ngOnInit() {
@@ -31,11 +32,14 @@ export class LoginComponent implements OnInit {
   ingresar(forma:NgForm) {
     if(forma.invalid){return;}
 
+    this.logueando = true;
     
     let usuario = new Usuario(null,forma.value.correo,forma.value.password,null,null);
     this._usuarioService.login(usuario, forma.value.recuerdame)
-    .subscribe( resp=>{      
-      this.router.navigate(['/inicio']);});
+    .subscribe( resp=>{
+      
+      this.router.navigate(['/inicio']);
+    });
   }
 
 }
