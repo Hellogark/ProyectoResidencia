@@ -223,8 +223,7 @@ export class EditarTareaComponent implements OnInit {
 
     this._tareasService.estadoTarea(this.mostrar,this.crear);
    
-    this.editar.emit(this.mostrar);
-    this.editar.emit(this.crear);
+
   }
 
 
