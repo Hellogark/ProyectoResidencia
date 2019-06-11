@@ -13,12 +13,12 @@
 <div class="row no-gutters justify-content-center" *ngIf="dataLista">   
    
   <ng-progress id="progreso" [spinner]="true"  [thick]="true"></ng-progress>  
-  <div class="col-12 col-xl-6 " [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}"  >
+  <div class="col-12 col-xl-6 animated fadeInDownBig" [ngClass]="{'col-xl-10': !mostrar,'col-xl-6': mostrar}"  >
       <div class="progress" *ngIf=" this.porcentajeFinalizado > 0" >
           <div class="progress-bar label-themecolor text-dark font-weight-bold " role="progressbar" [ngStyle]="{width: this.porcentajeFinalizado+'%'}" [attr.ariaValuenow]="porcentajeFinalizado" aria-valuemin="0" aria-valuemax="100">{{porcentajeFinalizado}}%</div>
       </div>
   <div class="overflowY col-12 col-xl-12 ">
-      <div class="card mb-0 ">
+      <div class="card mb-0 animated fadeInUpBig">
           <div class="card-header bg-white ">
             <div class="row  justify-content-around">
               <div class=" col-2  col-md-1 col-xl-1 align-self-center"> <i class="fa fa-chevron-left pointer" aria-hidden="true" (click)="regresar()"></i> </div>              
@@ -68,9 +68,9 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-6 pl-0 pl-xl-3 mt-md-3 mt-3 mt-xl-0" *ngIf=" mostrar">
+    <div class="col-12 col-xl-6 pl-0 pl-xl-3 mt-md-3 mt-3 mt-xl-0" [@fadeInOut] *ngIf=" mostrar" >
       
-            <app-editar-tarea (cerrarTarea)="cerrarTarea($event)" [idTarea]="idTarea"  [proyecto]="proyecto" [(mostrar)]="mostrar" [(crear)]="crear"></app-editar-tarea> 
+            <app-editar-tarea  (cerrarTarea)="cerrarTarea($event)" [idTarea]="idTarea"  [proyecto]="proyecto" [(mostrar)]="mostrar" [(crear)]="crear"></app-editar-tarea> 
     
             </div>
 </div>   
