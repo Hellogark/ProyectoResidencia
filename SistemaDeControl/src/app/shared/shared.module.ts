@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
@@ -22,7 +21,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
     imports: [
-        RouterModule,
+        RouterModule,       
         CommonModule,
         PipesModule,      
         NgxMyDatePickerModule.forRoot(),

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { Proyecto } from 'src/app/models/proyectos.model';
 import { Usuario } from 'src/app/models/usuario.model';
@@ -9,11 +10,11 @@ import { TagInputModule } from 'ngx-chips';
 import  Swal from 'sweetalert2';
 import { Tareas } from '../../models/tareas.model';
 import * as moment from 'moment';
-
 @Component({
   selector: 'app-editar-tarea',
   templateUrl: './editar-tarea.component.html',
-  styleUrls: ['./editar-tarea.component.css']
+  styleUrls: ['./editar-tarea.component.css'],
+ 
 })
 export class EditarTareaComponent implements OnInit {
   @Input() fecha: any;
@@ -36,7 +37,7 @@ export class EditarTareaComponent implements OnInit {
   datos: boolean = false;
   descripcion: string;
   datosTarea: Object = {};
-  path:string;
+  path:string; 
 
   @ViewChild(DatepickerComponent) date;
   constructor(public router:Router, public _usuarioService:UsuarioService, public _proyectoService:ProyectoService,
@@ -86,6 +87,8 @@ export class EditarTareaComponent implements OnInit {
     }
   
   ngOnDestroy(){
+    
+   
     this.cerrarTarea();
 
   }
@@ -215,16 +218,17 @@ export class EditarTareaComponent implements OnInit {
     
 
   }
-  cerrarTarea(){
-    this.mostrar = false;
-    this.crear = false;
-    this.tarea={};
-    this.fecha = '';
-
-    this._tareasService.estadoTarea(this.mostrar,this.crear);
-   
-    this.editar.emit(this.mostrar);
-    this.editar.emit(this.crear);
+  cerrarTarea(){ 
+  
+      
+      this.mostrar = false;
+      this.crear = false;
+      this.tarea={};
+      this.fecha = '';
+      this._tareasService.estadoTarea(this.mostrar,this.crear);   
+      this.editar.emit(this.mostrar);
+      this.editar.emit(this.crear);
+  
   }
 
 

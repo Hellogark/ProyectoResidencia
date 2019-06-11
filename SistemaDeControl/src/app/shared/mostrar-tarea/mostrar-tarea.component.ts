@@ -1,10 +1,11 @@
 import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { ProyectoService } from '../../services/proyectos/proyecto.service';
 import { TareasService } from '../../services/proyectos/tareas.service';
 import { Tareas } from '../../models/tareas.model';
 import { Proyecto } from '../../models/proyectos.model';
-import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { Usuario } from '../../models/usuario.model';
@@ -14,7 +15,16 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-mostrar-tarea',
   templateUrl: './mostrar-tarea.component.html',
-  styleUrls: ['./mostrar-tarea.component.css']
+  styleUrls: ['./mostrar-tarea.component.css'],
+  animations: [
+    // the fade-in/fade-out animation.
+    trigger('fadeInOut', [  
+      transition(':leave', animate('600ms ease', style({
+        transform: 'translate3d(-100%, 0, 0)',
+        opacity: 0,     
+      }))),
+    ])
+  ],
 })
 export class MostrarTareaComponent implements OnInit {
   proyecto: Proyecto; 
@@ -31,7 +41,6 @@ export class MostrarTareaComponent implements OnInit {
   crear: boolean ;
   finalizado:boolean; 
   cambio:boolean = false;
-  
   idProyecto: string;
   path: string;
   totalFinalizadas: number;
