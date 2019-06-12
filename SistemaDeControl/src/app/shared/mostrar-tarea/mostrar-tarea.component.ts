@@ -87,9 +87,7 @@ export class MostrarTareaComponent implements OnInit {
     this._tareasService.obtenerTodasTareas(this.idProyecto).subscribe( (res: Tareas[]) =>{
         
       this._tareasService.tareas = res;
-        this.tareas = this._tareasService.tareas;
-        console.log(this.tareas)
-        console.log(this.tareas['length']+2);      
+        this.tareas = this._tareasService.tareas;         
         this.porcentaje(this.tareas);
         this.dataLista=true;
        
@@ -188,12 +186,8 @@ export class MostrarTareaComponent implements OnInit {
   }
 
   porcentaje(tareas:Tareas[]){       
-      this.totalFinalizadas = this.tareas.filter(( tarea ) => { return tarea.finalizado; } ).length;
-     
-
-        this.porcentajeFinalizado = ( this.totalFinalizadas * 100) / tareas['length'];
-      
-      console.log(this.porcentajeFinalizado);
+      this.totalFinalizadas = this.tareas.filter(( tarea ) => { return tarea.finalizado; } ).length;     
+        this.porcentajeFinalizado = ( this.totalFinalizadas * 100) / tareas['length'];       
   }
  
   

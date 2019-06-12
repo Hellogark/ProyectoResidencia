@@ -60,6 +60,23 @@ export class UsuarioService {
     return this.token.length >1 ? true : false;
     }
   }
+   login(usuario: Usuario, recordar: boolean = false) {
+    if (recordar) {
+      localStorage.setItem('correo', usuario.correo);
+    } else {
+      this.token = '';
+      this.usuario = null;
+      this.router.navigate(['/login']);
+    }
+
+    let url = URL_SERVICIOS + 'login';
+    return this.http.post(url, usuario).pipe(map((res: any) => {
+     
+     this.guardarStorage(res.id,res.token,res.usuario, res.menu);
+      return true;
+    }));
+  }
+
   logout(){
     this.usuario = null;
     this.token = '';
@@ -121,35 +138,7 @@ export class UsuarioService {
     }
   }
 
-  login(usuario: Usuario, recordar: boolean = false) {
-    if (recordar) {
-      localStorage.setItem('correo', usuario.correo);
-    } else {
-      this.token = '';
-      this.usuario = null;
-      this.router.navigate(['/login']);
-    }
-
-    let url = URL_SERVICIOS + 'login';
-    return this.http.post(url, usuario).pipe(map((res: any) => {
-     
-     this.guardarStorage(res.id,res.token,res.usuario, res.menu);
-      return true;
-    }),catchError((err) =>{
-     
-      Swal.fire({
-        title: err.error.mensaje,
-        type: 'error',
-        toast: true,
-        timer: 3500
-
-
-      }      );
-      return throwError(err);
-
-    }));
-  }
-
+ 
   actualizarUsuario(usuario:Usuario){
     let url = URL_SERVICIOS+'usuario/'+usuario._id;
     url+='?token='+this.token;
@@ -173,7 +162,7 @@ export class UsuarioService {
 
 
       }      );
-      return throwError(console.log('upsi'));
+      return throwError(err);
 
     }));
 

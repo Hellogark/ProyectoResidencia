@@ -36,37 +36,19 @@ export class RegisterComponent implements OnInit {
 }
   
 
-  registrarUsuario(){
-   
-    if(!this.forma.value.condiciones){
-      Swal.fire({
-      type: 'error',
-      title: 'Importante',
-      text: 'Debe de aceptar las condiciones antes de registrarse'    
-    });
-    return;
-      
-    }   
-   
-    if(this.forma.invalid){ return;}
- 
-    const FECHA = new Date().toLocaleDateString('es-ES');
-    
-    
-
+  registrarUsuario(){         
+    if(this.forma.invalid){ return;} 
+    const FECHA = new Date().toLocaleDateString('es-ES');    
     let usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.correo,
       this.forma.value.password,
       this.forma.value.empresa,
-      FECHA,
-          
-
+      FECHA,          
     );
     //La resp muestra lo que muestra el postman
     this._usuarioService.crearUsuario(usuario).
-    subscribe(resp  =>{
-     
+    subscribe(resp  =>{     
       this.router.navigate(['/login']);
     });
   }

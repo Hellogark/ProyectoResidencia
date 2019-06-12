@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/usuario/usuario.service';
 import { Usuario } from '../models/usuario.model';
-
+import Swal from 'sweetalert2'
 declare function init_plugins();
 
 @Component({
@@ -39,6 +39,16 @@ export class LoginComponent implements OnInit {
     .subscribe( resp=>{
       
       this.router.navigate(['/inicio']);
+    },(err)=>{
+      this.logueando = false;     
+       Swal.fire({
+        title: 'El servicio no está disponible, intenta de nuevo más tarde',
+        type: 'error',
+        toast: true,
+        timer: 3500
+
+
+      });
     });
   }
 
