@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       empresa: new FormControl(null,Validators.required),
       condiciones : new FormControl(true)
 
-    }, {validators: this.sonIguales('password','password2')});   
+    }, {validators: this.sonDiferentes('password','password2')});   
     
 }
   
@@ -53,12 +53,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  sonIguales( campo1: string, campo2: string ) {
+  sonDiferentes( campo1: string, campo2: string ) {
     return ( group: FormGroup ) => {
     let pass1 = group.controls[campo1].value;
     let pass2 = group.controls[campo2].value;
     if ( pass1 === pass2 )  return null;
-    return {sonIguales: true};
+    return {sonDiferentes: true};
     };
   }
 }
