@@ -2,10 +2,12 @@
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <div  class="container-fluid login-register login-sidebar animated fadeIn" style="background-image:url(assets/images/background/login-register.jpg);">
-    <div class="row no-gutters justify-content-end h-100">       
+    <div class="row no-gutters justify-content-end h-100">   
+        
         <div class="col-12 col-xl-4 ">
-            <div *ngIf="logueando; then loader" ></div>
-                <div class=" card bg-white tarjeta h-100 ">
+            
+            <div *ngIf="logueando; then loader"></div>   
+            <div class=" card bg-white tarjeta h-100 ">
                  <div class="card-body ">
                     <form ngNativeValidate #f="ngForm" class="form-horizontal form-material" (ngSubmit)="ingresar(f)">
                         <a href="javascript:void(0)" class="text-center db"><img src="assets/images/logod.png" alt="Home" /></a>                <div class="form-group m-t-40">
@@ -38,8 +40,7 @@
                             </div>
                         </div>
                     </form>
-                        
-                    </div>
+                   
             </div>
         </div>
     </div>
@@ -47,16 +48,20 @@
 
 <ng-template #loader>
  
-        <div class="col-12 d-flex  justify-content-center h-100 animated fadeIn">
+    <div class="d-flex flex-column no-gutters text-center  animated fadeIn loader">
+        <div class="m-auto">
 
-            <div class="spinner-grow text-themecolor align-self-center" role="status" >
-                    <span class="sr-only">Cargando...</span>
-            </div>      
+                <div class="col-12 d-block">
+                    <div class="spinner-grow text-themecolor align-self-center" role="status" >
+                        <span class="sr-only">Cargando...</span>   
+                    </div>
+                </div>
+                <div class="col-12 d-block">
+                    <p>Iniciando sesión...</p>
+                </div>
         </div>
-            <div class="col-12 d-flex justify-content-center h-100">
-                    <p>Cargando...</p>
-            </div>
-      
+    </div>
+
 
 </ng-template>
 <!-- ============================================================== -->

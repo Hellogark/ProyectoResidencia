@@ -120,7 +120,7 @@ export class ProyectoService {
 
       });  
     }),catchError((err) =>{
-     
+      console.log(err)
       Swal.fire({
         title: err.error.errors.message,       
         type: 'error',        

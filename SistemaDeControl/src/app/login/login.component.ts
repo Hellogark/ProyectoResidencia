@@ -30,26 +30,31 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar(forma:NgForm) {
+    
+    
     if(forma.invalid){return;}
-
+    
     this.logueando = true;
     
     let usuario = new Usuario(null,forma.value.correo,forma.value.password,null,null);
+     
     this._usuarioService.login(usuario, forma.value.recuerdame)
     .subscribe( resp=>{
       
       this.router.navigate(['/inicio']);
     },(err)=>{
       this.logueando = false;     
-       Swal.fire({
+      Swal.fire({
         title: 'El servicio no está disponible, intenta de nuevo más tarde',
         type: 'error',
         toast: true,
         timer: 3500
-
-
+        
+        
       });
     });
+  
+ 
   }
 
 }

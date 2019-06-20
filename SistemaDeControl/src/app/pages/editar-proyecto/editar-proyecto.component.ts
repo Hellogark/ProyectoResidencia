@@ -221,6 +221,16 @@ subirArchivo(){
 
     this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
         this.terminado();
+    }, (err) =>{
+        this.terminado();
+        Swal.fire({
+            title: 'Hubo un problema al subir el archivo, inténtalo de nuevo',
+            type: 'error',
+            toast: true,
+            timer: 3500
+    
+    
+          });
     });
 }
 archivoInput(archivo) {
