@@ -122,6 +122,7 @@ cargarProyecto(id){
     let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';
     this.fecha = fecha;
     this.archivosMostrar = res.proyecto.archivos;
+    console.log(this.archivosMostrar);
     this.descripcion = this.proyecto.descripcion;
 
     this.obtenerUsuarios();
@@ -132,6 +133,28 @@ cargarProyecto(id){
     }, (err) =>{});
 
 }
+subirArchivo(){
+    this.archivo = {
+        nombre: this.file.name.trim(),
+        comentario: this.comentario,
+        responsable: this._usuarioService.usuario._id,
+    };
+
+    this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
+        this.terminado();
+    }, (err) =>{
+        this.terminado();
+        Swal.fire({
+            title: 'Hubo un problema al subir el archivo, inténtalo de nuevo',
+            type: 'error',
+            toast: true,
+            timer: 3500
+    
+    
+          });
+    });
+}
+
 descargarArchivo(archivo: any){
         this.cargar();
 
@@ -147,6 +170,7 @@ descargarArchivo(archivo: any){
              saveAs(res,'Recursos.rar');
         });
 }
+
 eliminarArchivo(archivo: Archivos){
         Swal.fire({
         title: '¿Estás seguro que deseas eliminar el archivo?',
@@ -212,27 +236,7 @@ editarProyecto(proyecto:Proyecto){
                 this.terminado();});
             }
 }
-subirArchivo(){
-    this.archivo = {
-        nombre: this.file.name.trim(),
-        comentario: this.comentario,
-        responsable: this._usuarioService.usuario._id,
-    };
 
-    this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
-        this.terminado();
-    }, (err) =>{
-        this.terminado();
-        Swal.fire({
-            title: 'Hubo un problema al subir el archivo, inténtalo de nuevo',
-            type: 'error',
-            toast: true,
-            timer: 3500
-    
-    
-          });
-    });
-}
 archivoInput(archivo) {
     let size = Math.round(((archivo.size / 1024) / 1024) * 100) / 100;
     if (size > 10) {

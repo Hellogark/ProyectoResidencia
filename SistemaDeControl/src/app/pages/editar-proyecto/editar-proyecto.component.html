@@ -178,10 +178,11 @@
                           <td class="align-middle">{{archivo.comentario}}</td>                            
                               <td class="align-middle">{{archivo.responsable.nombre}}</td>
                          <td class="align-middle">
-                           <button class="btn btn-themecolor mr-3" type="button" (click)="descargarArchivo( archivo )">
+                           <a [href]="archivo.archivoURL" target="blank">
+                           <button class="btn btn-themecolor mr-3" type="button">
                              <i class="fa fa-download" aria-hidden="true"></i>
-
-                           </button>
+                            </button>
+                            </a>
                            <button class="btn btn-danger" type="button" (click)="eliminarArchivo(archivo)">
                              <i class="fa fa-trash" aria-hidden="true"></i>
                            </button>

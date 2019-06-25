@@ -25,7 +25,7 @@ export class CambiarImagenService {
             
             resolve(JSON.parse(xhr.response));
           }else{
-           
+                                    
             reject(JSON.parse(xhr.response));
           }
 
