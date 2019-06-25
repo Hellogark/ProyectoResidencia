@@ -13,7 +13,7 @@ export class ArchivoPipe implements PipeTransform {
     if(!id){
       return;
     }
-    let url = URL_SERVICIOS + 'imgPerfil';
+    let url = "https://res.cloudinary.com/dinamycstest/image/upload";
     if(!archivo){
       return url + '/'+tipo+'/'+id+'/noImagenExistente';
     }
