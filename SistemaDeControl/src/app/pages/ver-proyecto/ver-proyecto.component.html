@@ -111,10 +111,11 @@
                               <td class="align-middle">{{archivo.responsable.nombre}}</td>
                               <td class="align-middle text-center">
                                 
-                               <button class="btn btn-themecolor " type="button" (click)="descargarArchivo(archivo)">
+                               <a  *ngIf="archivo?.archivoURL;else noEncontrado" [href]="archivo?.archivoURL || NOT_FOUND " target="_blank">
+                                <button class="btn btn-themecolor mr-3" type="button">
                                   <i class="fa fa-download" aria-hidden="true"></i>
-                                
-                                </button>    
+                                 </button>
+                                 </a>
                                                       
                               </td>
                             </tr>
@@ -155,3 +156,11 @@
   </div>
   </div>  
   
+  <ng-template #noEncontrado>
+    <a>
+        <button (click)="falloDescarga()" class="btn btn-themecolor mr-3 disabled" type="button">       
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        </button>
+    </a>
+  
+  </ng-template>

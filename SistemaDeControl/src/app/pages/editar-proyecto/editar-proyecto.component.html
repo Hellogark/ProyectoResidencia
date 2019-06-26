@@ -177,8 +177,8 @@
                        <tr *ngFor="let archivo of archivosMostrar | paginate: config" class=" fila  w-100 h-50 ">
                           <td class="align-middle">{{archivo.comentario}}</td>                            
                               <td class="align-middle">{{archivo.responsable.nombre}}</td>
-                         <td class="align-middle">
-                           <a *ngIf="archivo?.archivoURL;else noEncontrado" [href]="archivo?.archivoURL || NOT_FOUND " target="_blank">
+                         <td *ngIf="archivo?.archivoURL;else noEncontrado" class="align-middle">
+                           <a  [href]="archivo?.archivoURL || NOT_FOUND " target="_blank">
                            <button class="btn btn-themecolor mr-3" type="button">
                              <i class="fa fa-download" aria-hidden="true"></i>
                             </button>

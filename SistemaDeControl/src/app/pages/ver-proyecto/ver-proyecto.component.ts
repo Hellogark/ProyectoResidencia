@@ -99,29 +99,11 @@ public labels: any = {
         this.dataLista=true;
         this.cargando = false;
     }, (err) =>{
-     
+      console.log(err);
     });
   
   }
-  descargarArchivo(archivo: any){      
-    
-    this.cargar();
-   
-    this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre).subscribe( (res:any) =>{   
-      
-     if(res.value == true){
-      this.terminado();
-      return;
-     }
-      
-      this.archivoUrl = this.sanitizer.
-      bypassSecurityTrustResourceUrl(window.location.protocol + '//' + window.location.host + '/descarga.rar'); 
-      this.terminado();
-      saveAs(res,'Recursos.rar');
-});
 
-
-  }
   volver(){
     this._location.back();
   }
@@ -138,4 +120,12 @@ public labels: any = {
     
     this.config.currentPage = number;
   }
+
+  falloDescarga(){
+    Swal.fire({
+        title: 'El archivo no existe o no se encuentra disponible',       
+        type: 'error',        
+        timer: 3500
+      });
+}
 }

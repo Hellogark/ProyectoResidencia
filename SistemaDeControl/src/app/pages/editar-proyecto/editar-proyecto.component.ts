@@ -96,20 +96,17 @@ this.progressRef = this.progress.ref('progreso');
 //Obtener y rellenar lista de usuarios
 obtenerUsuarios(){
 
-this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
-.subscribe(res =>{
-this.todosUsuarios = res.usuarios;
-this.todosUsuarios.map( res =>{
-this.nuevoParticipantes ={
-_id: res._id,
-nombre:res.nombre.toString() }
-this.nombres.push(this.nuevoParticipantes);
+    this._usuarioService.cargarUsuarios(0,this._usuarioService.token)
+    .subscribe(res =>{
+         this.todosUsuarios = res.usuarios;
+         this.todosUsuarios.map( res =>{
+         this.nuevoParticipantes ={
+         _id: res._id,
+         nombre:res.nombre.toString() }
+         this.nombres.push(this.nuevoParticipantes);
 
-});
-
-
-
-});
+         });
+    });
 }
 
 
@@ -144,32 +141,19 @@ subirArchivo(){
         this.terminado();
     }, (err) =>{
         this.terminado();
-        Swal.fire({
-            title: 'Hubo un problema al subir el archivo, inténtalo de nuevo',
-            type: 'error',
-            toast: true,
-            timer: 3500
-    
-    
-          });
+        setTimeout(() => {
+            Swal.fire({
+                title: 'Hubo un problema al subir el archivo, inténtalo de nuevo',
+                type: 'error',
+                toast: true,
+                timer: 3500
+        
+        
+              });            
+        }, 3800);
     });
 }
 
-descargarArchivo(archivo: any){
-        this.cargar();
-
-        this._proyectoService.descargarArchivo(this.proyecto._id,archivo.nombre)
-        .subscribe( (res:any) =>{
-             if(res.value == true){
-              this.terminado();
-              return;
-             }
-             this.terminado();
-         
-         
-             saveAs(res,'Recursos.rar');
-        });
-}
 falloDescarga(){
     Swal.fire({
         title: 'El archivo no existe o no se encuentra disponible',       
