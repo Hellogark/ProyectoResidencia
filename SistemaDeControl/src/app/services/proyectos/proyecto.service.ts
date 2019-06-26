@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Archivos } from './../../models/archivos.model';
 import { URL_SERVICIOS } from './../../config/config';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { map, catchError,debounceTime } from 'rxjs/operators';
 import { Proyecto } from 'src/app/models/proyectos.model';
@@ -134,8 +134,7 @@ export class ProyectoService {
 
   descargarArchivo(id:string, nombreArchivo:string){
     let url = URL_SERVICIOS + 'proyectos/'+id+'/descargar/'+nombreArchivo+'?token='+this.token;
-    /* let formData: FormData = new FormData();
-    formData.append('url',urlArchivo);    */
+ 
     return this.http.get(url,{responseType: 'blob'}).pipe( map( (res:any) =>{      
       return res;
     } ),catchError((err:any) =>{
@@ -148,10 +147,15 @@ export class ProyectoService {
 
   }
 
-  eliminarArchivo(id:string,proyecto:Proyecto){
-    let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivo/'+id+'?token='+this.token;
-    
-    return this.http.delete(url).pipe ( map ( (res:any) =>{
+  eliminarArchivo(archivo:Archivos,proyecto:Proyecto){
+    let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivo/'+archivo._id+'?token='+this.token;
+
+
+
+const options = { 
+    headers: new HttpHeaders({'Content-Type': 'application/json',}),
+    body:{archivo: archivo}};
+    return this.http.delete(url,options).pipe ( map ( (res:any) =>{
       Swal.fire({
         title:'Archivo eliminado con éxito',
         type:'success'

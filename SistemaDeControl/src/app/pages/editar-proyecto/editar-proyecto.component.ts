@@ -170,8 +170,16 @@ descargarArchivo(archivo: any){
              saveAs(res,'Recursos.rar');
         });
 }
+falloDescarga(){
+    Swal.fire({
+        title: 'El archivo no existe o no se encuentra disponible',       
+        type: 'error',        
+        timer: 3500
+      });
+}
 
 eliminarArchivo(archivo: Archivos){
+  
         Swal.fire({
         title: '¿Estás seguro que deseas eliminar el archivo?',
         type: 'warning',
@@ -182,7 +190,7 @@ eliminarArchivo(archivo: Archivos){
         cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                this._proyectoService.eliminarArchivo(archivo._id,this.proyecto)
+                this._proyectoService.eliminarArchivo(archivo,this.proyecto)
                 .subscribe(res =>{
                     Swal.fire({
                     title: 'Archivo eliminado con éxito',
