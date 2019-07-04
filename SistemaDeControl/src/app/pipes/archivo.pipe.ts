@@ -9,11 +9,12 @@ import { UsuarioService } from '../services/service.index';
 export class ArchivoPipe implements PipeTransform {
   id: string; 
   transform(archivo: string,id:string ,tipo: string,_usuarioService:UsuarioService  ): any {
-      
+      console.log(archivo)
     if(!id){
       return;
     }
     let url = "https://res.cloudinary.com/dinamycstest/image/upload";
+    if(archivo == ''){return url = }
     if(!archivo){
       return url + '/'+tipo+'/'+id+'/noImagenExistente';
     }
