@@ -1,8 +1,6 @@
 import { PagesComponent } from './pages/pages.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 // Rutas
 import { APP_ROUTES } from './app.routes';
 

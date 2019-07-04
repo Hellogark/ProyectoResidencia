@@ -33,7 +33,7 @@ export class SettingsService {
 
   aplicarTema( tema: string ) {
 
-
+    
     const URL = `assets/css/colors/${ tema }.css`;
     this._document.getElementById('tema').setAttribute('href', URL );
 

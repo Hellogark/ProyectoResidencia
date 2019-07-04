@@ -102,11 +102,11 @@ export class ProyectoService {
     } ));
   }
 
-  subirArchivo(archivoObj:Archivos,archivo:File,proyecto:Proyecto){
+  subirArchivo(datosArchivo:Archivos,archivo:File,proyecto:Proyecto){
    
     let formData: FormData = new FormData();
     formData.append('archivos',archivo,archivo.name);      
-    formData.append('archivoObj',JSON.stringify(archivoObj));
+    formData.append('datosArchivo',JSON.stringify(datosArchivo));
   
 
     let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivos?token='+this.token;
