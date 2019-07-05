@@ -29,9 +29,8 @@ export class RegisterComponent implements OnInit {
       password: new FormControl(null,[Validators.required, Validators.minLength(8)]),
       password2: new FormControl(null,[Validators.required, Validators.minLength(8)]),
       empresa: new FormControl(null,Validators.required),
-      condiciones : new FormControl(true)
 
-    }, {validators: this.sonDiferentes('password','password2')});   
+    }, {validators: this.sonDiferentes('password','password2')});
     
 }
   
