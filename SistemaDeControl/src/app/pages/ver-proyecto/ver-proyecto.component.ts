@@ -99,7 +99,7 @@ public labels: any = {
         this.dataLista=true;
         this.cargando = false;
     }, (err) =>{
-      console.log(err);
+      
     });
   
   }

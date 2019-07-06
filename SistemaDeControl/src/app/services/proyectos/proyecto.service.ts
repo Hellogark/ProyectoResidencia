@@ -120,15 +120,15 @@ export class ProyectoService {
 
       });  
     }),catchError((err) =>{
-      console.log(err)
-      Swal.fire({
+     
+      return Swal.fire({
         title: err.error.errors.message,       
         type: 'error',        
         timer: 3500
 
 
       });
-      return throwError(err);
+       //throwError(err);
     } ));  
   }
 

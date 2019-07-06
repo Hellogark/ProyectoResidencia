@@ -124,7 +124,7 @@
                           
                           <div class="custom-file ">
                             <input type="file"#inputArchivo name="inputArchivo" id="customFile"
-                            (change)="archivoInput($event.target.files[0])" accept=".rar,.zip"
+                            (change)="archivoInput($event.target.files[0])" accept=".rar,.zip" 
                             placeholder="Elegir archivo" class="custom-file-input w-100 " aria-describedby="fileHelpId">
                             <label for="customFile"class="custom-file-label">Elegir archivo</label>                        
                           </div>
@@ -149,8 +149,11 @@
                     <div class="form-group ">
                       <div class="col-12">
                         <textarea [(ngModel)]="comentario" name="comentario" class="form-control comentario"
-                           placeholder="Descripción... (requerido)" maxlength="150"></textarea>
+                           placeholder="Descripción... (requerido)" maxlength="150" (keyup)="desabilitado=false"></textarea>
                       </div>
+                    </div>  
+                    <div class="col-12 text-right mb-2">
+                      <button class="btn btn-themecolor" type="button" (click)="subirArchivo()" [disabled]="desabilitado">Subir Archivo</button>
                     </div>
                   </fieldset>
                 </div>

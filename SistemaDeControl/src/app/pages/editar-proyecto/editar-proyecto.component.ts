@@ -70,6 +70,7 @@ nombreArchivo: string;
 dataLista:boolean = false;
 cargando: boolean = true;
 inputVacio: boolean = false;
+desabilitado: boolean = true;
 token = this._usuarioService.token;
 fecha: any ;
 formData = new FormData();
@@ -114,12 +115,13 @@ obtenerUsuarios(){
 cargarProyecto(id){
     this.dataLista = false;
     this._proyectoService.obtenerProyecto(id).subscribe( (res:any) => {
+          
     this.proyecto = res.proyecto;
     this.participantes = res.proyecto.participantes;
     let fecha = this.fecha != '' ? res.proyecto.fechaProyectada:'';
     this.fecha = fecha;
     this.archivosMostrar = res.proyecto.archivos;
-    console.log(this.archivosMostrar);
+  
     this.descripcion = this.proyecto.descripcion;
 
     this.obtenerUsuarios();
@@ -130,28 +132,39 @@ cargarProyecto(id){
     }, (err) =>{});
 
 }
-subirArchivo(){
+cargarDatosArchivo(){
     this.archivo = {
         nombre: this.file.name.trim(),
         comentario: this.comentario,
         responsable: this._usuarioService.usuario._id,
     };
-
-    this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
-        this.terminado();
-    }, (err) =>{
-        this.terminado();
-        setTimeout(() => {
+    
+}
+subirArchivo(){
+    
+    if (this.file != null || this.file){
+        if(this.comentario == '' || this.comentario == null){
             Swal.fire({
-                title: 'Hubo un problema al subir el archivo, inténtalo de nuevo',
-                type: 'error',
-                toast: true,
-                timer: 3500
-        
-        
-              });            
-        }, 3800);
-    });
+            title: 'Introduce una descripción',
+            type:'error',
+            timer:3500
+            });
+            this.terminado();
+            return;
+        }                    
+    }
+  
+
+  
+        this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
+            this.terminado();
+            this.quitarArchivo();
+        },(err)=>{
+            this.quitarArchivo();
+            this.terminado();
+
+        });
+ 
 }
 
 falloDescarga(){
@@ -189,7 +202,7 @@ eliminarArchivo(archivo: Archivos){
 }
 obtenerFecha = (fecha) =>this.fecha = fecha;
 //Guardar Proyecto
-editarProyecto(proyecto:Proyecto){
+async editarProyecto(proyecto:Proyecto){
         this.cargar();
         this.proyecto.nombre = proyecto.nombre;
         this.proyecto.descripcion = proyecto.descripcion;
@@ -198,35 +211,11 @@ editarProyecto(proyecto:Proyecto){
         this.proyecto.ultimoEditor = this._usuarioService.usuario._id;
         this.proyecto.fechaProyectada  = this.fecha != undefined ? this.fecha.toString():'';
 
-        if (this.file != null || this.file){
-            if(this.comentario == '' || this.comentario == null){
-                Swal.fire({
-                title: 'Introduce una descripción',
-                type:'error',
-                timer:3500
-                });
-                this.terminado();
-                return;
-            }
-            this.archivo = {
-                nombre: this.file.name.trim(),
-                comentario: this.comentario,
-                responsable: this._usuarioService.usuario._id,
-            };
-
-            this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).
-            subscribe( (res:any) =>{            
-                this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
-                    this.cargarProyecto(this.id);
-                this.terminado();
-                });
-            });
-
-        }else{
-            this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
+            await this._proyectoService.editarProyecto(this.proyecto).subscribe(res =>{
                 this.cargarProyecto(this.id);
-                this.terminado();});
-            }
+            this.terminado();
+            });
+      
 }
 
 archivoInput(archivo) {
@@ -315,6 +304,7 @@ quitarArchivo() {
     this.inputVacio = false;
     this.comentario =  "";
     this.file = null;
+    this.desabilitado = true;
 
 }
 
