@@ -9,7 +9,7 @@ import { UsuarioService } from '../services/service.index';
 export class ArchivoPipe implements PipeTransform {
   id: string; 
   transform(archivo: string,id:string ,tipo: string,_usuarioService:UsuarioService  ): any {
-      let img = '../assets/images/no-img.png';
+      let img = 'assets/images/no-img.png';
     if(!id){
       return;
     }

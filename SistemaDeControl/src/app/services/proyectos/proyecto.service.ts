@@ -106,9 +106,7 @@ export class ProyectoService {
    
     let formData: FormData = new FormData();
     formData.append('archivos',archivo,archivo.name);      
-    formData.append('datosArchivo',JSON.stringify(datosArchivo));
-  
-
+    formData.append('datosArchivo',JSON.stringify(datosArchivo));  
     let url = URL_SERVICIOS + 'proyectos/'+proyecto._id+'/archivos?token='+this.token;
     return this.http.put(url,formData,{reportProgress:true}).pipe( map( (res:any) => {
      
@@ -116,8 +114,6 @@ export class ProyectoService {
         title: res.mensaje,       
         type: 'success',        
         timer: 3500
-
-
       });  
     }),catchError((err) =>{
      

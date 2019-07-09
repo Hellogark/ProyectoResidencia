@@ -133,6 +133,7 @@ cargarProyecto(id){
 
 }
 cargarDatosArchivo(){
+   
     this.archivo = {
         nombre: this.file.name.trim(),
         comentario: this.comentario,
@@ -153,11 +154,10 @@ subirArchivo(){
             return;
         }                    
     }
-  
-
-  
+        this.cargarDatosArchivo() 
         this._proyectoService.subirArchivo(this.archivo,this.file,this.proyecto).subscribe( (res:any) =>{
             this.terminado();
+            this.cargarProyecto(this.id);
             this.quitarArchivo();
         },(err)=>{
             this.quitarArchivo();
@@ -233,9 +233,7 @@ archivoInput(archivo) {
         .trim();
     this.verificarArchivo(archivo);
     this.file = archivo;
-    this
-        .formData
-        .append('archivo', this.file, this.file.name);
+    this.formData.append('archivo', this.file, this.file.name);
 
 }
 
